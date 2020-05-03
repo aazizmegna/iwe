@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Product
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="fixed">Name</ion-label>
+      <div item-content>
+        <span>{{product.name}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Selling Price</ion-label>
+      <div item-content>
+        <span>{{product.sellingPrice}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Purchase Price</ion-label>
+      <div item-content>
+        <span>{{product.purchasePrice}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Q TY On Hand</ion-label>
+      <div item-content>
+        <span>{{product.qTYOnHand}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Picture Url</ion-label>
+      <div item-content>
+        <span>{{product.pictureUrl}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label>Service Provider</ion-label>
+      <div item-content *ngIf="product.serviceProvider">
+        <a>{{product.serviceProvider?.id}}</a>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" color="primary" (click)="open(product)">{{ 'EDIT_BUTTON' | translate }}</ion-button>
+  <ion-button expand="block" color="danger" (click)="deleteModal(product)">{{ 'DELETE_BUTTON' | translate }}</ion-button>
+</ion-content>

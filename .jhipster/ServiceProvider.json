@@ -1,0 +1,92 @@
+{
+    "name": "ServiceProvider",
+    "fields": [
+        {
+            "fieldName": "taxRegistrationUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "licenseOfTradeUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "criminalRecordUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "location",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "iWESubscription",
+            "otherEntityRelationshipName": "serviceProvider",
+            "relationshipName": "subscription",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "ride",
+            "otherEntityRelationshipName": "serviceProvider",
+            "relationshipName": "ride"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "message",
+            "otherEntityRelationshipName": "serviceProvider",
+            "relationshipName": "message"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "service",
+            "otherEntityRelationshipName": "serviceProvider",
+            "relationshipName": "service"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "reaction",
+            "otherEntityRelationshipName": "serviceProvider",
+            "relationshipName": "reaction"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "product",
+            "otherEntityRelationshipName": "serviceProvider",
+            "relationshipName": "product"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "connection",
+            "otherEntityRelationshipName": "serviceProvider",
+            "relationshipName": "connection"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "post",
+            "otherEntityRelationshipName": "serviceProvider",
+            "relationshipName": "post"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "rating",
+            "otherEntityRelationshipName": "serviceProvider",
+            "relationshipName": "rating",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200503195900",
+    "entityTableName": "service_provider",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

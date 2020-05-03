@@ -1,0 +1,44 @@
+{
+    "name": "SubscriptionSpecification",
+    "fields": [
+        {
+            "fieldName": "numberOfUsers",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "targetArea",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "profilePage",
+            "fieldType": "ProfilePageType",
+            "fieldValues": "GENERAL,CUSTOM"
+        },
+        {
+            "fieldName": "paymentOption",
+            "fieldType": "PaymentType",
+            "fieldValues": "CARD,CASH"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "iWESubscription",
+            "otherEntityRelationshipName": "subscriptionSpecification",
+            "relationshipName": "subscription",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200503195800",
+    "entityTableName": "subscription_specification",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

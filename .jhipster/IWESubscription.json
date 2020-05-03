@@ -1,0 +1,22 @@
+{
+    "name": "IWESubscription",
+    "fields": [
+        {
+            "fieldName": "type",
+            "fieldType": "SubscriptionType",
+            "fieldValues": "BRONZE,SILVER,GOLD,PLATINUM"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200503195700",
+    "entityTableName": "iwe_subscription",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

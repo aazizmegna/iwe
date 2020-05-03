@@ -1,0 +1,42 @@
+{
+    "name": "LocationServiceProvider",
+    "fields": [
+        {
+            "fieldName": "trafficRegistrationUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "criminalRecordUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "taxRegistrationUrl",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "ride",
+            "otherEntityRelationshipName": "locationServiceProvider",
+            "relationshipName": "ride"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "transaction",
+            "otherEntityRelationshipName": "locationServiceProvider",
+            "relationshipName": "transaction"
+        }
+    ],
+    "changelogDate": "20200503195300",
+    "entityTableName": "location_service_provider",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,30 @@
+{
+    "name": "PicturePost",
+    "fields": [
+        {
+            "fieldName": "contentUrl",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "post",
+            "otherEntityRelationshipName": "picturePost",
+            "relationshipName": "post",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200503201000",
+    "entityTableName": "picture_post",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

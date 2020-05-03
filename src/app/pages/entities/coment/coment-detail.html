@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Coment
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="fixed">Content</ion-label>
+      <div item-content>
+        <span>{{coment.content}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Picture Url</ion-label>
+      <div item-content>
+        <span>{{coment.pictureUrl}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Created At</ion-label>
+      <div item-content>
+        <span>{{coment.createdAt | date:'medium'}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label>Reaction</ion-label>
+      <div item-content *ngIf="coment.reaction">
+        <a>{{coment.reaction?.id}}</a>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" color="primary" (click)="open(coment)">{{ 'EDIT_BUTTON' | translate }}</ion-button>
+  <ion-button expand="block" color="danger" (click)="deleteModal(coment)">{{ 'DELETE_BUTTON' | translate }}</ion-button>
+</ion-content>

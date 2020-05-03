@@ -1,0 +1,50 @@
+{
+    "name": "Post",
+    "fields": [
+        {
+            "fieldName": "location",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "reaction",
+            "otherEntityRelationshipName": "post",
+            "relationshipName": "reaction"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "serviceConsumer",
+            "otherEntityRelationshipName": "post",
+            "relationshipName": "serviceConsumer",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "serviceProvider",
+            "otherEntityRelationshipName": "post",
+            "relationshipName": "serviceProvider",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "feed",
+            "otherEntityRelationshipName": "post",
+            "relationshipName": "feed",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200503200700",
+    "entityTableName": "post",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

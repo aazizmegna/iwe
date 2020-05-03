@@ -1,0 +1,25 @@
+{
+    "name": "Feed",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "post",
+            "otherEntityRelationshipName": "feed",
+            "relationshipName": "post",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200503200600",
+    "entityTableName": "feed",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

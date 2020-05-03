@@ -1,0 +1,36 @@
+{
+    "name": "Connection",
+    "fields": [
+        {
+            "fieldName": "startedAt",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "serviceConsumer",
+            "otherEntityRelationshipName": "connection",
+            "relationshipName": "serviceConsumer",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "serviceProvider",
+            "otherEntityRelationshipName": "connection",
+            "relationshipName": "serviceProvider",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200503200300",
+    "entityTableName": "connection",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

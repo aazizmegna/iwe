@@ -1,0 +1,38 @@
+{
+    "name": "Rating",
+    "fields": [
+        {
+            "fieldName": "rating",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "serviceProvider",
+            "otherEntityRelationshipName": "rating",
+            "relationshipName": "serviceProvider",
+            "otherEntityField": "id",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "serviceConsumer",
+            "otherEntityRelationshipName": "rating",
+            "relationshipName": "serviceConsumer",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200503200100",
+    "entityTableName": "rating",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

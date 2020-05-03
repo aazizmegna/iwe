@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Picture Post
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="fixed">Content Url</ion-label>
+      <div item-content>
+        <span>{{picturePost.contentUrl}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label>Post</ion-label>
+      <div item-content *ngIf="picturePost.post">
+        <a>{{picturePost.post?.id}}</a>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" color="primary" (click)="open(picturePost)">{{ 'EDIT_BUTTON' | translate }}</ion-button>
+  <ion-button expand="block" color="danger" (click)="deleteModal(picturePost)">{{ 'DELETE_BUTTON' | translate }}</ion-button>
+</ion-content>

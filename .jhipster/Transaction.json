@@ -1,0 +1,41 @@
+{
+    "name": "Transaction",
+    "fields": [
+        {
+            "fieldName": "paymentType",
+            "fieldType": "PaymentType",
+            "fieldValues": "CARD,CASH"
+        },
+        {
+            "fieldName": "timestamp",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "locationServiceProvider",
+            "otherEntityRelationshipName": "transaction",
+            "relationshipName": "locationServiceProvider",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "service",
+            "otherEntityRelationshipName": "transaction",
+            "relationshipName": "service",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200503195400",
+    "entityTableName": "transaction",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,38 @@
+{
+    "name": "Reaction",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "serviceConsumer",
+            "otherEntityRelationshipName": "reaction",
+            "relationshipName": "serviceConsumer",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "serviceProvider",
+            "otherEntityRelationshipName": "reaction",
+            "relationshipName": "serviceProvider",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "post",
+            "otherEntityRelationshipName": "reaction",
+            "relationshipName": "post",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200503201200",
+    "entityTableName": "reaction",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

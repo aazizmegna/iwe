@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Text Post
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="fixed">Content</ion-label>
+      <div item-content>
+        <span>{{textPost.content}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label>Post</ion-label>
+      <div item-content *ngIf="textPost.post">
+        <a>{{textPost.post?.id}}</a>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" color="primary" (click)="open(textPost)">{{ 'EDIT_BUTTON' | translate }}</ion-button>
+  <ion-button expand="block" color="danger" (click)="deleteModal(textPost)">{{ 'DELETE_BUTTON' | translate }}</ion-button>
+</ion-content>

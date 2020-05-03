@@ -1,0 +1,81 @@
+import { Component } from '@angular/core';
+import { NavController, ToastController, Platform, IonItemSliding } from '@ionic/angular';
+import { filter, map } from 'rxjs/operators';
+import { HttpResponse } from '@angular/common/http';
+import { ServiceProvider } from './service-provider.model';
+import { ServiceProviderService } from './service-provider.service';
+
+@Component({
+  selector: 'page-service-provider',
+  templateUrl: 'service-provider.html',
+})
+export class ServiceProviderPage {
+  serviceProviders: ServiceProvider[];
+
+  // todo: add pagination
+
+  constructor(
+    private navController: NavController,
+    private serviceProviderService: ServiceProviderService,
+    private toastCtrl: ToastController,
+    public plt: Platform
+  ) {
+    this.serviceProviders = [];
+  }
+
+  ionViewWillEnter() {
+    this.loadAll();
+  }
+
+  async loadAll(refresher?) {
+    this.serviceProviderService
+      .query()
+      .pipe(
+        filter((res: HttpResponse<ServiceProvider[]>) => res.ok),
+        map((res: HttpResponse<ServiceProvider[]>) => res.body)
+      )
+      .subscribe(
+        (response: ServiceProvider[]) => {
+          this.serviceProviders = response;
+          if (typeof refresher !== 'undefined') {
+            setTimeout(() => {
+              refresher.target.complete();
+            }, 750);
+          }
+        },
+        async (error) => {
+          console.error(error);
+          const toast = await this.toastCtrl.create({ message: 'Failed to load data', duration: 2000, position: 'middle' });
+          toast.present();
+        }
+      );
+  }
+
+  trackId(index: number, item: ServiceProvider) {
+    return item.id;
+  }
+
+  new() {
+    this.navController.navigateForward('/tabs/entities/service-provider/new');
+  }
+
+  edit(item: IonItemSliding, serviceProvider: ServiceProvider) {
+    this.navController.navigateForward('/tabs/entities/service-provider/' + serviceProvider.id + '/edit');
+    item.close();
+  }
+
+  async delete(serviceProvider) {
+    this.serviceProviderService.delete(serviceProvider.id).subscribe(
+      async () => {
+        const toast = await this.toastCtrl.create({ message: 'ServiceProvider deleted successfully.', duration: 3000, position: 'middle' });
+        toast.present();
+        this.loadAll();
+      },
+      (error) => console.error(error)
+    );
+  }
+
+  view(serviceProvider: ServiceProvider) {
+    this.navController.navigateForward('/tabs/entities/service-provider/' + serviceProvider.id + '/view');
+  }
+}

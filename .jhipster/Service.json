@@ -1,0 +1,50 @@
+{
+    "name": "Service",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "pictureURL",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "location",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "transaction",
+            "otherEntityRelationshipName": "service",
+            "relationshipName": "transaction"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "serviceConsumer",
+            "otherEntityRelationshipName": "service",
+            "relationshipName": "serviceConsumer",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "serviceProvider",
+            "otherEntityRelationshipName": "service",
+            "relationshipName": "serviceProvider",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200503195500",
+    "entityTableName": "service",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

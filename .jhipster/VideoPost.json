@@ -1,0 +1,34 @@
+{
+    "name": "VideoPost",
+    "fields": [
+        {
+            "fieldName": "contentUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "duration",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "post",
+            "otherEntityRelationshipName": "videoPost",
+            "relationshipName": "post",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200503200800",
+    "entityTableName": "video_post",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

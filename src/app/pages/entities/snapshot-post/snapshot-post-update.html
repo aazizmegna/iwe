@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Snapshot Post
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button [disabled]="!isReadyToSave" (click)="save()" color="primary">
+        <span *ngIf="platform.is('ios')">{{'DONE_BUTTON' | translate}}</span>
+        <ion-icon name="checkmark" *ngIf="!platform.is('ios')"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form *ngIf="form" name="form" [formGroup]="form" (ngSubmit)="save()">
+    <ion-list>
+      <ion-item [hidden]="!form.id">
+        <ion-label>ID</ion-label>
+        <ion-input type="hidden" id="id" formControlName="id" readonly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Content Url</ion-label>
+        <ion-input type="text" name="contentUrl" formControlName="contentUrl"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Duration</ion-label>
+        <ion-input type="number" name="duration" formControlName="duration"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Post</ion-label>
+        <ion-select id="field_post" formControlName="post" [compareWith]="comparePost">
+          <ion-select-option [value]="null"></ion-select-option>
+          <ion-select-option
+            [value]="postOption.id === snapshotPost.post?.id ? snapshotPost.post : postOption"
+            *ngFor="let postOption of posts; trackBy: trackPostById"
+            >{{postOption.id}}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

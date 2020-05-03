@@ -1,0 +1,72 @@
+{
+    "name": "ServiceConsumer",
+    "fields": [
+        {
+            "fieldName": "location",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "ride",
+            "otherEntityRelationshipName": "serviceConsumer",
+            "relationshipName": "ride"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "service",
+            "otherEntityRelationshipName": "serviceConsumer",
+            "relationshipName": "service"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "message",
+            "otherEntityRelationshipName": "serviceConsumer",
+            "relationshipName": "message"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "post",
+            "otherEntityRelationshipName": "serviceConsumer",
+            "relationshipName": "post"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "reaction",
+            "otherEntityRelationshipName": "serviceConsumer",
+            "relationshipName": "reaction"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "connection",
+            "otherEntityRelationshipName": "serviceConsumer",
+            "relationshipName": "connection"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "invitation",
+            "otherEntityRelationshipName": "serviceConsumer",
+            "relationshipName": "invitation"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "rating",
+            "otherEntityRelationshipName": "serviceConsumer",
+            "relationshipName": "rating",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200503200400",
+    "entityTableName": "service_consumer",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

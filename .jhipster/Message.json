@@ -1,0 +1,48 @@
+{
+    "name": "Message",
+    "fields": [
+        {
+            "fieldName": "content",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sender",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "receiver",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "timestamp",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "serviceConsumer",
+            "otherEntityRelationshipName": "message",
+            "relationshipName": "serviceConsumer",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "serviceProvider",
+            "otherEntityRelationshipName": "message",
+            "relationshipName": "serviceProvider",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200503200200",
+    "entityTableName": "message",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

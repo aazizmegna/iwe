@@ -1,0 +1,30 @@
+{
+    "name": "Like",
+    "fields": [
+        {
+            "fieldName": "amount",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "reaction",
+            "otherEntityRelationshipName": "like",
+            "relationshipName": "reaction",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200503201300",
+    "entityTableName": "like",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,172 @@
+entity LocationServiceProvider {
+ trafficRegistrationUrl String
+ criminalRecordUrl String
+ taxRegistrationUrl String
+}
+
+entity Transaction {
+  paymentType PaymentType
+  Timestamp Instant
+}
+
+entity Service {
+  name String
+  pictureURL String
+  location String
+}
+
+entity Ride {
+  departure String
+  destination String
+  startedAt Instant
+  endedAt Instant
+}
+
+entity IWESubscription {
+    type SubscriptionType
+}
+
+entity SubscriptionSpecification {
+	NumberOfUsers Integer
+	TargetArea Integer
+	profilePage ProfilePageType
+	paymentOption PaymentType
+}
+
+
+entity ServiceProvider {
+ taxRegistrationUrl String
+ licenseOfTradeUrl String
+ criminalRecordUrl String
+ location String
+}
+
+entity Product {
+ name String
+ sellingPrice BigDecimal
+ purchasePrice BigDecimal
+ QTYOnHand Integer
+ pictureUrl String
+}
+
+entity Rating {
+ rating Integer
+}
+
+entity Message {
+ content String
+ sender String
+ receiver String
+ timestamp Instant
+}
+
+entity Connection {
+	StartedAt Instant
+}
+
+entity ServiceConsumer {
+	location String
+}
+
+entity Invitation {
+	sentTo String
+	content String
+}
+
+entity Feed {
+
+}
+
+entity Post {
+	location String
+}
+
+entity VideoPost {
+	contentUrl String
+	duration Integer 
+}
+
+entity SnapshotPost {
+	contentUrl String
+	duration Integer
+}
+
+entity PicturePost {
+	contentUrl String
+}
+
+entity TextPost {
+	content String
+}
+
+entity Reaction {
+}
+
+entity Like {
+	amount Integer
+}
+
+entity Coment {
+	content String
+    pictureUrl String
+    createdAt Instant
+}
+
+
+
+
+enum PaymentType {
+    CARD, CASH
+}
+
+enum SubscriptionType {
+	BRONZE, SILVER, GOLD, PLATINUM
+}
+
+enum ProfilePageType {
+	GENERAL, CUSTOM
+}
+
+relationship ManyToMany {
+	ServiceProvider{rating} to Rating{serviceProvider},
+    ServiceConsumer{rating} to Rating{serviceConsumer},
+    Feed{post} to Post{feed}
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	LocationServiceProvider to Ride{locationServiceProvider},
+    LocationServiceProvider to Transaction{locationServiceProvider},
+    ServiceConsumer to Ride{serviceConsumer},
+    ServiceConsumer to Service{serviceConsumer},
+    ServiceConsumer to Message{serviceConsumer},
+    ServiceConsumer to Post{serviceConsumer},
+    ServiceConsumer to Reaction{serviceConsumer},
+    ServiceConsumer to Connection{serviceConsumer},
+    ServiceConsumer to Invitation{serviceConsumer},
+    ServiceProvider to Ride{serviceProvider},
+    ServiceProvider to Message{serviceProvider},
+    ServiceProvider to Service{serviceProvider},
+    ServiceProvider to Reaction{serviceProvider},
+    ServiceProvider to Product{serviceProvider},
+    ServiceProvider to Connection{serviceProvider},
+    ServiceProvider to Post{serviceProvider},
+    Service to Transaction{service},
+    Post to Reaction{post}
+}
+
+
+// defining multiple oneToOne relationships
+relationship OneToOne {
+	ServiceProvider{subscription} to IWESubscription,
+	SubscriptionSpecification{subscription} to IWESubscription,
+	VideoPost{post} to Post
+    SnapshotPost{post} to Post
+    PicturePost{post} to Post
+    TextPost{post} to Post
+    Like{reaction} to Reaction
+    Coment{reaction} to Reaction
+}
+
+// Set pagination options
+paginate Feed with infinite-scroll

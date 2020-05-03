@@ -1,0 +1,34 @@
+{
+    "name": "SnapshotPost",
+    "fields": [
+        {
+            "fieldName": "contentUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "duration",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "post",
+            "otherEntityRelationshipName": "snapshotPost",
+            "relationshipName": "post",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200503200900",
+    "entityTableName": "snapshot_post",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

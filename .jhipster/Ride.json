@@ -1,0 +1,55 @@
+{
+    "name": "Ride",
+    "fields": [
+        {
+            "fieldName": "departure",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "destination",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "startedAt",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "endedAt",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "locationServiceProvider",
+            "otherEntityRelationshipName": "ride",
+            "relationshipName": "locationServiceProvider",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "serviceConsumer",
+            "otherEntityRelationshipName": "ride",
+            "relationshipName": "serviceConsumer",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "serviceProvider",
+            "otherEntityRelationshipName": "ride",
+            "relationshipName": "serviceProvider",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200503195600",
+    "entityTableName": "ride",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

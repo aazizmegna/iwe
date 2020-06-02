@@ -12,6 +12,7 @@ import { filter, map } from 'rxjs/operators';
 import { PostPage } from './post';
 import { PostUpdatePage } from './post-update';
 import { Post, PostService, PostDetailPage } from '.';
+import {Camera} from '@ionic-native/camera/ngx';
 
 @Injectable({ providedIn: 'root' })
 export class PostResolve implements Resolve<Post> {
@@ -76,5 +77,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [PostPage, PostUpdatePage, PostDetailPage],
   imports: [IonicModule, FormsModule, ReactiveFormsModule, CommonModule, TranslateModule, RouterModule.forChild(routes)],
+  providers: [Camera],
 })
 export class PostPageModule {}

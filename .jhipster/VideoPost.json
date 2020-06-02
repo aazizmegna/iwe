@@ -2,8 +2,9 @@
     "name": "VideoPost",
     "fields": [
         {
-            "fieldName": "contentUrl",
-            "fieldType": "String"
+            "fieldName": "content",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
         },
         {
             "fieldName": "duration",

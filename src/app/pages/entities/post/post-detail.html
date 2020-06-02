@@ -18,6 +18,12 @@
       </div>
     </ion-item>
     <ion-item>
+      <ion-label position="fixed">Description</ion-label>
+      <div item-content>
+        <span>{{post.description}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
       <ion-label>Service Consumer</ion-label>
       <div item-content *ngIf="post.serviceConsumer">
         <a>{{post.serviceConsumer?.id}}</a>

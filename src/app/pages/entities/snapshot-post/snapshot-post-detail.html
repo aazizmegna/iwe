@@ -14,7 +14,10 @@
     <ion-item>
       <ion-label position="fixed">Content Url</ion-label>
       <div item-content>
-        <span>{{snapshotPost.contentUrl}}</span>
+        <div *ngIf="snapshotPost.contentUrl">
+          <a (click)="openFile(snapshotPost.contentUrlContentType, snapshotPost.contentUrl)" jhiTranslate="entity.action.open">open</a>
+          {{snapshotPost.contentUrlContentType}}, {{byteSize(snapshotPost.contentUrl)}}
+        </div>
       </div>
     </ion-item>
     <ion-item>

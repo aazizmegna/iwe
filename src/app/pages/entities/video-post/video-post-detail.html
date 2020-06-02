@@ -12,9 +12,12 @@
 <ion-content class="ion-padding">
   <ion-list>
     <ion-item>
-      <ion-label position="fixed">Content Url</ion-label>
+      <ion-label position="fixed">Content</ion-label>
       <div item-content>
-        <span>{{videoPost.contentUrl}}</span>
+        <div *ngIf="videoPost.content">
+          <a (click)="openFile(videoPost.contentContentType, videoPost.content)" jhiTranslate="entity.action.open">open</a>
+          {{videoPost.contentContentType}}, {{byteSize(videoPost.content)}}
+        </div>
       </div>
     </ion-item>
     <ion-item>

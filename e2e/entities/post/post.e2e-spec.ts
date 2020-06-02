@@ -14,6 +14,7 @@ describe('Post e2e test', () => {
   let isVisible = false;
 
   const location = 'location';
+  const description = 'description';
 
   beforeAll(async () => {
     loginPage = new LoginPage();
@@ -52,6 +53,7 @@ describe('Post e2e test', () => {
     expect(await postUpdatePage.getPageTitle()).toEqual(SUBCOMPONENT_TITLE);
 
     await postUpdatePage.setLocationInput(location);
+    await postUpdatePage.setDescriptionInput(description);
 
     await postUpdatePage.save();
     await browser.wait(ec.visibilityOf(postComponentsPage.title), 1000);
@@ -87,6 +89,8 @@ describe('Post e2e test', () => {
       expect(await postDetailPage.getPageTitle()).toEqual(SUBCOMPONENT_TITLE);
 
       expect(await postDetailPage.getLocationInput()).toEqual(location);
+
+      expect(await postDetailPage.getDescriptionInput()).toEqual(description);
     }
   });
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NavController, Platform, ToastController } from '@ionic/angular';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
@@ -9,6 +9,10 @@ import { PostService } from './post.service';
 import { ServiceConsumer, ServiceConsumerService } from '../service-consumer';
 import { ServiceProvider, ServiceProviderService } from '../service-provider';
 import { Feed, FeedService } from '../feed';
+import {PicturePost} from './picture-post.model';
+import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
+import {JhiDataUtils} from 'ng-jhipster';
+import {PicturePostService} from './picture-post.service';
 
 @Component({
   selector: 'page-post-update',
@@ -18,6 +22,10 @@ export class PostUpdatePage implements OnInit {
   post: Post;
   serviceConsumers: ServiceConsumer[];
   serviceProviders: ServiceProvider[];
+  picturePost: PicturePost;
+  posts: Post[];
+  @ViewChild('fileInput', { static: false }) fileInput;
+  cameraOptions: CameraOptions;
   feeds: Feed[];
   isSaving = false;
   isNew = true;
@@ -26,8 +34,12 @@ export class PostUpdatePage implements OnInit {
   form = this.formBuilder.group({
     id: [],
     location: [null, []],
+    description: [null, []],
     serviceConsumer: [null, []],
     serviceProvider: [null, []],
+    content: [null, []],
+    contentContentType: [null, []],
+    post: [null, []],
   });
 
   constructor(
@@ -39,12 +51,29 @@ export class PostUpdatePage implements OnInit {
     private serviceConsumerService: ServiceConsumerService,
     private serviceProviderService: ServiceProviderService,
     private feedService: FeedService,
-    private postService: PostService
+    private postService: PostService,
+    private dataUtils: JhiDataUtils,
+    private elementRef: ElementRef,
+    private camera: Camera,
+    private picturePostService: PicturePostService
   ) {
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
       this.isReadyToSave = this.form.valid;
     });
+
+    // Set the Camera options
+    this.cameraOptions = {
+      quality: 100,
+      targetWidth: 900,
+      targetHeight: 600,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      saveToPhotoAlbum: false,
+      allowEdit: true,
+      sourceType: 1,
+    };
   }
 
   ngOnInit() {
@@ -69,16 +98,40 @@ export class PostUpdatePage implements OnInit {
     this.activatedRoute.data.subscribe((response) => {
       this.post = response.data;
       this.isNew = this.post.id === null || this.post.id === undefined;
-      this.updateForm(this.post);
+      this.picturePost = response.data;
+      this.isNew = this.picturePost.id === null || this.picturePost.id === undefined;
+      this.updateForm(this.post, this.picturePost);
+    });
+    this.postService.query({ filter: 'picturepost-is-null' }).subscribe(
+      (data) => {
+        if (!this.picturePost.post || !this.picturePost.post.id) {
+          this.posts = data.body;
+        } else {
+          this.postService.find(this.picturePost.post.id).subscribe(
+            (subData: HttpResponse<Post>) => {
+              this.posts = [subData.body].concat(subData.body);
+            },
+            (error) => this.onError(error)
+          );
+        }
+      },
+      (error) => this.onError(error)
+    );
+    this.activatedRoute.data.subscribe((response) => {
+
     });
   }
 
-  updateForm(post: Post) {
+  updateForm(post: Post, picturePost: PicturePost) {
     this.form.patchValue({
       id: post.id,
       location: post.location,
+      description: post.description,
       serviceConsumer: post.serviceConsumer,
       serviceProvider: post.serviceProvider,
+      content: picturePost.content,
+      contentContentType: picturePost.contentContentType,
+      post: picturePost.post,
     });
   }
 
@@ -87,8 +140,10 @@ export class PostUpdatePage implements OnInit {
     const post = this.createFromForm();
     if (!this.isNew) {
       this.subscribeToSaveResponse(this.postService.update(post));
+      this.subscribeToSaveResponse(this.picturePostService.update(post));
     } else {
       this.subscribeToSaveResponse(this.postService.create(post));
+      this.subscribeToSaveResponse(this.picturePostService.create(post));
     }
   }
 
@@ -121,13 +176,17 @@ export class PostUpdatePage implements OnInit {
     toast.present();
   }
 
-  private createFromForm(): Post {
+  private createFromForm(): Post | PicturePost {
     return {
       ...new Post(),
       id: this.form.get(['id']).value,
       location: this.form.get(['location']).value,
+      description: this.form.get(['description']).value,
       serviceConsumer: this.form.get(['serviceConsumer']).value,
       serviceProvider: this.form.get(['serviceProvider']).value,
+      ...new PicturePost(),
+      content: this.form.get(['content']).value,
+      contentContentType: this.form.get(['contentContentType']).value,
     };
   }
 
@@ -151,5 +210,60 @@ export class PostUpdatePage implements OnInit {
 
   trackFeedById(index: number, item: Feed) {
     return item.id;
+  }
+
+  byteSize(field) {
+    return this.dataUtils.byteSize(field);
+  }
+
+  openFile(contentType, field) {
+    return this.dataUtils.openFile(contentType, field);
+  }
+
+  setFileData(event, field, isImage) {
+    this.dataUtils.loadFileToForm(event, this.form, field, isImage).subscribe();
+    this.processWebImage(event, field);
+  }
+
+  getPicture(fieldName) {
+    if (Camera.installed()) {
+      this.camera.getPicture(this.cameraOptions).then(
+        (data) => {
+          this.picturePost[fieldName] = data;
+          this.picturePost[fieldName + 'ContentType'] = 'image/jpeg';
+          this.form.patchValue({ [fieldName]: data });
+          this.form.patchValue({ [fieldName + 'ContentType']: 'image/jpeg' });
+        },
+        (err) => {
+          alert('Unable to take photo');
+        }
+      );
+    } else {
+      this.fileInput.nativeElement.click();
+    }
+  }
+
+  processWebImage(event, fieldName) {
+    const reader = new FileReader();
+    reader.onload = (readerEvent) => {
+      let imageData = (readerEvent.target as any).result;
+      const imageType = event.target.files[0].type;
+      imageData = imageData.substring(imageData.indexOf(',') + 1);
+
+      this.form.patchValue({ [fieldName]: imageData });
+      this.form.patchValue({ [fieldName + 'ContentType']: imageType });
+      this.picturePost[fieldName] = imageData;
+      this.picturePost[fieldName + 'ContentType'] = imageType;
+    };
+
+    reader.readAsDataURL(event.target.files[0]);
+  }
+
+  clearInputImage(field: string, fieldContentType: string, idInput: string) {
+    this.dataUtils.clearInputImage(this.picturePost, this.elementRef, field, fieldContentType, idInput);
+    this.form.patchValue({ [field]: '' });
+  }
+  comparePost(first: Post, second: Post): boolean {
+    return first && first.id && second && second.id ? first.id === second.id : first === second;
   }
 }

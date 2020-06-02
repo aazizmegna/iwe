@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ToastController, Platform, IonItemSliding } from '@ionic/angular';
 import { filter, map } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
+import { JhiDataUtils } from 'ng-jhipster';
 import { VideoPost } from './video-post.model';
 import { VideoPostService } from './video-post.service';
 
@@ -15,6 +16,7 @@ export class VideoPostPage {
   // todo: add pagination
 
   constructor(
+    private dataUtils: JhiDataUtils,
     private navController: NavController,
     private videoPostService: VideoPostService,
     private toastCtrl: ToastController,
@@ -53,6 +55,14 @@ export class VideoPostPage {
 
   trackId(index: number, item: VideoPost) {
     return item.id;
+  }
+
+  byteSize(field) {
+    return this.dataUtils.byteSize(field);
+  }
+
+  openFile(contentType, field) {
+    return this.dataUtils.openFile(contentType, field);
   }
 
   new() {

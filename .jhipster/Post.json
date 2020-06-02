@@ -4,6 +4,10 @@
         {
             "fieldName": "location",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
         }
     ],
     "relationships": [

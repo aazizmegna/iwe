@@ -13,7 +13,6 @@ describe('SnapshotPost e2e test', () => {
   let lastElement: any;
   let isVisible = false;
 
-  const contentUrl = 'contentUrl';
   const duration = '10';
 
   beforeAll(async () => {

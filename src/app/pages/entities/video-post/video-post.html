@@ -19,7 +19,7 @@
     <ion-item-sliding *ngFor="let videoPost of videoPosts; trackBy: trackId" #slidingItem>
       <ion-item (click)="view(videoPost)">
         <ion-label text-wrap>
-          <p>{{videoPost.contentUrl}}</p>
+          <p>{{videoPost.content}}</p>
           <p>{{videoPost.duration}}</p>
         </ion-label>
       </ion-item>

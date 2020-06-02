@@ -24,8 +24,18 @@
         <ion-input type="hidden" id="id" formControlName="id" readonly></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Content Url</ion-label>
-        <ion-input type="text" name="contentUrl" formControlName="contentUrl"></ion-input>
+        <div>
+          <div *ngIf="snapshotPost.contentUrl">
+            <p>{{snapshotPost.contentUrlContentType}}, {{byteSize(snapshotPost.contentUrl)}}</p>
+            <ion-button
+              color="danger"
+              (click)="snapshotPost.contentUrl=null;snapshotPost.contentUrlContentType=null;form.patchValue({'contentUrl': ''});form.patchValue({'contentUrlContentType': ''})"
+            >
+              <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+          <input type="file" #fileInput (change)="setFileData($event, 'contentUrl', false)" />
+        </div>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Duration</ion-label>

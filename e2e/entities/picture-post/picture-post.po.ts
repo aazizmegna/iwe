@@ -28,14 +28,14 @@ export class PicturePostUpdatePage {
   pageTitle = element.all(by.css('ion-title')).get(3);
   saveButton = element.all(by.css('ion-button')).get(1);
 
-  contentUrlInput = element(by.css('ion-input[formControlName="contentUrl"] input'));
+  contentInput = element(by.css('ion-input[formControlName="content"] input'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getText();
   }
 
-  async setContentUrlInput(contentUrl: string): Promise<void> {
-    await this.contentUrlInput.sendKeys(contentUrl);
+  async setContentInput(content: string): Promise<void> {
+    await this.contentInput.sendKeys(content);
   }
 
   async save(): Promise<void> {
@@ -46,10 +46,10 @@ export class PicturePostUpdatePage {
 export class PicturePostDetailPage {
   pageTitle = element.all(by.css('ion-title')).get(3);
   deleteButton = element(by.css('ion-button[color="danger"]'));
-  contentUrlInput = element.all(by.css('span')).get(1);
+  contentInput = element.all(by.css('span')).get(1);
 
-  async getContentUrlInput(): Promise<string> {
-    return await this.contentUrlInput.getText();
+  async getContentInput(): Promise<string> {
+    return await this.contentInput.getText();
   }
 
   async clickOnDeleteButton(): Promise<void> {

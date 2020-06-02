@@ -13,8 +13,6 @@ describe('PicturePost e2e test', () => {
   let lastElement: any;
   let isVisible = false;
 
-  const contentUrl = 'contentUrl';
-
   beforeAll(async () => {
     loginPage = new LoginPage();
     await loginPage.navigateTo('/');
@@ -54,7 +52,7 @@ describe('PicturePost e2e test', () => {
     await browser.wait(ec.visibilityOf(picturePostUpdatePage.pageTitle), 1000);
     expect(await picturePostUpdatePage.getPageTitle()).toEqual(SUBCOMPONENT_TITLE);
 
-    await picturePostUpdatePage.setContentUrlInput(contentUrl);
+    await picturePostUpdatePage.setContentInput(content);
 
     await picturePostUpdatePage.save();
     await browser.wait(ec.visibilityOf(picturePostComponentsPage.title), 1000);
@@ -89,7 +87,7 @@ describe('PicturePost e2e test', () => {
     if (isVisible && (await picturePostDetailPage.pageTitle.isDisplayed())) {
       expect(await picturePostDetailPage.getPageTitle()).toEqual(SUBCOMPONENT_TITLE);
 
-      expect(await picturePostDetailPage.getContentUrlInput()).toEqual(contentUrl);
+      expect(await picturePostDetailPage.getContentInput()).toEqual(content);
     }
   });
 

@@ -8,9 +8,13 @@ export class Post implements BaseEntity {
   constructor(
     public id?: number,
     public location?: string,
+    public description?: string,
     public reactions?: Reaction[],
     public serviceConsumer?: ServiceConsumer,
     public serviceProvider?: ServiceProvider,
-    public feeds?: Feed[]
+    public feeds?: Feed[],
+    public contentContentType?: string,
+    public content?: any,
+    public post?: Post
   ) {}
 }

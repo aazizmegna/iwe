@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JhiDataUtils } from 'ng-jhipster';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NavController, Platform, ToastController } from '@ionic/angular';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
@@ -21,7 +22,8 @@ export class VideoPostUpdatePage implements OnInit {
 
   form = this.formBuilder.group({
     id: [],
-    contentUrl: [null, []],
+    content: [null, []],
+    contentContentType: [null, []],
     duration: [null, []],
     post: [null, []],
   });
@@ -32,6 +34,7 @@ export class VideoPostUpdatePage implements OnInit {
     protected formBuilder: FormBuilder,
     public platform: Platform,
     protected toastCtrl: ToastController,
+    private dataUtils: JhiDataUtils,
     private postService: PostService,
     private videoPostService: VideoPostService
   ) {
@@ -67,7 +70,8 @@ export class VideoPostUpdatePage implements OnInit {
   updateForm(videoPost: VideoPost) {
     this.form.patchValue({
       id: videoPost.id,
-      contentUrl: videoPost.contentUrl,
+      content: videoPost.content,
+      contentContentType: videoPost.contentContentType,
       duration: videoPost.duration,
       post: videoPost.post,
     });
@@ -116,10 +120,23 @@ export class VideoPostUpdatePage implements OnInit {
     return {
       ...new VideoPost(),
       id: this.form.get(['id']).value,
-      contentUrl: this.form.get(['contentUrl']).value,
+      content: this.form.get(['content']).value,
+      contentContentType: this.form.get(['contentContentType']).value,
       duration: this.form.get(['duration']).value,
       post: this.form.get(['post']).value,
     };
+  }
+
+  byteSize(field) {
+    return this.dataUtils.byteSize(field);
+  }
+
+  openFile(contentType, field) {
+    return this.dataUtils.openFile(contentType, field);
+  }
+
+  setFileData(event, field, isImage) {
+    this.dataUtils.loadFileToForm(event, this.form, field, isImage).subscribe();
   }
 
   comparePost(first: Post, second: Post): boolean {

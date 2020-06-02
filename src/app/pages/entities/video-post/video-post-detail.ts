@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JhiDataUtils } from 'ng-jhipster';
 import { VideoPost } from './video-post.model';
 import { VideoPostService } from './video-post.service';
 import { NavController, AlertController } from '@ionic/angular';
@@ -12,6 +13,7 @@ export class VideoPostDetailPage implements OnInit {
   videoPost: VideoPost = {};
 
   constructor(
+    private dataUtils: JhiDataUtils,
     private navController: NavController,
     private videoPostService: VideoPostService,
     private activatedRoute: ActivatedRoute,
@@ -48,5 +50,13 @@ export class VideoPostDetailPage implements OnInit {
       ],
     });
     await alert.present();
+  }
+
+  byteSize(field) {
+    return this.dataUtils.byteSize(field);
+  }
+
+  openFile(contentType, field) {
+    return this.dataUtils.openFile(contentType, field);
   }
 }

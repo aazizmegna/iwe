@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JhiDataUtils } from 'ng-jhipster';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NavController, Platform, ToastController } from '@ionic/angular';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
@@ -22,6 +23,7 @@ export class SnapshotPostUpdatePage implements OnInit {
   form = this.formBuilder.group({
     id: [],
     contentUrl: [null, []],
+    contentUrlContentType: [null, []],
     duration: [null, []],
     post: [null, []],
   });
@@ -32,6 +34,7 @@ export class SnapshotPostUpdatePage implements OnInit {
     protected formBuilder: FormBuilder,
     public platform: Platform,
     protected toastCtrl: ToastController,
+    private dataUtils: JhiDataUtils,
     private postService: PostService,
     private snapshotPostService: SnapshotPostService
   ) {
@@ -68,6 +71,7 @@ export class SnapshotPostUpdatePage implements OnInit {
     this.form.patchValue({
       id: snapshotPost.id,
       contentUrl: snapshotPost.contentUrl,
+      contentUrlContentType: snapshotPost.contentUrlContentType,
       duration: snapshotPost.duration,
       post: snapshotPost.post,
     });
@@ -117,9 +121,22 @@ export class SnapshotPostUpdatePage implements OnInit {
       ...new SnapshotPost(),
       id: this.form.get(['id']).value,
       contentUrl: this.form.get(['contentUrl']).value,
+      contentUrlContentType: this.form.get(['contentUrlContentType']).value,
       duration: this.form.get(['duration']).value,
       post: this.form.get(['post']).value,
     };
+  }
+
+  byteSize(field) {
+    return this.dataUtils.byteSize(field);
+  }
+
+  openFile(contentType, field) {
+    return this.dataUtils.openFile(contentType, field);
+  }
+
+  setFileData(event, field, isImage) {
+    this.dataUtils.loadFileToForm(event, this.form, field, isImage).subscribe();
   }
 
   comparePost(first: Post, second: Post): boolean {

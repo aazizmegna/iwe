@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JhiDataUtils } from 'ng-jhipster';
 import { SnapshotPost } from './snapshot-post.model';
 import { SnapshotPostService } from './snapshot-post.service';
 import { NavController, AlertController } from '@ionic/angular';
@@ -12,6 +13,7 @@ export class SnapshotPostDetailPage implements OnInit {
   snapshotPost: SnapshotPost = {};
 
   constructor(
+    private dataUtils: JhiDataUtils,
     private navController: NavController,
     private snapshotPostService: SnapshotPostService,
     private activatedRoute: ActivatedRoute,
@@ -48,5 +50,13 @@ export class SnapshotPostDetailPage implements OnInit {
       ],
     });
     await alert.present();
+  }
+
+  byteSize(field) {
+    return this.dataUtils.byteSize(field);
+  }
+
+  openFile(contentType, field) {
+    return this.dataUtils.openFile(contentType, field);
   }
 }

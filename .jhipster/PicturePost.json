@@ -2,8 +2,9 @@
     "name": "PicturePost",
     "fields": [
         {
-            "fieldName": "contentUrl",
-            "fieldType": "String"
+            "fieldName": "content",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
         }
     ],
     "relationships": [

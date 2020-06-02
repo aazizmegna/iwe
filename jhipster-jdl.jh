@@ -79,24 +79,29 @@ entity Feed {
 
 entity Post {
 	location String
+    description String
 }
 
 entity VideoPost {
-	contentUrl String
+	content Blob
 	duration Integer 
 }
 
 entity SnapshotPost {
-	contentUrl String
+	contentUrl Blob
 	duration Integer
 }
 
 entity PicturePost {
-	contentUrl String
+	content ImageBlob
 }
 
 entity TextPost {
 	content String
+}
+
+entity MarketingPost {
+	price BigDecimal
 }
 
 entity Reaction {

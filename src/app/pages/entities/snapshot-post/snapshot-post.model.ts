@@ -2,5 +2,11 @@ import { BaseEntity } from 'src/model/base-entity';
 import { Post } from '../post/post.model';
 
 export class SnapshotPost implements BaseEntity {
-  constructor(public id?: number, public contentUrl?: string, public duration?: number, public post?: Post) {}
+  constructor(
+    public id?: number,
+    public contentUrlContentType?: string,
+    public contentUrl?: any,
+    public duration?: number,
+    public post?: Post
+  ) {}
 }

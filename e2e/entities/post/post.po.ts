@@ -29,6 +29,7 @@ export class PostUpdatePage {
   saveButton = element.all(by.css('ion-button')).get(1);
 
   locationInput = element(by.css('ion-input[formControlName="location"] input'));
+  descriptionInput = element(by.css('ion-input[formControlName="description"] input'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getText();
@@ -36,6 +37,9 @@ export class PostUpdatePage {
 
   async setLocationInput(location: string): Promise<void> {
     await this.locationInput.sendKeys(location);
+  }
+  async setDescriptionInput(description: string): Promise<void> {
+    await this.descriptionInput.sendKeys(description);
   }
 
   async save(): Promise<void> {
@@ -48,8 +52,14 @@ export class PostDetailPage {
   deleteButton = element(by.css('ion-button[color="danger"]'));
   locationInput = element.all(by.css('span')).get(1);
 
+  descriptionInput = element.all(by.css('span')).get(2);
+
   async getLocationInput(): Promise<string> {
     return await this.locationInput.getText();
+  }
+
+  async getDescriptionInput(): Promise<string> {
+    return await this.descriptionInput.getText();
   }
 
   async clickOnDeleteButton(): Promise<void> {

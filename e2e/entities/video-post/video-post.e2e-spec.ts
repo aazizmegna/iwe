@@ -13,7 +13,6 @@ describe('VideoPost e2e test', () => {
   let lastElement: any;
   let isVisible = false;
 
-  const contentUrl = 'contentUrl';
   const duration = '10';
 
   beforeAll(async () => {
@@ -55,7 +54,7 @@ describe('VideoPost e2e test', () => {
     await browser.wait(ec.visibilityOf(videoPostUpdatePage.pageTitle), 1000);
     expect(await videoPostUpdatePage.getPageTitle()).toEqual(SUBCOMPONENT_TITLE);
 
-    await videoPostUpdatePage.setContentUrlInput(contentUrl);
+    await videoPostUpdatePage.setContentInput(content);
     await videoPostUpdatePage.setDurationInput(duration);
 
     await videoPostUpdatePage.save();
@@ -91,7 +90,7 @@ describe('VideoPost e2e test', () => {
     if (isVisible && (await videoPostDetailPage.pageTitle.isDisplayed())) {
       expect(await videoPostDetailPage.getPageTitle()).toEqual(SUBCOMPONENT_TITLE);
 
-      expect(await videoPostDetailPage.getContentUrlInput()).toEqual(contentUrl);
+      expect(await videoPostDetailPage.getContentInput()).toEqual(content);
 
       expect(await videoPostDetailPage.getDurationInput()).toEqual(duration);
     }

@@ -1,5 +1,7 @@
 {
   "name": "iwe-mobile",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

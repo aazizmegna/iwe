@@ -26,12 +26,40 @@ ion-content {
   --ion-text-color: #ffffff;
 }
 
-.btn-sigin {
-  --color: #ffffff;
+.ion-button {
+  --ion-background-color:#2E3442;
+  --ion-text-color: #ffffff;
   --border-color: #BFA487;
+
+}
+
+.ion-color-signin {
+  --ion-color-base: #2E3442;
+  --ion-color-base-rgb: 255,255,0;
+  --ion-color-contrast: #ffffff;
+  --ion-color-contrast-rgb: 0,0,0;
+  --ion-color-shade: #e0e000;
+  --ion-color-tint: #ffff1a;
+}
+
+.ion-color-signup {
+  --ion-color-base: #BFA487;
+  --ion-color-base-rgb: 255,255,0;
+  --ion-color-contrast: #ffffff;
+  --ion-color-contrast-rgb: 0,0,0;
+  --ion-color-shade: #e0e000;
+  --ion-color-tint: #ffff1a;
+}
+
+.btn-sigin {
+  border: 2px solid #BFA487;
+  background-color: #2E3442;
+  border-radius: 8px;
+  color: #ffffff;
 }
 
 .btn-signup {
-  --color: #ffffff;
-  --border-color: #BFA487;
+  background-color: #BFA487;
+  border-radius: 8px;
+  color: #ffffff;
 }

@@ -1,0 +1,19 @@
+.hipster {
+  display: block;
+  width: 200px;
+  height: 100px;
+  margin: 20px auto;
+  background: url('../../../assets/img/logo.png') no-repeat center top;
+  background-size: contain;
+}
+
+ion-content {
+  --ion-background-color:#2E3442;
+  --ion-text-color: #ffffff;
+}
+
+.btn-submit {
+  background-color: #BFA487;
+  border-radius: 8px;
+  color: #ffffff;
+}

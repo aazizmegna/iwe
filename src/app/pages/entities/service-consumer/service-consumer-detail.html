@@ -17,12 +17,6 @@
         <span>{{serviceConsumer.location}}</span>
       </div>
     </ion-item>
-    <ion-item>
-      <ion-label>Rating</ion-label>
-      <div item-content>
-        <span *ngFor="let rating of serviceConsumer.ratings; let last = last"> <a>{{rating.id}}</a>{{last ? '' : ', '}} </span>
-      </div>
-    </ion-item>
   </ion-list>
 
   <ion-button expand="block" color="primary" (click)="open(serviceConsumer)">{{ 'EDIT_BUTTON' | translate }}</ion-button>

@@ -12,21 +12,38 @@
 <ion-content class="ion-padding">
   <ion-list>
     <ion-item>
-      <ion-label position="fixed">Tax Registration Url</ion-label>
+      <ion-label position="fixed">Tax Registration</ion-label>
       <div item-content>
-        <span>{{serviceProvider.taxRegistrationUrl}}</span>
+        <div *ngIf="serviceProvider.taxRegistration">
+          <a
+            (click)="openFile(serviceProvider.taxRegistrationContentType, serviceProvider.taxRegistration)"
+            jhiTranslate="entity.action.open"
+            >open</a
+          >
+          {{serviceProvider.taxRegistrationContentType}}, {{byteSize(serviceProvider.taxRegistration)}}
+        </div>
       </div>
     </ion-item>
     <ion-item>
-      <ion-label position="fixed">License Of Trade Url</ion-label>
+      <ion-label position="fixed">License Of Trade</ion-label>
       <div item-content>
-        <span>{{serviceProvider.licenseOfTradeUrl}}</span>
+        <div *ngIf="serviceProvider.licenseOfTrade">
+          <a (click)="openFile(serviceProvider.licenseOfTradeContentType, serviceProvider.licenseOfTrade)" jhiTranslate="entity.action.open"
+            >open</a
+          >
+          {{serviceProvider.licenseOfTradeContentType}}, {{byteSize(serviceProvider.licenseOfTrade)}}
+        </div>
       </div>
     </ion-item>
     <ion-item>
-      <ion-label position="fixed">Criminal Record Url</ion-label>
+      <ion-label position="fixed">Criminal Record</ion-label>
       <div item-content>
-        <span>{{serviceProvider.criminalRecordUrl}}</span>
+        <div *ngIf="serviceProvider.criminalRecord">
+          <a (click)="openFile(serviceProvider.criminalRecordContentType, serviceProvider.criminalRecord)" jhiTranslate="entity.action.open"
+            >open</a
+          >
+          {{serviceProvider.criminalRecordContentType}}, {{byteSize(serviceProvider.criminalRecord)}}
+        </div>
       </div>
     </ion-item>
     <ion-item>
@@ -39,12 +56,6 @@
       <ion-label>Subscription</ion-label>
       <div item-content *ngIf="serviceProvider.subscription">
         <a>{{serviceProvider.subscription?.id}}</a>
-      </div>
-    </ion-item>
-    <ion-item>
-      <ion-label>Rating</ion-label>
-      <div item-content>
-        <span *ngFor="let rating of serviceProvider.ratings; let last = last"> <a>{{rating.id}}</a>{{last ? '' : ', '}} </span>
       </div>
     </ion-item>
   </ion-list>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JhiDataUtils } from 'ng-jhipster';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NavController, Platform, ToastController } from '@ionic/angular';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
@@ -7,7 +8,6 @@ import { Observable } from 'rxjs';
 import { ServiceProvider } from './service-provider.model';
 import { ServiceProviderService } from './service-provider.service';
 import { IWESubscription, IWESubscriptionService } from '../iwe-subscription';
-import { Rating, RatingService } from '../rating';
 
 @Component({
   selector: 'page-service-provider-update',
@@ -16,19 +16,20 @@ import { Rating, RatingService } from '../rating';
 export class ServiceProviderUpdatePage implements OnInit {
   serviceProvider: ServiceProvider;
   iweSubscriptions: IWESubscription[];
-  ratings: Rating[];
   isSaving = false;
   isNew = true;
   isReadyToSave: boolean;
 
   form = this.formBuilder.group({
     id: [],
-    taxRegistrationUrl: [null, []],
-    licenseOfTradeUrl: [null, []],
-    criminalRecordUrl: [null, []],
+    taxRegistration: [null, []],
+    taxRegistrationContentType: [null, []],
+    licenseOfTrade: [null, []],
+    licenseOfTradeContentType: [null, []],
+    criminalRecord: [null, []],
+    criminalRecordContentType: [null, []],
     location: [null, []],
     subscription: [null, []],
-    ratings: [null, []],
   });
 
   constructor(
@@ -37,8 +38,8 @@ export class ServiceProviderUpdatePage implements OnInit {
     protected formBuilder: FormBuilder,
     public platform: Platform,
     protected toastCtrl: ToastController,
+    private dataUtils: JhiDataUtils,
     private iWESubscriptionService: IWESubscriptionService,
-    private ratingService: RatingService,
     private serviceProviderService: ServiceProviderService
   ) {
     // Watch the form for changes, and
@@ -63,12 +64,6 @@ export class ServiceProviderUpdatePage implements OnInit {
       },
       (error) => this.onError(error)
     );
-    this.ratingService.query().subscribe(
-      (data) => {
-        this.ratings = data.body;
-      },
-      (error) => this.onError(error)
-    );
     this.activatedRoute.data.subscribe((response) => {
       this.serviceProvider = response.data;
       this.isNew = this.serviceProvider.id === null || this.serviceProvider.id === undefined;
@@ -79,12 +74,14 @@ export class ServiceProviderUpdatePage implements OnInit {
   updateForm(serviceProvider: ServiceProvider) {
     this.form.patchValue({
       id: serviceProvider.id,
-      taxRegistrationUrl: serviceProvider.taxRegistrationUrl,
-      licenseOfTradeUrl: serviceProvider.licenseOfTradeUrl,
-      criminalRecordUrl: serviceProvider.criminalRecordUrl,
+      taxRegistration: serviceProvider.taxRegistration,
+      taxRegistrationContentType: serviceProvider.taxRegistrationContentType,
+      licenseOfTrade: serviceProvider.licenseOfTrade,
+      licenseOfTradeContentType: serviceProvider.licenseOfTradeContentType,
+      criminalRecord: serviceProvider.criminalRecord,
+      criminalRecordContentType: serviceProvider.criminalRecordContentType,
       location: serviceProvider.location,
       subscription: serviceProvider.subscription,
-      ratings: serviceProvider.ratings,
     });
   }
 
@@ -131,13 +128,27 @@ export class ServiceProviderUpdatePage implements OnInit {
     return {
       ...new ServiceProvider(),
       id: this.form.get(['id']).value,
-      taxRegistrationUrl: this.form.get(['taxRegistrationUrl']).value,
-      licenseOfTradeUrl: this.form.get(['licenseOfTradeUrl']).value,
-      criminalRecordUrl: this.form.get(['criminalRecordUrl']).value,
+      taxRegistration: this.form.get(['taxRegistration']).value,
+      taxRegistrationContentType: this.form.get(['taxRegistrationContentType']).value,
+      licenseOfTrade: this.form.get(['licenseOfTrade']).value,
+      licenseOfTradeContentType: this.form.get(['licenseOfTradeContentType']).value,
+      criminalRecord: this.form.get(['criminalRecord']).value,
+      criminalRecordContentType: this.form.get(['criminalRecordContentType']).value,
       location: this.form.get(['location']).value,
       subscription: this.form.get(['subscription']).value,
-      ratings: this.form.get(['ratings']).value,
     };
+  }
+
+  byteSize(field) {
+    return this.dataUtils.byteSize(field);
+  }
+
+  openFile(contentType, field) {
+    return this.dataUtils.openFile(contentType, field);
+  }
+
+  setFileData(event, field, isImage) {
+    this.dataUtils.loadFileToForm(event, this.form, field, isImage).subscribe();
   }
 
   compareIWESubscription(first: IWESubscription, second: IWESubscription): boolean {
@@ -145,13 +156,6 @@ export class ServiceProviderUpdatePage implements OnInit {
   }
 
   trackIWESubscriptionById(index: number, item: IWESubscription) {
-    return item.id;
-  }
-  compareRating(first: Rating, second: Rating): boolean {
-    return first && first.id && second && second.id ? first.id === second.id : first === second;
-  }
-
-  trackRatingById(index: number, item: Rating) {
     return item.id;
   }
 }

@@ -27,14 +27,6 @@
         <ion-label position="floating">Location</ion-label>
         <ion-input type="text" name="location" formControlName="location"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label>Rating</ion-label>
-        <ion-select id="field_rating" multiple="true" formControlName="ratings" [compareWith]="compareRating">
-          <ion-select-option [value]="ratingOption" *ngFor="let ratingOption of ratings; trackBy: trackRatingById"
-            >{{ratingOption.id}}</ion-select-option
-          >
-        </ion-select>
-      </ion-item>
     </ion-list>
   </form>
 </ion-content>

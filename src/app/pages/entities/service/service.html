@@ -20,7 +20,9 @@
       <ion-item (click)="view(service)">
         <ion-label text-wrap>
           <ion-text color="primary"><h2>{{service.name}}</h2></ion-text>
-          <p>{{service.pictureURL}}</p>
+          <ion-avatar *ngIf="service.picture">
+            <img [src]="'data:' + service.pictureContentType + ';base64,' + service.picture" />
+          </ion-avatar>
           <p>{{service.location}}</p>
         </ion-label>
       </ion-item>

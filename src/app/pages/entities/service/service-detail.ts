@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JhiDataUtils } from 'ng-jhipster';
 import { Service } from './service.model';
 import { ServiceService } from './service.service';
 import { NavController, AlertController } from '@ionic/angular';
@@ -12,6 +13,7 @@ export class ServiceDetailPage implements OnInit {
   service: Service = {};
 
   constructor(
+    private dataUtils: JhiDataUtils,
     private navController: NavController,
     private serviceService: ServiceService,
     private activatedRoute: ActivatedRoute,
@@ -48,5 +50,13 @@ export class ServiceDetailPage implements OnInit {
       ],
     });
     await alert.present();
+  }
+
+  byteSize(field) {
+    return this.dataUtils.byteSize(field);
+  }
+
+  openFile(contentType, field) {
+    return this.dataUtils.openFile(contentType, field);
   }
 }

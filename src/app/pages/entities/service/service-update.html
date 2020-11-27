@@ -28,8 +28,25 @@
         <ion-input type="text" name="name" formControlName="name"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Picture URL</ion-label>
-        <ion-input type="text" name="pictureURL" formControlName="pictureURL"></ion-input>
+        <div>
+          <img
+            [src]="'data:' + service.pictureContentType + ';base64,' + service.picture"
+            style="max-height: 100px;"
+            *ngIf="service?.picture"
+            alt="service image"
+          />
+          <div *ngIf="service.picture">
+            <p>{{service.pictureContentType}}, {{byteSize(service.picture)}}</p>
+            <ion-button color="danger" (click)="clearInputImage('picture', 'pictureContentType', 'fileImage')">
+              <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+          <input type="file" #fileInput style="display: none;" (change)="setFileData($event, 'picture', true)" accept="image/*" />
+          <ion-button *ngIf="!service?.picture" (click)="getPicture('picture')">
+            <ion-icon name="add-circle" slot="start"></ion-icon>
+            {{ 'ITEM_CREATE_CHOOSE_IMAGE' | translate }}
+          </ion-button>
+        </div>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Location</ion-label>

@@ -14,7 +14,6 @@ describe('Service e2e test', () => {
   let isVisible = false;
 
   const name = 'name';
-  const pictureURL = 'pictureURL';
   const location = 'location';
 
   beforeAll(async () => {
@@ -57,7 +56,7 @@ describe('Service e2e test', () => {
     expect(await serviceUpdatePage.getPageTitle()).toEqual(SUBCOMPONENT_TITLE);
 
     await serviceUpdatePage.setNameInput(name);
-    await serviceUpdatePage.setPictureURLInput(pictureURL);
+    await serviceUpdatePage.setPictureInput(picture);
     await serviceUpdatePage.setLocationInput(location);
 
     await serviceUpdatePage.save();
@@ -95,7 +94,7 @@ describe('Service e2e test', () => {
 
       expect(await serviceDetailPage.getNameInput()).toEqual(name);
 
-      expect(await serviceDetailPage.getPictureURLInput()).toEqual(pictureURL);
+      expect(await serviceDetailPage.getPictureInput()).toEqual(picture);
 
       expect(await serviceDetailPage.getLocationInput()).toEqual(location);
     }

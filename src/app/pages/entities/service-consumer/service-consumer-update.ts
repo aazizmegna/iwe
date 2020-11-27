@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ServiceConsumer } from './service-consumer.model';
 import { ServiceConsumerService } from './service-consumer.service';
-import { Rating, RatingService } from '../rating';
 
 @Component({
   selector: 'page-service-consumer-update',
@@ -14,7 +13,6 @@ import { Rating, RatingService } from '../rating';
 })
 export class ServiceConsumerUpdatePage implements OnInit {
   serviceConsumer: ServiceConsumer;
-  ratings: Rating[];
   isSaving = false;
   isNew = true;
   isReadyToSave: boolean;
@@ -22,7 +20,6 @@ export class ServiceConsumerUpdatePage implements OnInit {
   form = this.formBuilder.group({
     id: [],
     location: [null, []],
-    ratings: [null, []],
   });
 
   constructor(
@@ -31,7 +28,6 @@ export class ServiceConsumerUpdatePage implements OnInit {
     protected formBuilder: FormBuilder,
     public platform: Platform,
     protected toastCtrl: ToastController,
-    private ratingService: RatingService,
     private serviceConsumerService: ServiceConsumerService
   ) {
     // Watch the form for changes, and
@@ -41,12 +37,6 @@ export class ServiceConsumerUpdatePage implements OnInit {
   }
 
   ngOnInit() {
-    this.ratingService.query().subscribe(
-      (data) => {
-        this.ratings = data.body;
-      },
-      (error) => this.onError(error)
-    );
     this.activatedRoute.data.subscribe((response) => {
       this.serviceConsumer = response.data;
       this.isNew = this.serviceConsumer.id === null || this.serviceConsumer.id === undefined;
@@ -58,7 +48,6 @@ export class ServiceConsumerUpdatePage implements OnInit {
     this.form.patchValue({
       id: serviceConsumer.id,
       location: serviceConsumer.location,
-      ratings: serviceConsumer.ratings,
     });
   }
 
@@ -106,15 +95,6 @@ export class ServiceConsumerUpdatePage implements OnInit {
       ...new ServiceConsumer(),
       id: this.form.get(['id']).value,
       location: this.form.get(['location']).value,
-      ratings: this.form.get(['ratings']).value,
     };
-  }
-
-  compareRating(first: Rating, second: Rating): boolean {
-    return first && first.id && second && second.id ? first.id === second.id : first === second;
-  }
-
-  trackRatingById(index: number, item: Rating) {
-    return item.id;
   }
 }

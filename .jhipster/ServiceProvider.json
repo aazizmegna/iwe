@@ -2,16 +2,19 @@
     "name": "ServiceProvider",
     "fields": [
         {
-            "fieldName": "taxRegistrationUrl",
-            "fieldType": "String"
+            "fieldName": "taxRegistration",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
         },
         {
-            "fieldName": "licenseOfTradeUrl",
-            "fieldType": "String"
+            "fieldName": "licenseOfTrade",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
         },
         {
-            "fieldName": "criminalRecordUrl",
-            "fieldType": "String"
+            "fieldName": "criminalRecord",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
         },
         {
             "fieldName": "location",
@@ -26,6 +29,12 @@
             "relationshipName": "subscription",
             "otherEntityField": "id",
             "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "booking",
+            "otherEntityRelationshipName": "serviceProvider",
+            "relationshipName": "booking"
         },
         {
             "relationshipType": "one-to-many",
@@ -68,14 +77,6 @@
             "otherEntityName": "post",
             "otherEntityRelationshipName": "serviceProvider",
             "relationshipName": "post"
-        },
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityName": "rating",
-            "otherEntityRelationshipName": "serviceProvider",
-            "relationshipName": "rating",
-            "otherEntityField": "id",
-            "ownerSide": true
         }
     ],
     "changelogDate": "20200503195900",

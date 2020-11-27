@@ -6,24 +6,7 @@
             "fieldType": "Integer"
         }
     ],
-    "relationships": [
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityName": "serviceProvider",
-            "otherEntityRelationshipName": "rating",
-            "relationshipName": "serviceProvider",
-            "otherEntityField": "id",
-            "ownerSide": false
-        },
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityName": "serviceConsumer",
-            "otherEntityRelationshipName": "rating",
-            "relationshipName": "serviceConsumer",
-            "otherEntityField": "id",
-            "ownerSide": false
-        }
-    ],
+    "relationships": [],
     "changelogDate": "20200503200100",
     "entityTableName": "rating",
     "dto": "no",

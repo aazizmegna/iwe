@@ -24,16 +24,46 @@
         <ion-input type="hidden" id="id" formControlName="id" readonly></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Tax Registration Url</ion-label>
-        <ion-input type="text" name="taxRegistrationUrl" formControlName="taxRegistrationUrl"></ion-input>
+        <div>
+          <div *ngIf="serviceProvider.taxRegistration">
+            <p>{{serviceProvider.taxRegistrationContentType}}, {{byteSize(serviceProvider.taxRegistration)}}</p>
+            <ion-button
+              color="danger"
+              (click)="serviceProvider.taxRegistration=null;serviceProvider.taxRegistrationContentType=null;form.patchValue({'taxRegistration': ''});form.patchValue({'taxRegistrationContentType': ''})"
+            >
+              <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+          <input type="file" #fileInput (change)="setFileData($event, 'taxRegistration', false)" />
+        </div>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">License Of Trade Url</ion-label>
-        <ion-input type="text" name="licenseOfTradeUrl" formControlName="licenseOfTradeUrl"></ion-input>
+        <div>
+          <div *ngIf="serviceProvider.licenseOfTrade">
+            <p>{{serviceProvider.licenseOfTradeContentType}}, {{byteSize(serviceProvider.licenseOfTrade)}}</p>
+            <ion-button
+              color="danger"
+              (click)="serviceProvider.licenseOfTrade=null;serviceProvider.licenseOfTradeContentType=null;form.patchValue({'licenseOfTrade': ''});form.patchValue({'licenseOfTradeContentType': ''})"
+            >
+              <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+          <input type="file" #fileInput (change)="setFileData($event, 'licenseOfTrade', false)" />
+        </div>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Criminal Record Url</ion-label>
-        <ion-input type="text" name="criminalRecordUrl" formControlName="criminalRecordUrl"></ion-input>
+        <div>
+          <div *ngIf="serviceProvider.criminalRecord">
+            <p>{{serviceProvider.criminalRecordContentType}}, {{byteSize(serviceProvider.criminalRecord)}}</p>
+            <ion-button
+              color="danger"
+              (click)="serviceProvider.criminalRecord=null;serviceProvider.criminalRecordContentType=null;form.patchValue({'criminalRecord': ''});form.patchValue({'criminalRecordContentType': ''})"
+            >
+              <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+          <input type="file" #fileInput (change)="setFileData($event, 'criminalRecord', false)" />
+        </div>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Location</ion-label>
@@ -47,14 +77,6 @@
             [value]="iWESubscriptionOption.id === serviceProvider.subscription?.id ? serviceProvider.subscription : iWESubscriptionOption"
             *ngFor="let iWESubscriptionOption of subscriptions; trackBy: trackIWESubscriptionById"
             >{{iWESubscriptionOption.id}}</ion-select-option
-          >
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>Rating</ion-label>
-        <ion-select id="field_rating" multiple="true" formControlName="ratings" [compareWith]="compareRating">
-          <ion-select-option [value]="ratingOption" *ngFor="let ratingOption of ratings; trackBy: trackRatingById"
-            >{{ratingOption.id}}</ion-select-option
           >
         </ion-select>
       </ion-item>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JhiDataUtils } from 'ng-jhipster';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NavController, Platform, ToastController } from '@ionic/angular';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
@@ -19,9 +20,12 @@ export class LocationServiceProviderUpdatePage implements OnInit {
 
   form = this.formBuilder.group({
     id: [],
-    trafficRegistrationUrl: [null, []],
-    criminalRecordUrl: [null, []],
-    taxRegistrationUrl: [null, []],
+    trafficRegistration: [null, []],
+    trafficRegistrationContentType: [null, []],
+    criminalRecord: [null, []],
+    criminalRecordContentType: [null, []],
+    taxRegistration: [null, []],
+    taxRegistrationContentType: [null, []],
   });
 
   constructor(
@@ -30,6 +34,7 @@ export class LocationServiceProviderUpdatePage implements OnInit {
     protected formBuilder: FormBuilder,
     public platform: Platform,
     protected toastCtrl: ToastController,
+    private dataUtils: JhiDataUtils,
     private locationServiceProviderService: LocationServiceProviderService
   ) {
     // Watch the form for changes, and
@@ -49,9 +54,12 @@ export class LocationServiceProviderUpdatePage implements OnInit {
   updateForm(locationServiceProvider: LocationServiceProvider) {
     this.form.patchValue({
       id: locationServiceProvider.id,
-      trafficRegistrationUrl: locationServiceProvider.trafficRegistrationUrl,
-      criminalRecordUrl: locationServiceProvider.criminalRecordUrl,
-      taxRegistrationUrl: locationServiceProvider.taxRegistrationUrl,
+      trafficRegistration: locationServiceProvider.trafficRegistration,
+      trafficRegistrationContentType: locationServiceProvider.trafficRegistrationContentType,
+      criminalRecord: locationServiceProvider.criminalRecord,
+      criminalRecordContentType: locationServiceProvider.criminalRecordContentType,
+      taxRegistration: locationServiceProvider.taxRegistration,
+      taxRegistrationContentType: locationServiceProvider.taxRegistrationContentType,
     });
   }
 
@@ -102,9 +110,24 @@ export class LocationServiceProviderUpdatePage implements OnInit {
     return {
       ...new LocationServiceProvider(),
       id: this.form.get(['id']).value,
-      trafficRegistrationUrl: this.form.get(['trafficRegistrationUrl']).value,
-      criminalRecordUrl: this.form.get(['criminalRecordUrl']).value,
-      taxRegistrationUrl: this.form.get(['taxRegistrationUrl']).value,
+      trafficRegistration: this.form.get(['trafficRegistration']).value,
+      trafficRegistrationContentType: this.form.get(['trafficRegistrationContentType']).value,
+      criminalRecord: this.form.get(['criminalRecord']).value,
+      criminalRecordContentType: this.form.get(['criminalRecordContentType']).value,
+      taxRegistration: this.form.get(['taxRegistration']).value,
+      taxRegistrationContentType: this.form.get(['taxRegistrationContentType']).value,
     };
+  }
+
+  byteSize(field) {
+    return this.dataUtils.byteSize(field);
+  }
+
+  openFile(contentType, field) {
+    return this.dataUtils.openFile(contentType, field);
+  }
+
+  setFileData(event, field, isImage) {
+    this.dataUtils.loadFileToForm(event, this.form, field, isImage).subscribe();
   }
 }

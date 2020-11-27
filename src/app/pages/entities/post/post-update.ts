@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NavController, Platform, ToastController } from '@ionic/angular';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
@@ -9,10 +9,10 @@ import { PostService } from './post.service';
 import { ServiceConsumer, ServiceConsumerService } from '../service-consumer';
 import { ServiceProvider, ServiceProviderService } from '../service-provider';
 import { Feed, FeedService } from '../feed';
-import {PicturePost} from './picture-post.model';
-import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
-import {JhiDataUtils} from 'ng-jhipster';
-import {PicturePostService} from './picture-post.service';
+import { PicturePost } from './picture-post.model';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { JhiDataUtils } from 'ng-jhipster';
+import { PicturePostService } from './picture-post.service';
 
 @Component({
   selector: 'page-post-update',
@@ -117,9 +117,7 @@ export class PostUpdatePage implements OnInit {
       },
       (error) => this.onError(error)
     );
-    this.activatedRoute.data.subscribe((response) => {
-
-    });
+    this.activatedRoute.data.subscribe((response) => {});
   }
 
   updateForm(post: Post, picturePost: PicturePost) {

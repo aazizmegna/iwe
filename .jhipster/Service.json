@@ -6,8 +6,9 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "pictureURL",
-            "fieldType": "String"
+            "fieldName": "picture",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
         },
         {
             "fieldName": "location",
@@ -15,6 +16,12 @@
         }
     ],
     "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "booking",
+            "otherEntityRelationshipName": "service",
+            "relationshipName": "booking"
+        },
         {
             "relationshipType": "one-to-many",
             "otherEntityName": "transaction",

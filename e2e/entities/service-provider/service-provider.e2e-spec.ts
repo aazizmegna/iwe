@@ -13,9 +13,6 @@ describe('ServiceProvider e2e test', () => {
   let lastElement: any;
   let isVisible = false;
 
-  const taxRegistrationUrl = 'taxRegistrationUrl';
-  const licenseOfTradeUrl = 'licenseOfTradeUrl';
-  const criminalRecordUrl = 'criminalRecordUrl';
   const location = 'location';
 
   beforeAll(async () => {
@@ -57,9 +54,9 @@ describe('ServiceProvider e2e test', () => {
     await browser.wait(ec.visibilityOf(serviceProviderUpdatePage.pageTitle), 1000);
     expect(await serviceProviderUpdatePage.getPageTitle()).toEqual(SUBCOMPONENT_TITLE);
 
-    await serviceProviderUpdatePage.setTaxRegistrationUrlInput(taxRegistrationUrl);
-    await serviceProviderUpdatePage.setLicenseOfTradeUrlInput(licenseOfTradeUrl);
-    await serviceProviderUpdatePage.setCriminalRecordUrlInput(criminalRecordUrl);
+    await serviceProviderUpdatePage.setTaxRegistrationInput(taxRegistration);
+    await serviceProviderUpdatePage.setLicenseOfTradeInput(licenseOfTrade);
+    await serviceProviderUpdatePage.setCriminalRecordInput(criminalRecord);
     await serviceProviderUpdatePage.setLocationInput(location);
 
     await serviceProviderUpdatePage.save();
@@ -95,11 +92,11 @@ describe('ServiceProvider e2e test', () => {
     if (isVisible && (await serviceProviderDetailPage.pageTitle.isDisplayed())) {
       expect(await serviceProviderDetailPage.getPageTitle()).toEqual(SUBCOMPONENT_TITLE);
 
-      expect(await serviceProviderDetailPage.getTaxRegistrationUrlInput()).toEqual(taxRegistrationUrl);
+      expect(await serviceProviderDetailPage.getTaxRegistrationInput()).toEqual(taxRegistration);
 
-      expect(await serviceProviderDetailPage.getLicenseOfTradeUrlInput()).toEqual(licenseOfTradeUrl);
+      expect(await serviceProviderDetailPage.getLicenseOfTradeInput()).toEqual(licenseOfTrade);
 
-      expect(await serviceProviderDetailPage.getCriminalRecordUrlInput()).toEqual(criminalRecordUrl);
+      expect(await serviceProviderDetailPage.getCriminalRecordInput()).toEqual(criminalRecord);
 
       expect(await serviceProviderDetailPage.getLocationInput()).toEqual(location);
     }

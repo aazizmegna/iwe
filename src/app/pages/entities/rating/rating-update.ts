@@ -6,8 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Rating } from './rating.model';
 import { RatingService } from './rating.service';
-import { ServiceProvider, ServiceProviderService } from '../service-provider';
-import { ServiceConsumer, ServiceConsumerService } from '../service-consumer';
 
 @Component({
   selector: 'page-rating-update',
@@ -15,8 +13,6 @@ import { ServiceConsumer, ServiceConsumerService } from '../service-consumer';
 })
 export class RatingUpdatePage implements OnInit {
   rating: Rating;
-  serviceProviders: ServiceProvider[];
-  serviceConsumers: ServiceConsumer[];
   isSaving = false;
   isNew = true;
   isReadyToSave: boolean;
@@ -32,8 +28,6 @@ export class RatingUpdatePage implements OnInit {
     protected formBuilder: FormBuilder,
     public platform: Platform,
     protected toastCtrl: ToastController,
-    private serviceProviderService: ServiceProviderService,
-    private serviceConsumerService: ServiceConsumerService,
     private ratingService: RatingService
   ) {
     // Watch the form for changes, and
@@ -43,18 +37,6 @@ export class RatingUpdatePage implements OnInit {
   }
 
   ngOnInit() {
-    this.serviceProviderService.query().subscribe(
-      (data) => {
-        this.serviceProviders = data.body;
-      },
-      (error) => this.onError(error)
-    );
-    this.serviceConsumerService.query().subscribe(
-      (data) => {
-        this.serviceConsumers = data.body;
-      },
-      (error) => this.onError(error)
-    );
     this.activatedRoute.data.subscribe((response) => {
       this.rating = response.data;
       this.isNew = this.rating.id === null || this.rating.id === undefined;
@@ -114,20 +96,5 @@ export class RatingUpdatePage implements OnInit {
       id: this.form.get(['id']).value,
       rating: this.form.get(['rating']).value,
     };
-  }
-
-  compareServiceProvider(first: ServiceProvider, second: ServiceProvider): boolean {
-    return first && first.id && second && second.id ? first.id === second.id : first === second;
-  }
-
-  trackServiceProviderById(index: number, item: ServiceProvider) {
-    return item.id;
-  }
-  compareServiceConsumer(first: ServiceConsumer, second: ServiceConsumer): boolean {
-    return first && first.id && second && second.id ? first.id === second.id : first === second;
-  }
-
-  trackServiceConsumerById(index: number, item: ServiceConsumer) {
-    return item.id;
   }
 }

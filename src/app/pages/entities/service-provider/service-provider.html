@@ -19,9 +19,9 @@
     <ion-item-sliding *ngFor="let serviceProvider of serviceProviders; trackBy: trackId" #slidingItem>
       <ion-item (click)="view(serviceProvider)">
         <ion-label text-wrap>
-          <p>{{serviceProvider.taxRegistrationUrl}}</p>
-          <p>{{serviceProvider.licenseOfTradeUrl}}</p>
-          <p>{{serviceProvider.criminalRecordUrl}}</p>
+          <p>{{serviceProvider.taxRegistration}}</p>
+          <p>{{serviceProvider.licenseOfTrade}}</p>
+          <p>{{serviceProvider.criminalRecord}}</p>
           <p>{{serviceProvider.location}}</p>
         </ion-label>
       </ion-item>

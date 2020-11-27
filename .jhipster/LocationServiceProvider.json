@@ -2,16 +2,19 @@
     "name": "LocationServiceProvider",
     "fields": [
         {
-            "fieldName": "trafficRegistrationUrl",
-            "fieldType": "String"
+            "fieldName": "trafficRegistration",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
         },
         {
-            "fieldName": "criminalRecordUrl",
-            "fieldType": "String"
+            "fieldName": "criminalRecord",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
         },
         {
-            "fieldName": "taxRegistrationUrl",
-            "fieldType": "String"
+            "fieldName": "taxRegistration",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
         }
     ],
     "relationships": [

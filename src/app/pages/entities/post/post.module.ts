@@ -12,7 +12,7 @@ import { filter, map } from 'rxjs/operators';
 import { PostPage } from './post';
 import { PostUpdatePage } from './post-update';
 import { Post, PostService, PostDetailPage } from '.';
-import {Camera} from '@ionic-native/camera/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 
 @Injectable({ providedIn: 'root' })
 export class PostResolve implements Resolve<Post> {

@@ -28,22 +28,22 @@ export class LocationServiceProviderUpdatePage {
   pageTitle = element.all(by.css('ion-title')).get(3);
   saveButton = element.all(by.css('ion-button')).get(1);
 
-  trafficRegistrationUrlInput = element(by.css('ion-input[formControlName="trafficRegistrationUrl"] input'));
-  criminalRecordUrlInput = element(by.css('ion-input[formControlName="criminalRecordUrl"] input'));
-  taxRegistrationUrlInput = element(by.css('ion-input[formControlName="taxRegistrationUrl"] input'));
+  trafficRegistrationInput = element(by.css('ion-input[formControlName="trafficRegistration"] input'));
+  criminalRecordInput = element(by.css('ion-input[formControlName="criminalRecord"] input'));
+  taxRegistrationInput = element(by.css('ion-input[formControlName="taxRegistration"] input'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getText();
   }
 
-  async setTrafficRegistrationUrlInput(trafficRegistrationUrl: string): Promise<void> {
-    await this.trafficRegistrationUrlInput.sendKeys(trafficRegistrationUrl);
+  async setTrafficRegistrationInput(trafficRegistration: string): Promise<void> {
+    await this.trafficRegistrationInput.sendKeys(trafficRegistration);
   }
-  async setCriminalRecordUrlInput(criminalRecordUrl: string): Promise<void> {
-    await this.criminalRecordUrlInput.sendKeys(criminalRecordUrl);
+  async setCriminalRecordInput(criminalRecord: string): Promise<void> {
+    await this.criminalRecordInput.sendKeys(criminalRecord);
   }
-  async setTaxRegistrationUrlInput(taxRegistrationUrl: string): Promise<void> {
-    await this.taxRegistrationUrlInput.sendKeys(taxRegistrationUrl);
+  async setTaxRegistrationInput(taxRegistration: string): Promise<void> {
+    await this.taxRegistrationInput.sendKeys(taxRegistration);
   }
 
   async save(): Promise<void> {
@@ -54,22 +54,22 @@ export class LocationServiceProviderUpdatePage {
 export class LocationServiceProviderDetailPage {
   pageTitle = element.all(by.css('ion-title')).get(3);
   deleteButton = element(by.css('ion-button[color="danger"]'));
-  trafficRegistrationUrlInput = element.all(by.css('span')).get(1);
+  trafficRegistrationInput = element.all(by.css('span')).get(1);
 
-  criminalRecordUrlInput = element.all(by.css('span')).get(2);
+  criminalRecordInput = element.all(by.css('span')).get(2);
 
-  taxRegistrationUrlInput = element.all(by.css('span')).get(3);
+  taxRegistrationInput = element.all(by.css('span')).get(3);
 
-  async getTrafficRegistrationUrlInput(): Promise<string> {
-    return await this.trafficRegistrationUrlInput.getText();
+  async getTrafficRegistrationInput(): Promise<string> {
+    return await this.trafficRegistrationInput.getText();
   }
 
-  async getCriminalRecordUrlInput(): Promise<string> {
-    return await this.criminalRecordUrlInput.getText();
+  async getCriminalRecordInput(): Promise<string> {
+    return await this.criminalRecordInput.getText();
   }
 
-  async getTaxRegistrationUrlInput(): Promise<string> {
-    return await this.taxRegistrationUrlInput.getText();
+  async getTaxRegistrationInput(): Promise<string> {
+    return await this.taxRegistrationInput.getText();
   }
 
   async clickOnDeleteButton(): Promise<void> {

@@ -15,6 +15,12 @@
         },
         {
             "relationshipType": "one-to-many",
+            "otherEntityName": "booking",
+            "otherEntityRelationshipName": "serviceConsumer",
+            "relationshipName": "booking"
+        },
+        {
+            "relationshipType": "one-to-many",
             "otherEntityName": "service",
             "otherEntityRelationshipName": "serviceConsumer",
             "relationshipName": "service"
@@ -48,14 +54,6 @@
             "otherEntityName": "invitation",
             "otherEntityRelationshipName": "serviceConsumer",
             "relationshipName": "invitation"
-        },
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityName": "rating",
-            "otherEntityRelationshipName": "serviceConsumer",
-            "relationshipName": "rating",
-            "otherEntityField": "id",
-            "ownerSide": true
         }
     ],
     "changelogDate": "20200503200400",

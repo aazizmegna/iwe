@@ -24,16 +24,46 @@
         <ion-input type="hidden" id="id" formControlName="id" readonly></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Traffic Registration Url</ion-label>
-        <ion-input type="text" name="trafficRegistrationUrl" formControlName="trafficRegistrationUrl"></ion-input>
+        <div>
+          <div *ngIf="locationServiceProvider.trafficRegistration">
+            <p>{{locationServiceProvider.trafficRegistrationContentType}}, {{byteSize(locationServiceProvider.trafficRegistration)}}</p>
+            <ion-button
+              color="danger"
+              (click)="locationServiceProvider.trafficRegistration=null;locationServiceProvider.trafficRegistrationContentType=null;form.patchValue({'trafficRegistration': ''});form.patchValue({'trafficRegistrationContentType': ''})"
+            >
+              <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+          <input type="file" #fileInput (change)="setFileData($event, 'trafficRegistration', false)" />
+        </div>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Criminal Record Url</ion-label>
-        <ion-input type="text" name="criminalRecordUrl" formControlName="criminalRecordUrl"></ion-input>
+        <div>
+          <div *ngIf="locationServiceProvider.criminalRecord">
+            <p>{{locationServiceProvider.criminalRecordContentType}}, {{byteSize(locationServiceProvider.criminalRecord)}}</p>
+            <ion-button
+              color="danger"
+              (click)="locationServiceProvider.criminalRecord=null;locationServiceProvider.criminalRecordContentType=null;form.patchValue({'criminalRecord': ''});form.patchValue({'criminalRecordContentType': ''})"
+            >
+              <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+          <input type="file" #fileInput (change)="setFileData($event, 'criminalRecord', false)" />
+        </div>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Tax Registration Url</ion-label>
-        <ion-input type="text" name="taxRegistrationUrl" formControlName="taxRegistrationUrl"></ion-input>
+        <div>
+          <div *ngIf="locationServiceProvider.taxRegistration">
+            <p>{{locationServiceProvider.taxRegistrationContentType}}, {{byteSize(locationServiceProvider.taxRegistration)}}</p>
+            <ion-button
+              color="danger"
+              (click)="locationServiceProvider.taxRegistration=null;locationServiceProvider.taxRegistrationContentType=null;form.patchValue({'taxRegistration': ''});form.patchValue({'taxRegistrationContentType': ''})"
+            >
+              <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+          <input type="file" #fileInput (change)="setFileData($event, 'taxRegistration', false)" />
+        </div>
       </ion-item>
     </ion-list>
   </form>

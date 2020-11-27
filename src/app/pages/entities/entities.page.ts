@@ -30,6 +30,8 @@ export class EntitiesPage {
     { name: 'Reaction', component: 'ReactionPage', route: 'reaction' },
     { name: 'Like', component: 'LikePage', route: 'like' },
     { name: 'Coment', component: 'ComentPage', route: 'coment' },
+    { name: 'MarketingPost', component: 'MarketingPostPage', route: 'marketing-post' },
+    { name: 'Booking', component: 'BookingPage', route: 'booking' },
     /* jhipster-needle-add-entity-page - JHipster will add entity pages here */
   ];
 

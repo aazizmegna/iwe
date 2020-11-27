@@ -1,6 +1,7 @@
 import { NgModule, Injectable } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
+import { Camera } from '@ionic-native/camera/ngx';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { UserRouteAccessService } from '../../../services/auth/user-route-access.service';
@@ -76,5 +77,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [ServicePage, ServiceUpdatePage, ServiceDetailPage],
   imports: [IonicModule, FormsModule, ReactiveFormsModule, CommonModule, TranslateModule, RouterModule.forChild(routes)],
+  providers: [Camera],
 })
 export class ServicePageModule {}

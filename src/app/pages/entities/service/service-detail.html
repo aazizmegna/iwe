@@ -18,9 +18,14 @@
       </div>
     </ion-item>
     <ion-item>
-      <ion-label position="fixed">Picture URL</ion-label>
+      <ion-label position="fixed">Picture</ion-label>
       <div item-content>
-        <span>{{service.pictureURL}}</span>
+        <div *ngIf="service.picture">
+          <a (click)="openFile(service.pictureContentType, service.picture)">
+            <img [src]="'data:' + service.pictureContentType + ';base64,' + service.picture" style="max-width: 100%;" alt="service image" />
+          </a>
+          {{service.pictureContentType}}, {{byteSize(service.picture)}}
+        </div>
       </div>
     </ion-item>
     <ion-item>

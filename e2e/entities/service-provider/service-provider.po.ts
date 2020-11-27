@@ -28,23 +28,23 @@ export class ServiceProviderUpdatePage {
   pageTitle = element.all(by.css('ion-title')).get(3);
   saveButton = element.all(by.css('ion-button')).get(1);
 
-  taxRegistrationUrlInput = element(by.css('ion-input[formControlName="taxRegistrationUrl"] input'));
-  licenseOfTradeUrlInput = element(by.css('ion-input[formControlName="licenseOfTradeUrl"] input'));
-  criminalRecordUrlInput = element(by.css('ion-input[formControlName="criminalRecordUrl"] input'));
+  taxRegistrationInput = element(by.css('ion-input[formControlName="taxRegistration"] input'));
+  licenseOfTradeInput = element(by.css('ion-input[formControlName="licenseOfTrade"] input'));
+  criminalRecordInput = element(by.css('ion-input[formControlName="criminalRecord"] input'));
   locationInput = element(by.css('ion-input[formControlName="location"] input'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getText();
   }
 
-  async setTaxRegistrationUrlInput(taxRegistrationUrl: string): Promise<void> {
-    await this.taxRegistrationUrlInput.sendKeys(taxRegistrationUrl);
+  async setTaxRegistrationInput(taxRegistration: string): Promise<void> {
+    await this.taxRegistrationInput.sendKeys(taxRegistration);
   }
-  async setLicenseOfTradeUrlInput(licenseOfTradeUrl: string): Promise<void> {
-    await this.licenseOfTradeUrlInput.sendKeys(licenseOfTradeUrl);
+  async setLicenseOfTradeInput(licenseOfTrade: string): Promise<void> {
+    await this.licenseOfTradeInput.sendKeys(licenseOfTrade);
   }
-  async setCriminalRecordUrlInput(criminalRecordUrl: string): Promise<void> {
-    await this.criminalRecordUrlInput.sendKeys(criminalRecordUrl);
+  async setCriminalRecordInput(criminalRecord: string): Promise<void> {
+    await this.criminalRecordInput.sendKeys(criminalRecord);
   }
   async setLocationInput(location: string): Promise<void> {
     await this.locationInput.sendKeys(location);
@@ -58,24 +58,24 @@ export class ServiceProviderUpdatePage {
 export class ServiceProviderDetailPage {
   pageTitle = element.all(by.css('ion-title')).get(3);
   deleteButton = element(by.css('ion-button[color="danger"]'));
-  taxRegistrationUrlInput = element.all(by.css('span')).get(1);
+  taxRegistrationInput = element.all(by.css('span')).get(1);
 
-  licenseOfTradeUrlInput = element.all(by.css('span')).get(2);
+  licenseOfTradeInput = element.all(by.css('span')).get(2);
 
-  criminalRecordUrlInput = element.all(by.css('span')).get(3);
+  criminalRecordInput = element.all(by.css('span')).get(3);
 
   locationInput = element.all(by.css('span')).get(4);
 
-  async getTaxRegistrationUrlInput(): Promise<string> {
-    return await this.taxRegistrationUrlInput.getText();
+  async getTaxRegistrationInput(): Promise<string> {
+    return await this.taxRegistrationInput.getText();
   }
 
-  async getLicenseOfTradeUrlInput(): Promise<string> {
-    return await this.licenseOfTradeUrlInput.getText();
+  async getLicenseOfTradeInput(): Promise<string> {
+    return await this.licenseOfTradeInput.getText();
   }
 
-  async getCriminalRecordUrlInput(): Promise<string> {
-    return await this.criminalRecordUrlInput.getText();
+  async getCriminalRecordInput(): Promise<string> {
+    return await this.criminalRecordInput.getText();
   }
 
   async getLocationInput(): Promise<string> {

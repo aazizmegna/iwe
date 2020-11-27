@@ -29,7 +29,7 @@ export class ServiceUpdatePage {
   saveButton = element.all(by.css('ion-button')).get(1);
 
   nameInput = element(by.css('ion-input[formControlName="name"] input'));
-  pictureURLInput = element(by.css('ion-input[formControlName="pictureURL"] input'));
+  pictureInput = element(by.css('ion-input[formControlName="picture"] input'));
   locationInput = element(by.css('ion-input[formControlName="location"] input'));
 
   async getPageTitle(): Promise<string> {
@@ -39,8 +39,8 @@ export class ServiceUpdatePage {
   async setNameInput(name: string): Promise<void> {
     await this.nameInput.sendKeys(name);
   }
-  async setPictureURLInput(pictureURL: string): Promise<void> {
-    await this.pictureURLInput.sendKeys(pictureURL);
+  async setPictureInput(picture: string): Promise<void> {
+    await this.pictureInput.sendKeys(picture);
   }
   async setLocationInput(location: string): Promise<void> {
     await this.locationInput.sendKeys(location);
@@ -56,7 +56,7 @@ export class ServiceDetailPage {
   deleteButton = element(by.css('ion-button[color="danger"]'));
   nameInput = element.all(by.css('span')).get(1);
 
-  pictureURLInput = element.all(by.css('span')).get(2);
+  pictureInput = element.all(by.css('span')).get(2);
 
   locationInput = element.all(by.css('span')).get(3);
 
@@ -64,8 +64,8 @@ export class ServiceDetailPage {
     return await this.nameInput.getText();
   }
 
-  async getPictureURLInput(): Promise<string> {
-    return await this.pictureURLInput.getText();
+  async getPictureInput(): Promise<string> {
+    return await this.pictureInput.getText();
   }
 
   async getLocationInput(): Promise<string> {

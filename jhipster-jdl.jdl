@@ -1,7 +1,7 @@
 entity LocationServiceProvider {
- trafficRegistrationUrl String
- criminalRecordUrl String
- taxRegistrationUrl String
+ trafficRegistration Blob
+ criminalRecord Blob
+ taxRegistration Blob
 }
 
 entity Transaction {
@@ -11,7 +11,7 @@ entity Transaction {
 
 entity Service {
   name String
-  pictureURL String
+  picture ImageBlob
   location String
 }
 
@@ -35,9 +35,9 @@ entity SubscriptionSpecification {
 
 
 entity ServiceProvider {
- taxRegistrationUrl String
- licenseOfTradeUrl String
- criminalRecordUrl String
+ taxRegistration Blob
+ licenseOfTrade Blob
+ criminalRecord Blob
  location String
 }
 
@@ -117,6 +117,10 @@ entity Coment {
     createdAt Instant
 }
 
+entity Booking {
+	dateTime Instant
+}
+
 
 
 
@@ -133,8 +137,6 @@ enum ProfilePageType {
 }
 
 relationship ManyToMany {
-	ServiceProvider{rating} to Rating{serviceProvider},
-    ServiceConsumer{rating} to Rating{serviceConsumer},
     Feed{post} to Post{feed}
 }
 
@@ -143,6 +145,9 @@ relationship OneToMany {
 	LocationServiceProvider to Ride{locationServiceProvider},
     LocationServiceProvider to Transaction{locationServiceProvider},
     ServiceConsumer to Ride{serviceConsumer},
+    ServiceConsumer to Booking{serviceConsumer},
+    ServiceProvider to Booking{serviceProvider},
+	Service to Booking{service},
     ServiceConsumer to Service{serviceConsumer},
     ServiceConsumer to Message{serviceConsumer},
     ServiceConsumer to Post{serviceConsumer},

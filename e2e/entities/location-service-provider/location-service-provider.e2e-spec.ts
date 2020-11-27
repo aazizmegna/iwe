@@ -17,10 +17,6 @@ describe('LocationServiceProvider e2e test', () => {
   let lastElement: any;
   let isVisible = false;
 
-  const trafficRegistrationUrl = 'trafficRegistrationUrl';
-  const criminalRecordUrl = 'criminalRecordUrl';
-  const taxRegistrationUrl = 'taxRegistrationUrl';
-
   beforeAll(async () => {
     loginPage = new LoginPage();
     await loginPage.navigateTo('/');
@@ -63,9 +59,9 @@ describe('LocationServiceProvider e2e test', () => {
     await browser.wait(ec.visibilityOf(locationServiceProviderUpdatePage.pageTitle), 1000);
     expect(await locationServiceProviderUpdatePage.getPageTitle()).toEqual(SUBCOMPONENT_TITLE);
 
-    await locationServiceProviderUpdatePage.setTrafficRegistrationUrlInput(trafficRegistrationUrl);
-    await locationServiceProviderUpdatePage.setCriminalRecordUrlInput(criminalRecordUrl);
-    await locationServiceProviderUpdatePage.setTaxRegistrationUrlInput(taxRegistrationUrl);
+    await locationServiceProviderUpdatePage.setTrafficRegistrationInput(trafficRegistration);
+    await locationServiceProviderUpdatePage.setCriminalRecordInput(criminalRecord);
+    await locationServiceProviderUpdatePage.setTaxRegistrationInput(taxRegistration);
 
     await locationServiceProviderUpdatePage.save();
     await browser.wait(ec.visibilityOf(locationServiceProviderComponentsPage.title), 1000);
@@ -100,11 +96,11 @@ describe('LocationServiceProvider e2e test', () => {
     if (isVisible && (await locationServiceProviderDetailPage.pageTitle.isDisplayed())) {
       expect(await locationServiceProviderDetailPage.getPageTitle()).toEqual(SUBCOMPONENT_TITLE);
 
-      expect(await locationServiceProviderDetailPage.getTrafficRegistrationUrlInput()).toEqual(trafficRegistrationUrl);
+      expect(await locationServiceProviderDetailPage.getTrafficRegistrationInput()).toEqual(trafficRegistration);
 
-      expect(await locationServiceProviderDetailPage.getCriminalRecordUrlInput()).toEqual(criminalRecordUrl);
+      expect(await locationServiceProviderDetailPage.getCriminalRecordInput()).toEqual(criminalRecord);
 
-      expect(await locationServiceProviderDetailPage.getTaxRegistrationUrlInput()).toEqual(taxRegistrationUrl);
+      expect(await locationServiceProviderDetailPage.getTaxRegistrationInput()).toEqual(taxRegistration);
     }
   });
 

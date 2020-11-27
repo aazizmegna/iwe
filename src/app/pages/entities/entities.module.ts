@@ -104,6 +104,14 @@ const routes: Routes = [
     path: 'coment',
     loadChildren: './coment/coment.module#ComentPageModule',
   },
+  {
+    path: 'marketing-post',
+    loadChildren: './marketing-post/marketing-post.module#MarketingPostPageModule',
+  },
+  {
+    path: 'booking',
+    loadChildren: './booking/booking.module#BookingPageModule',
+  },
   /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
 ];
 

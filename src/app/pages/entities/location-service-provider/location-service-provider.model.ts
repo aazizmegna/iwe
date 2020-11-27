@@ -5,9 +5,12 @@ import { Transaction } from '../transaction/transaction.model';
 export class LocationServiceProvider implements BaseEntity {
   constructor(
     public id?: number,
-    public trafficRegistrationUrl?: string,
-    public criminalRecordUrl?: string,
-    public taxRegistrationUrl?: string,
+    public trafficRegistrationContentType?: string,
+    public trafficRegistration?: any,
+    public criminalRecordContentType?: string,
+    public criminalRecord?: any,
+    public taxRegistrationContentType?: string,
+    public taxRegistration?: any,
     public rides?: Ride[],
     public transactions?: Transaction[]
   ) {}

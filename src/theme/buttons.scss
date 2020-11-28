@@ -1,0 +1,54 @@
+.text-link {
+    text-decoration: underline;
+}
+
+ion-button.follow_btn {
+    --background: #C2C5CA;
+    --background-activated: #C2C5CA;
+    --background-activated-opacity: 1;
+    --background-focused: #C2C5CA;
+    --background-focused-opacity: 1;
+    --background-hover: #C2C5CA;
+    --background-hover-opacity: 1;
+    --border-color: #C2C5CA;
+    --border-radius: 5px;
+    --border-style: solid;
+    --border-width: 8px;
+    --box-shadow: 0;
+    --color: #ffffff;
+    --color-activated: #ffffff;
+    --color-focused: #ffffff;
+    --color-hover: #ffffff;
+    --opacity: 1;
+    --padding-bottom: 2px;
+    --padding-end: 2px;
+    --padding-start: 2px;
+    --padding-top: 2px;
+    --ripple-color: #1e1e1e;
+    --transition: background-color 15ms linear;
+    font-size: 10px;
+    height: 25px;
+    margin-left: 10px;
+}
+
+.btn-back {
+    font-size: 14px;
+    color: #ffffff;
+}
+
+// Sizes
+
+.btn-md {
+    width: 120px;
+    font-size: 12px;
+}
+
+
+// Menu
+
+.elipse_menu {
+    color: white;
+    font-size: 20px;
+    padding-top: 5px;
+}
+

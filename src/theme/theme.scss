@@ -1,0 +1,87 @@
+.ion-header {
+    .header_logo {
+        width: 40px;
+        margin-left: 10px;
+    }
+    
+}
+// Customize
+// Setting up global vars for primary and secondary colors
+
+$primary-color: #2E3442;
+$secondary-color: #C1A689;
+
+:root {
+    ion-tab-bar {
+        --border: none;
+        box-shadow: 0px -2px 8px -1px rgba(0,0,0,0.54);
+    }
+    ion-tab-button {
+        --color: #2E3442;
+        --color-selected: #C1A689;
+    }
+    
+    ion-button {
+        --box-shadow: none !important;
+    }
+    
+    ion-card, .card-ios, .card-md  {
+        box-shadow: none !important;
+    }
+    
+    ion-back-button {
+        font-size: 14px;
+        color: white;
+    }
+    
+}
+
+.list-md {
+    --background: white!important;
+    background: white!important;
+    padding-top: 40px;
+    --padding-top: 40px;
+}
+
+ion-item.item.md.in-list.ion-focusable.hydrated.item-label {
+    --background: white;
+    --border-color: transparent;
+    background: white;
+    border-radius: transparent;
+}
+
+// Resets
+
+h1, h2, h3, h4, h5, h6, a, hr, li, p {
+    margin: 0;
+}
+
+.pos-rel {
+    position: relative;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+// Images
+
+.circle_image {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    margin: auto;
+}
+
+.rounded {
+    border-radius: 5px;
+}

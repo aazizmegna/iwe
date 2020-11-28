@@ -1,0 +1,109 @@
+.MainMenu {
+    padding-top: 30px!important;
+
+    --ion-list, --ion-item {
+        --background: white!important;
+    }
+
+    ion-list, ion-item {
+        background: white!important;
+        --background: white!important;
+    }
+
+}
+// Card
+
+.ChartCard {
+    --ion-title {
+        font-size: 14px;
+    }
+    border: 1px solid #ececec;
+}
+
+.SP_card {
+
+    margin-bottom: 30px;
+
+    --ion-title {
+        font-size: 14px;
+    }
+
+    .post_popover {
+        font-size: 20px;
+        padding-top: 5px;
+        float: right;
+    }
+
+    .sp_title {
+        font-size: 16px;
+    }
+
+    .image_wrapper {
+        position: relative;
+    }
+    .like {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        font-size: 40px;
+        color: #F25A6B;
+    }
+
+    .card_image {
+        border-radius: 10px;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+}
+
+// Profile
+
+.profile_image {
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+}
+
+.profile_header {
+
+    h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    p   {
+        font-size: 12px;
+        font-weight: bold;
+    }
+}
+
+.profile_feed {
+    .feed_image {
+        border-radius: 5px;
+    }
+}
+
+
+.rounded-img {
+    border-radius: 5px;
+}
+
+.incoming_msg {
+    background: #EDEEEF;
+    border-radius: 5px;
+    padding: 10px;
+    .time {
+        font-size: 10px;
+        margin-top: 10px;
+    }
+}
+
+.outgoing_msg {
+    background: #C2C5CA;
+    border-radius: 5px;
+    padding: 10px;
+    .time {
+        font-size: 10px;
+        margin-top: 10px;
+    }
+}

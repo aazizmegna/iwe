@@ -36,6 +36,24 @@
                 "input": "src/theme/variables.scss"
               },
               {
+                "input": "src/theme/buttons.scss"
+              },
+              {
+                "input": "src/theme/theme.scss"
+              },
+              {
+                "input": "src/theme/spacings.scss"
+              },
+              {
+                "input": "src/theme/typo.scss"
+              },
+              {
+                "input": "src/theme/blocks.scss"
+              },
+              {
+                "input": "src/theme/forms.scss"
+              },
+              {
                 "input": "src/global.scss"
               }
             ],

@@ -1,40 +1,43 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ 'SIGNUP_TITLE' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+  <div class="page_header ion-text-center ion-padding-top">
+    <img class="small_logo" src="../assets/img/iwe_logo.png"/>
+  </div>
+  <h1 class="ion-padding-top ion-text-center">Sign Up</h1>
+
   <form (submit)="doSignup()">
-    <ion-list>
-      <ion-item>
-        <ion-label position="floating">{{ 'FIRST_NAME' | translate }}</ion-label>
-        <ion-input type="string" [(ngModel)]="account.firstName" name="firstName"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">{{ 'LAST_NAME' | translate }}</ion-label>
-        <ion-input type="string" [(ngModel)]="account.lastName" name="lastName"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">{{ 'EMAIL' | translate }}</ion-label>
-        <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">{{ 'PASSWORD' | translate }}</ion-label>
-        <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
-      </ion-item>
-
-      <ion-row class="ion-padding">
-        <ion-col>
-          <ion-button expand="block" type="submit" color="primary">{{ 'SIGNUP_BUTTON' | translate }}</ion-button>
+    <ion-grid class="ion-margin-top">
+      <ion-row class='ion-justify-content-center'>
+        <ion-col size="8">
+          <ion-input type="string" [(ngModel)]="account.firstName" name="firstName" color="primary"
+                     placeholder="firstName" class="input-white"></ion-input>
+        </ion-col>
+        <ion-col size="8">
+          <ion-input type="string" [(ngModel)]="account.lastName" name="lastName" color="primary" placeholder="lastName"
+                     class="input-white mt-2"></ion-input>
+        </ion-col>
+        <ion-col size="8">
+          <ion-input type="email" [(ngModel)]="account.email" name="email" color="primary" placeholder="email"
+                     class="input-white mt-2"></ion-input>
+        </ion-col>
+        <ion-col size="8">
+          <ion-input type="password" [(ngModel)]="account.password" name="password" color="primary"
+                     placeholder="password" class="input-white mt-2"></ion-input>
         </ion-col>
       </ion-row>
-    </ion-list>
+    </ion-grid>
+
+    <ion-row class="ion-justify-content-center ion-margin-top">
+      <ion-col size="4">
+        <ion-button expand="block" fill="solid" type="submit" color="secondary">Sign Up</ion-button>
+      </ion-col>
+    </ion-row>
   </form>
 </ion-content>

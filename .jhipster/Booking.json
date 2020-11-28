@@ -1,0 +1,43 @@
+{
+    "name": "Booking",
+    "fields": [
+        {
+            "fieldName": "dateTime",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "serviceConsumer",
+            "otherEntityRelationshipName": "booking",
+            "relationshipName": "serviceConsumer",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "serviceProvider",
+            "otherEntityRelationshipName": "booking",
+            "relationshipName": "serviceProvider",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "service",
+            "otherEntityRelationshipName": "booking",
+            "relationshipName": "service",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20201127211400",
+    "entityTableName": "booking",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Booking
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="fixed">Date Time</ion-label>
+      <div item-content>
+        <span>{{booking.dateTime | date:'medium'}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label>Service Consumer</ion-label>
+      <div item-content *ngIf="booking.serviceConsumer">
+        <a>{{booking.serviceConsumer?.id}}</a>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label>Service Provider</ion-label>
+      <div item-content *ngIf="booking.serviceProvider">
+        <a>{{booking.serviceProvider?.id}}</a>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label>Service</ion-label>
+      <div item-content *ngIf="booking.service">
+        <a>{{booking.service?.id}}</a>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" color="primary" (click)="open(booking)">{{ 'EDIT_BUTTON' | translate }}</ion-button>
+  <ion-button expand="block" color="danger" (click)="deleteModal(booking)">{{ 'DELETE_BUTTON' | translate }}</ion-button>
+</ion-content>

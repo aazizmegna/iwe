@@ -24,6 +24,12 @@
       </div>
     </ion-item>
     <ion-item>
+      <ion-label position="fixed">Time Posted</ion-label>
+      <div item-content>
+        <span>{{post.timePosted | date:'medium'}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
       <ion-label>Service Consumer</ion-label>
       <div item-content *ngIf="post.serviceConsumer">
         <a>{{post.serviceConsumer?.id}}</a>

@@ -13,6 +13,8 @@ entity Service {
   name String
   picture ImageBlob
   location String
+  price BigDecimal
+  timePosted Instant
 }
 
 entity Ride {
@@ -80,6 +82,7 @@ entity Feed {
 entity Post {
 	location String
     description String
+    timePosted Instant
 }
 
 entity VideoPost {

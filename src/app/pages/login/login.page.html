@@ -8,16 +8,34 @@
 
 <ion-content color="primary">
   <div class="page_header ion-text-center ion-padding-top">
-    <img class="small_logo" src="../assets/img/iwe_logo.png"/>
+    <img class="small_logo" src="../assets/img/iwe_logo.png" />
   </div>
 
   <h1 class="ion-padding-top ion-text-center">Login</h1>
 
   <form (submit)="doLogin()">
     <ion-grid class="ion-margin-top">
-      <ion-row class='ion-justify-content-center'>
-        <ion-col size="8"><ion-input type="string" [(ngModel)]="account.username" name="username" class="input-white" color="primary" placeholder="Username"></ion-input></ion-col>
-        <ion-col size="8"><ion-input type="password" [(ngModel)]="account.password" name="password" class="input-white mt-2" color="primary" placeholder="Password"></ion-input></ion-col>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="8"
+          ><ion-input
+            type="string"
+            [(ngModel)]="account.username"
+            name="username"
+            class="input-white"
+            color="primary"
+            placeholder="Username"
+          ></ion-input
+        ></ion-col>
+        <ion-col size="8"
+          ><ion-input
+            type="password"
+            [(ngModel)]="account.password"
+            name="password"
+            class="input-white mt-2"
+            color="primary"
+            placeholder="Password"
+          ></ion-input
+        ></ion-col>
       </ion-row>
       <ion-row class="ion-justify-content-center ion-margin-top">
         <ion-col size="4"><ion-button type="submit" fill="solid" color="secondary" expand="block" id="login">Login</ion-button></ion-col>

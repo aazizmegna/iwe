@@ -14,6 +14,8 @@ describe('SnapshotPost e2e test', () => {
   let isVisible = false;
 
   const duration = '10';
+  const content = 'contentUrl';
+
 
   beforeAll(async () => {
     loginPage = new LoginPage();
@@ -54,7 +56,7 @@ describe('SnapshotPost e2e test', () => {
     await browser.wait(ec.visibilityOf(snapshotPostUpdatePage.pageTitle), 1000);
     expect(await snapshotPostUpdatePage.getPageTitle()).toEqual(SUBCOMPONENT_TITLE);
 
-    await snapshotPostUpdatePage.setContentUrlInput(contentUrl);
+    await snapshotPostUpdatePage.setContentUrlInput(content);
     await snapshotPostUpdatePage.setDurationInput(duration);
 
     await snapshotPostUpdatePage.save();
@@ -90,7 +92,7 @@ describe('SnapshotPost e2e test', () => {
     if (isVisible && (await snapshotPostDetailPage.pageTitle.isDisplayed())) {
       expect(await snapshotPostDetailPage.getPageTitle()).toEqual(SUBCOMPONENT_TITLE);
 
-      expect(await snapshotPostDetailPage.getContentUrlInput()).toEqual(contentUrl);
+      expect(await snapshotPostDetailPage.getContentUrlInput()).toEqual(content);
 
       expect(await snapshotPostDetailPage.getDurationInput()).toEqual(duration);
     }

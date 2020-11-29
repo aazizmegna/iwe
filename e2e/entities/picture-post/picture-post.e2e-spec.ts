@@ -13,6 +13,8 @@ describe('PicturePost e2e test', () => {
   let lastElement: any;
   let isVisible = false;
 
+  const content = 'contentUrl';
+
   beforeAll(async () => {
     loginPage = new LoginPage();
     await loginPage.navigateTo('/');

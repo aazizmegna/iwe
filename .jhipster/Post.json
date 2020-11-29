@@ -8,6 +8,10 @@
         {
             "fieldName": "description",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "timePosted",
+            "fieldType": "Instant"
         }
     ],
     "relationships": [

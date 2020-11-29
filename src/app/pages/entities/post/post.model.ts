@@ -9,12 +9,10 @@ export class Post implements BaseEntity {
     public id?: number,
     public location?: string,
     public description?: string,
+    public timePosted?: any,
     public reactions?: Reaction[],
     public serviceConsumer?: ServiceConsumer,
     public serviceProvider?: ServiceProvider,
-    public feeds?: Feed[],
-    public contentContentType?: string,
-    public content?: any,
-    public post?: Post
+    public feeds?: Feed[]
   ) {}
 }

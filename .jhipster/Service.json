@@ -13,6 +13,14 @@
         {
             "fieldName": "location",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "price",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "timePosted",
+            "fieldType": "Instant"
         }
     ],
     "relationships": [

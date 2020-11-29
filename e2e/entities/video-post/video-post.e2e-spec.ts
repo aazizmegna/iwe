@@ -15,6 +15,9 @@ describe('VideoPost e2e test', () => {
 
   const duration = '10';
 
+  const content = 'contentUrl';
+
+
   beforeAll(async () => {
     loginPage = new LoginPage();
     await loginPage.navigateTo('/');

@@ -15,6 +15,7 @@ describe('Service e2e test', () => {
 
   const name = 'name';
   const location = 'location';
+  const price = '10';
 
   beforeAll(async () => {
     loginPage = new LoginPage();
@@ -58,6 +59,7 @@ describe('Service e2e test', () => {
     await serviceUpdatePage.setNameInput(name);
     await serviceUpdatePage.setPictureInput(picture);
     await serviceUpdatePage.setLocationInput(location);
+    await serviceUpdatePage.setPriceInput(price);
 
     await serviceUpdatePage.save();
     await browser.wait(ec.visibilityOf(serviceComponentsPage.title), 1000);
@@ -97,6 +99,8 @@ describe('Service e2e test', () => {
       expect(await serviceDetailPage.getPictureInput()).toEqual(picture);
 
       expect(await serviceDetailPage.getLocationInput()).toEqual(location);
+
+      expect(await serviceDetailPage.getPriceInput()).toEqual(price);
     }
   });
 

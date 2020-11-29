@@ -53,6 +53,14 @@
         <ion-input type="text" name="location" formControlName="location"></ion-input>
       </ion-item>
       <ion-item>
+        <ion-label position="floating">Price</ion-label>
+        <ion-input type="number" name="price" formControlName="price"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Time Posted</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY HH:mm" formControlName="timePosted" id="field_timePosted"></ion-datetime>
+      </ion-item>
+      <ion-item>
         <ion-label>Service Consumer</ion-label>
         <ion-select id="field_serviceConsumer" formControlName="serviceConsumer" [compareWith]="compareServiceConsumer">
           <ion-select-option [value]="null"></ion-select-option>

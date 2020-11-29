@@ -8,28 +8,52 @@
 
 <ion-content class="ion-padding">
   <div class="page_header ion-text-center ion-padding-top">
-    <img class="small_logo" src="../assets/img/iwe_logo.png"/>
+    <img class="small_logo" src="../assets/img/iwe_logo.png" />
   </div>
   <h1 class="ion-padding-top ion-text-center">Sign Up</h1>
 
   <form (submit)="doSignup()">
     <ion-grid class="ion-margin-top">
-      <ion-row class='ion-justify-content-center'>
+      <ion-row class="ion-justify-content-center">
         <ion-col size="8">
-          <ion-input type="string" [(ngModel)]="account.firstName" name="firstName" color="primary"
-                     placeholder="first name" class="input-white"></ion-input>
+          <ion-input
+            type="string"
+            [(ngModel)]="account.firstName"
+            name="firstName"
+            color="primary"
+            placeholder="first name"
+            class="input-white"
+          ></ion-input>
         </ion-col>
         <ion-col size="8">
-          <ion-input type="string" [(ngModel)]="account.lastName" name="lastName" color="primary" placeholder="last name"
-                     class="input-white mt-2"></ion-input>
+          <ion-input
+            type="string"
+            [(ngModel)]="account.lastName"
+            name="lastName"
+            color="primary"
+            placeholder="last name"
+            class="input-white mt-2"
+          ></ion-input>
         </ion-col>
         <ion-col size="8">
-          <ion-input type="email" [(ngModel)]="account.email" name="email" color="primary" placeholder="email"
-                     class="input-white mt-2"></ion-input>
+          <ion-input
+            type="email"
+            [(ngModel)]="account.email"
+            name="email"
+            color="primary"
+            placeholder="email"
+            class="input-white mt-2"
+          ></ion-input>
         </ion-col>
         <ion-col size="8">
-          <ion-input type="password" [(ngModel)]="account.password" name="password" color="primary"
-                     placeholder="password" class="input-white mt-2"></ion-input>
+          <ion-input
+            type="password"
+            [(ngModel)]="account.password"
+            name="password"
+            color="primary"
+            placeholder="password"
+            class="input-white mt-2"
+          ></ion-input>
         </ion-col>
       </ion-row>
     </ion-grid>

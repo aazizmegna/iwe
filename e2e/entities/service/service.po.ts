@@ -31,6 +31,7 @@ export class ServiceUpdatePage {
   nameInput = element(by.css('ion-input[formControlName="name"] input'));
   pictureInput = element(by.css('ion-input[formControlName="picture"] input'));
   locationInput = element(by.css('ion-input[formControlName="location"] input'));
+  priceInput = element(by.css('ion-input[formControlName="price"] input'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getText();
@@ -44,6 +45,9 @@ export class ServiceUpdatePage {
   }
   async setLocationInput(location: string): Promise<void> {
     await this.locationInput.sendKeys(location);
+  }
+  async setPriceInput(price: string): Promise<void> {
+    await this.priceInput.sendKeys(price);
   }
 
   async save(): Promise<void> {
@@ -60,6 +64,8 @@ export class ServiceDetailPage {
 
   locationInput = element.all(by.css('span')).get(3);
 
+  priceInput = element.all(by.css('span')).get(4);
+
   async getNameInput(): Promise<string> {
     return await this.nameInput.getText();
   }
@@ -70,6 +76,10 @@ export class ServiceDetailPage {
 
   async getLocationInput(): Promise<string> {
     return await this.locationInput.getText();
+  }
+
+  async getPriceInput(): Promise<string> {
+    return await this.priceInput.getText();
   }
 
   async clickOnDeleteButton(): Promise<void> {

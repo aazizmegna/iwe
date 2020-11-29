@@ -21,6 +21,7 @@ export class ServiceUpdatePage implements OnInit {
   serviceProviders: ServiceProvider[];
   @ViewChild('fileInput', { static: false }) fileInput;
   cameraOptions: CameraOptions;
+  timePosted: string;
   isSaving = false;
   isNew = true;
   isReadyToSave: boolean;
@@ -31,6 +32,8 @@ export class ServiceUpdatePage implements OnInit {
     picture: [null, []],
     pictureContentType: [null, []],
     location: [null, []],
+    price: [null, []],
+    timePosted: [null, []],
     serviceConsumer: [null, []],
     serviceProvider: [null, []],
   });
@@ -95,6 +98,8 @@ export class ServiceUpdatePage implements OnInit {
       picture: service.picture,
       pictureContentType: service.pictureContentType,
       location: service.location,
+      price: service.price,
+      timePosted: this.isNew ? new Date().toISOString() : service.timePosted,
       serviceConsumer: service.serviceConsumer,
       serviceProvider: service.serviceProvider,
     });
@@ -147,6 +152,8 @@ export class ServiceUpdatePage implements OnInit {
       picture: this.form.get(['picture']).value,
       pictureContentType: this.form.get(['pictureContentType']).value,
       location: this.form.get(['location']).value,
+      price: this.form.get(['price']).value,
+      timePosted: new Date(this.form.get(['timePosted']).value),
       serviceConsumer: this.form.get(['serviceConsumer']).value,
       serviceProvider: this.form.get(['serviceProvider']).value,
     };

@@ -26,7 +26,6 @@
 @import '~@ionic/angular/css/flex-utils.css';
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap');
 
-
 .ion-margin-top {
   margin-top: 30px;
 }
@@ -41,8 +40,7 @@
 
 // Inputs
 
-
-ion-input{
+ion-input {
   --placeholder-color: red;
   --placeholder-opacity: 1;
 }
@@ -57,6 +55,6 @@ ion-input{
   margin-top: 1rem;
 }
 
-ion-header ion-toolbar{
-  --background: #2E3442;
+ion-header ion-toolbar {
+  --background: #2e3442;
 }

@@ -24,6 +24,8 @@
             <img [src]="'data:' + service.pictureContentType + ';base64,' + service.picture" />
           </ion-avatar>
           <p>{{service.location}}</p>
+          <p>{{service.price}}</p>
+          <p>{{service.timePosted | date:'medium'}}</p>
         </ion-label>
       </ion-item>
       <ion-item-options side="end">

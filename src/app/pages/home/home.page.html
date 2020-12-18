@@ -1,17 +1,20 @@
 <ion-header class="ion-header">
   <ion-toolbar>
-    <img class="header_logo" src="../assets/img/iwe_logo.png" />
+    <img class="header_logo" src="../assets/img/iwe_logo.png"/>
     <ion-icon class="elipse_menu" name="ellipsis-vertical"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card color="light" class="SP_card">
+  <ion-refresher [disabled]="plt.is('desktop')" slot="fixed" (ionRefresh)="loadFeeds($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card color="light" class="SP_card" *ngFor="let feed of feeds; trackBy: trackId" #slidingItem>
     <ion-card-header>
       <ion-grid class="ion-no-padding">
         <ion-row class="ion-align-items-center ion-no-padding">
           <ion-col size="8" class="ion-no-padding" routerLink="">
-            <p class="sp_title">Barber Barber</p>
+            <p class="sp_title">{{feed.name}}</p>
           </ion-col>
           <ion-col size="4" class="ion-no-padding">
             <ion-button class="follow_btn" routerLink="/chat">Follow</ion-button>
@@ -27,146 +30,32 @@
         <div class="like">
           <ion-icon name="heart-outline"></ion-icon>
         </div>
-        <img class="card_image" src="../assets/img/post-image.png" />
+        <span *ngIf="feed.picture">
+          <img class="card_image" [src]="'data:' + feed.pictureContentType + ';base64,' + feed.picture"/>
+        </span>
       </div>
 
       <ion-grid class="ion-no-padding">
         <ion-row class="ion-align-items-center ion-no-padding mb-sm">
           <ion-col size="8" class="ion-no-padding">
-            <p class="fz-sm"><ion-icon class="icon" name="location-outline"></ion-icon> Goodwood, Cape Town</p>
+            <p class="fz-sm">
+              <ion-icon class="icon" name="location-outline"></ion-icon>
+              {{feed.location}}</p>
           </ion-col>
           <ion-col size="4" class="ion-align-self-end ion-no-padding ion-text-right">
-            <p class="fz-sm"><ion-icon class="icon" name="pricetag-outline"></ion-icon> R 275</p>
+            <p class="fz-sm" *ngIf="feed.price">
+              <ion-icon class="icon" name="pricetag-outline"></ion-icon>
+              R {{feed.price}}</p>
           </ion-col>
         </ion-row>
       </ion-grid>
       <p class="fz-sm">
-        Keep close to Nature's heart... and break clear away, once in awhile,and climb a mountain or spend a week in the woods. Wash your
-        spirit clean.
+        {{feed.description}}
       </p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card color="light" class="SP_card">
-    <ion-card-header>
-      <ion-grid class="ion-no-padding">
-        <ion-row class="ion-align-items-center ion-no-padding">
-          <ion-col size="8" class="ion-no-padding" routerLink="">
-            <p class="sp_title">Barber Barber</p>
-          </ion-col>
-          <ion-col size="4" class="ion-no-padding">
-            <ion-button class="follow_btn">Follow</ion-button>
-            <ion-icon class="post_popover" name="ellipsis-vertical"></ion-icon>
-            <div class="clear"></div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-header>
-
-    <ion-card-content>
-      <div class="image_wrapper">
-        <div class="like">
-          <ion-icon name="heart-outline"></ion-icon>
-        </div>
-        <img class="card_image" src="../assets/img/post-image.png" />
-      </div>
-
-      <ion-grid class="ion-no-padding">
-        <ion-row class="ion-align-items-center ion-no-padding mb-sm">
-          <ion-col size="8" class="ion-no-padding">
-            <p class="fz-sm"><ion-icon class="icon" name="location-outline"></ion-icon> Goodwood, Cape Town</p>
-          </ion-col>
-          <ion-col size="4" class="ion-align-self-end ion-no-padding ion-text-right">
-            <p class="fz-sm"><ion-icon class="icon" name="pricetag-outline"></ion-icon> R 275</p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <p class="fz-sm">
-        Keep close to Nature's heart... and break clear away, once in awhile,and climb a mountain or spend a week in the woods. Wash your
-        spirit clean.
-      </p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card color="light" class="SP_card">
-    <ion-card-header>
-      <ion-grid class="ion-no-padding">
-        <ion-row class="ion-align-items-center ion-no-padding">
-          <ion-col size="8" class="ion-no-padding" routerLink="">
-            <p class="sp_title">Barber Barber</p>
-          </ion-col>
-          <ion-col size="4" class="ion-no-padding">
-            <ion-button class="follow_btn">Follow</ion-button>
-            <ion-icon class="post_popover" name="ellipsis-vertical"></ion-icon>
-            <div class="clear"></div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-header>
-
-    <ion-card-content>
-      <div class="image_wrapper">
-        <div class="like">
-          <ion-icon name="heart-outline"></ion-icon>
-        </div>
-        <img class="card_image" src="../assets/img/post-image.png" />
-      </div>
-
-      <ion-grid class="ion-no-padding">
-        <ion-row class="ion-align-items-center ion-no-padding mb-sm">
-          <ion-col size="8" class="ion-no-padding">
-            <p class="fz-sm"><ion-icon class="icon" name="location-outline"></ion-icon> Goodwood, Cape Town</p>
-          </ion-col>
-          <ion-col size="4" class="ion-align-self-end ion-no-padding ion-text-right">
-            <p class="fz-sm"><ion-icon class="icon" name="pricetag-outline"></ion-icon> R 275</p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <p class="fz-sm">
-        Keep close to Nature's heart... and break clear away, once in awhile,and climb a mountain or spend a week in the woods. Wash your
-        spirit clean.
-      </p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card color="light" class="SP_card">
-    <ion-card-header>
-      <ion-grid class="ion-no-padding">
-        <ion-row class="ion-align-items-center ion-no-padding">
-          <ion-col size="8" class="ion-no-padding" routerLink="">
-            <p class="sp_title">Barber Barber</p>
-          </ion-col>
-          <ion-col size="4" class="ion-no-padding">
-            <ion-button class="follow_btn">Follow</ion-button>
-            <ion-icon class="post_popover" name="ellipsis-vertical"></ion-icon>
-            <div class="clear"></div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-header>
-
-    <ion-card-content>
-      <div class="image_wrapper">
-        <div class="like">
-          <ion-icon name="heart-outline"></ion-icon>
-        </div>
-        <img class="card_image" src="../assets/img/post-image.png" />
-      </div>
-
-      <ion-grid class="ion-no-padding">
-        <ion-row class="ion-align-items-center ion-no-padding mb-sm">
-          <ion-col size="8" class="ion-no-padding">
-            <p class="fz-sm"><ion-icon class="icon" name="location-outline"></ion-icon> Goodwood, Cape Town</p>
-          </ion-col>
-          <ion-col size="4" class="ion-align-self-end ion-no-padding ion-text-right">
-            <p class="fz-sm"><ion-icon class="icon" name="pricetag-outline"></ion-icon> R 275</p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <p class="fz-sm">
-        Keep close to Nature's heart... and break clear away, once in awhile,and climb a mountain or spend a week in the woods. Wash your
-        spirit clean.
-      </p>
+      {{feed.timePosted | date:'medium'}}
     </ion-card-content>
   </ion-card>
 </ion-content>
+
+
+

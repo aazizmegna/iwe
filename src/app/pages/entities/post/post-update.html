@@ -16,26 +16,26 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <form *ngIf="form" name="form" [formGroup]="form" (ngSubmit)="save()">
-    <ion-list>
+<ion-content color="primary">
+  <form *ngIf="form" name="form" [formGroup]="form" (ngSubmit)="save()" >
+    <ion-list color="primary">
       <ion-item [hidden]="!form.id">
         <ion-label>ID</ion-label>
         <ion-input type="hidden" id="id" formControlName="id" readonly></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item color="primary">
         <ion-label position="floating">Location</ion-label>
         <ion-input type="text" name="location" formControlName="location"></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item color="primary">
         <ion-label position="floating">Description</ion-label>
         <ion-input type="text" name="description" formControlName="description"></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item color="primary">
         <ion-label>Time Posted</ion-label>
         <ion-datetime displayFormat="MM/DD/YYYY HH:mm" formControlName="timePosted" id="field_timePosted"></ion-datetime>
       </ion-item>
-      <ion-item>
+      <ion-item color="primary">
         <ion-label>Service Consumer</ion-label>
         <ion-select id="field_serviceConsumer" formControlName="serviceConsumer" [compareWith]="compareServiceConsumer">
           <ion-select-option [value]="null"></ion-select-option>
@@ -46,7 +46,7 @@
           >
         </ion-select>
       </ion-item>
-      <ion-item>
+      <ion-item color="primary">
         <ion-label>Service Provider</ion-label>
         <ion-select id="field_serviceProvider" formControlName="serviceProvider" [compareWith]="compareServiceProvider">
           <ion-select-option [value]="null"></ion-select-option>

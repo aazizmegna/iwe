@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import {NavController, Platform} from '@ionic/angular';
 import { AccountService } from 'src/app/services/auth/account.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Account } from 'src/model/account.model';
+import {HomeService} from './home.service';
+import {Home} from './home.model';
+import {Service} from '../entities/service';
 
 @Component({
   selector: 'app-home',
@@ -11,8 +14,11 @@ import { Account } from 'src/model/account.model';
 })
 export class HomePage implements OnInit {
   account: Account;
+  feeds: Home[];
 
-  constructor(public navController: NavController, private accountService: AccountService, private loginService: LoginService) {}
+  constructor(public navController: NavController, private accountService: AccountService, private loginService: LoginService,
+              private homeService: HomeService, public plt: Platform) {
+  }
 
   ngOnInit() {
     this.accountService.identity().then((account) => {
@@ -22,6 +28,19 @@ export class HomePage implements OnInit {
         this.account = account;
       }
     });
+  }
+
+  ionViewWillEnter() {
+    this.loadFeeds();
+  }
+
+  trackId(index: number, item: Home) {
+    return item.id;
+  }
+
+  async loadFeeds(refresher?) {
+    console.log('loadFeeds');
+    this.feeds = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts();
   }
 
   isAuthenticated() {

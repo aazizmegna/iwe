@@ -18,16 +18,16 @@
 
 <ion-content class="ion-padding">
   <form *ngIf="form" name="form" [formGroup]="form" (ngSubmit)="save()">
-    <ion-list>
-      <ion-item [hidden]="!form.id">
+    <ion-list color="primary">
+      <ion-item [hidden]="!form.id" color="primary">
         <ion-label>ID</ion-label>
         <ion-input type="hidden" id="id" formControlName="id" readonly></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item color="primary">
         <ion-label>Date Time</ion-label>
         <ion-datetime displayFormat="MM/DD/YYYY HH:mm" formControlName="dateTime" id="field_dateTime"></ion-datetime>
       </ion-item>
-      <ion-item>
+      <ion-item color="primary">
         <ion-label>Service Consumer</ion-label>
         <ion-select id="field_serviceConsumer" formControlName="serviceConsumer" [compareWith]="compareServiceConsumer">
           <ion-select-option [value]="null"></ion-select-option>
@@ -38,7 +38,7 @@
           >
         </ion-select>
       </ion-item>
-      <ion-item>
+      <ion-item color="primary">
         <ion-label>Service Provider</ion-label>
         <ion-select id="field_serviceProvider" formControlName="serviceProvider" [compareWith]="compareServiceProvider">
           <ion-select-option [value]="null"></ion-select-option>
@@ -49,7 +49,7 @@
           >
         </ion-select>
       </ion-item>
-      <ion-item>
+      <ion-item color="primary">
         <ion-label>Service</ion-label>
         <ion-select id="field_service" formControlName="service" [compareWith]="compareService">
           <ion-select-option [value]="null"></ion-select-option>

@@ -1,24 +1,32 @@
-<ion-tabs>
+<ion-header class="ion-header" color="primary">
+  <ion-toolbar>
+    <img class="header_logo" src="../assets/img/iwe_logo.png"/>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="main-menu">
+        <ion-icon class="elipse_menu" name="ellipsis-vertical"></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-tabs color="light">
   <ion-tab-bar slot="bottom">
+
     <ion-tab-button tab="home">
-      <ion-icon name="flash"></ion-icon>
-      <ion-label>
-        {{ 'TAB1_TITLE' | translate }}
-      </ion-label>
+      <ion-icon name="home"></ion-icon>
     </ion-tab-button>
 
     <ion-tab-button tab="entities">
-      <ion-icon name="apps"></ion-icon>
-      <ion-label>
-        {{ 'TAB2_TITLE' | translate }}
-      </ion-label>
+      <ion-icon name="search"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="add-tab">
+      <ion-icon name="add"></ion-icon>
     </ion-tab-button>
 
     <ion-tab-button tab="account">
-      <ion-icon name="send"></ion-icon>
-      <ion-label>
-        {{ 'TAB3_TITLE' | translate }}
-      </ion-label>
+      <ion-icon name="person"></ion-icon>
     </ion-tab-button>
+
   </ion-tab-bar>
 </ion-tabs>

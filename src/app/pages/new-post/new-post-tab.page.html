@@ -1,0 +1,51 @@
+<ion-header class="ion-header">
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="padding-y">
+    <ion-row class="mt-sm">
+      <ion-col class="mb-md">
+        <h2 class="mb-md">Add new post</h2>
+        <form *ngIf="form" name="form" [formGroup]="form" (ngSubmit)="save()">
+          <div>
+            <img
+              [src]="'data:' + picturePost?.contentContentType + ';base64,' + picturePost?.content"
+              style="max-height: 100px;"
+              *ngIf="picturePost?.content"
+              alt="picturePost image"
+            />
+            <div *ngIf="picturePost?.content">
+              <p>{{picturePost.contentContentType}}, {{byteSize(picturePost.content)}}</p>
+              <ion-button color="danger" (click)="clearInputImage('content', 'contentContentType', 'fileImage')">
+                <ion-icon name="trash" slot="icon-only"></ion-icon>
+              </ion-button>
+            </div>
+            <input type="file" #fileInput style="display: none;" (change)="setFileData($event, 'content', true)"
+                   accept="image/*"/>
+            <ion-button *ngIf="!picturePost?.content" (click)="getPicture('content')"
+                        required="please select upload an image" color="primary">
+              <ion-icon name="add-circle" slot="start"></ion-icon>
+              PLEASE CHOOSE IMAGE
+            </ion-button>
+          </div>
+          <ion-col size="12">
+            <ion-item class="input_grey" color="tertiary">
+              <ion-input type="text" name="location" formControlName="location" placeholder="please enter location"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-item class="input_grey" color="tertiary">
+              <ion-input type="text" name="description" formControlName="description" placeholder="please enter description"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12">
+            <ion-button type="submit" fill="solid" color="secondary" expand="block" class="btn-md fw-bold">Post
+            </ion-button>
+          </ion-col>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

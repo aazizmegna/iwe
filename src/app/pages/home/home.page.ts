@@ -39,7 +39,6 @@ export class HomePage implements OnInit {
   }
 
   async loadFeeds(refresher?) {
-    console.log('loadFeeds');
     this.feeds = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts();
   }
 

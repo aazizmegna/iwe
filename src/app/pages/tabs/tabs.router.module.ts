@@ -35,6 +35,15 @@ const routes: Routes = [
         ],
       },
       {
+        path: 'new-post',
+        children: [
+          {
+            path: '',
+            loadChildren: '../new-post/new-post-tab.module#NewPostTabModule',
+          },
+        ],
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full',

@@ -27,6 +27,7 @@ export class NewPostTabPage implements OnInit {
 
   form = this.formBuilder.group({
     id: [],
+    price: [],
     content: new FormControl([null, []], Validators.required),
     contentContentType: new FormControl([null, []], Validators.required),
     post: [null, []],

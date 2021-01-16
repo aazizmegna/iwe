@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+          [text]=""
+          [icon]="">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-icon class="elipse_menu" name="ellipsis-vertical"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-grid class="padding-y">
+  <ion-row class="mt-sm">
+    <ion-col>
+      <div class="ion-text-center">
+        <h3 class="mb-heading">Your Ride Summary:</h3>
+        <p class="mb-sm"><span class="fw-bold">Date:</span> 21 May 2020</p>
+        <p class="mb-md"><span class="fw-bold">Time:</span> 21 May 2020</p>
+        <p class="mb-sm"><span class="fw-bold">Pick Up Location</span></p>
+        <img class="mb-md" src="../assets/img/map.png"/>
+        <p class="mb-sm"><span class="fw-bold">Drop Off Location</span></p>
+        <img class="mb-sm" src="../assets/img/map.png"/>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-text-center mt-md mb-md">
+    <ion-col class="center_button">
+      <ion-button (click)="openCueRideConfirm()" fill="solid" color="secondary" expand="fill" class="btn-md fw-bold">Confirm</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>

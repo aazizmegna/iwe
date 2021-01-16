@@ -5,6 +5,7 @@ import { HttpResponse } from '@angular/common/http';
 import { JhiDataUtils } from 'ng-jhipster';
 import { ServiceProvider } from './service-provider.model';
 import { ServiceProviderService } from './service-provider.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'page-service-provider',
@@ -12,6 +13,8 @@ import { ServiceProviderService } from './service-provider.service';
 })
 export class ServiceProviderPage {
   serviceProviders: ServiceProvider[];
+  currentSearch: string;
+
 
   // todo: add pagination
 
@@ -20,9 +23,14 @@ export class ServiceProviderPage {
     private navController: NavController,
     private serviceProviderService: ServiceProviderService,
     private toastCtrl: ToastController,
-    public plt: Platform
+    public plt: Platform,
+    protected activatedRoute: ActivatedRoute
   ) {
     this.serviceProviders = [];
+    this.currentSearch =
+      this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams.search
+        ? this.activatedRoute.snapshot.queryParams.search
+        : '';
   }
 
   ionViewWillEnter() {

@@ -10,6 +10,7 @@ import {PicturePost} from './picture-post.model';
 import {PicturePostService} from './picture-post.service';
 import {Post} from './post.model';
 import {PostService} from './post.service';
+import {Service, ServiceService} from '../entities/service';
 
 @Component({
   selector: 'app-add-tab',
@@ -28,6 +29,7 @@ export class NewPostTabPage implements OnInit {
   form = this.formBuilder.group({
     id: [],
     price: [],
+    name: [],
     content: new FormControl([null, []], Validators.required),
     contentContentType: new FormControl([null, []], Validators.required),
     post: [null, []],
@@ -48,7 +50,8 @@ export class NewPostTabPage implements OnInit {
     private elementRef: ElementRef,
     private camera: Camera,
     private postService: PostService,
-    private picturePostService: PicturePostService
+    private picturePostService: PicturePostService,
+    private serviceService: ServiceService
   ) {
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
@@ -105,15 +108,32 @@ export class NewPostTabPage implements OnInit {
 
   save() {
     this.isSaving = true;
-    const picturePost = this.createFromForm();
-    this.subscribeToSaveResponse(this.picturePostService.create(picturePost));
+    const post = this.createFromPostForm();
+    this.subscribeToPostSaveResponse(this.postService.create(post));
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<PicturePost>>) {
+  protected subscribeToPostSaveResponse(result: Observable<HttpResponse<Post>>) {
     result.subscribe(
-      (res: HttpResponse<PicturePost>) => this.onSaveSuccess(res),
+      (res: HttpResponse<Post>) => this.savePicturePost(res.body),
       (res: HttpErrorResponse) => this.onError(res.error)
     );
+  }
+
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<Post>>) {
+    result.subscribe(
+      (res: HttpResponse<Post>) => this.onSaveSuccess(res.body),
+      (res: HttpErrorResponse) => this.onError(res.error)
+    );
+  }
+
+  protected savePicturePost(post: Post) {
+    if (this.form.get(['price']).value) {
+      const service = this.createFromServiceForm()
+      this.subscribeToSaveResponse(this.serviceService.create(service));
+    } else {
+      const picturePost = this.createFromForm(post);
+      this.subscribeToSaveResponse(this.picturePostService.create(picturePost));
+    }
   }
 
   async onSaveSuccess(response) {
@@ -138,13 +158,40 @@ export class NewPostTabPage implements OnInit {
     toast.present();
   }
 
-  private createFromForm(): PicturePost {
+  private createFromForm(post: Post): PicturePost {
     return {
       ...new PicturePost(),
       id: this.form.get(['id']).value,
       content: this.form.get(['content']).value,
       contentContentType: this.form.get(['contentContentType']).value,
-      post: this.form.get(['post']).value,
+      post,
+    };
+  }
+
+  private createFromServiceForm(): Service {
+    return {
+      ...new Service(),
+      id: this.form.get(['id']).value,
+      name: this.form.get(['name']).value,
+      picture: this.form.get(['content']).value,
+      pictureContentType: this.form.get(['contentContentType']).value,
+      location: this.form.get(['location']).value,
+      price: this.form.get(['price']).value,
+      timePosted: new Date(),
+      serviceConsumer: this.form.get(['serviceConsumer']).value,
+      serviceProvider: this.form.get(['serviceProvider']).value,
+    };
+  }
+
+  private createFromPostForm(): Post {
+    return {
+      ...new Post(),
+      id: this.form.get(['id']).value,
+      location: this.form.get(['location']).value,
+      description: this.form.get(['description']).value,
+      timePosted: new Date(),
+      serviceConsumer: this.form.get(['serviceConsumer']).value,
+      serviceProvider: this.form.get(['serviceProvider']).value,
     };
   }
 

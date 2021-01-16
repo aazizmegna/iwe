@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+          [text]=""
+          [icon]="">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-icon class="elipse_menu" name="ellipsis-vertical"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid class="padding-y">
+    
+    <ion-row class="ion-align-items-center">
+      <ion-col size="4">
+        <img class="profile_image" src="../assets/img/post-image.png"/>
+      </ion-col>
+      <ion-col class="profile_header" size="8">
+        <h2>Barber Barber</h2>
+        <p><ion-icon class="icon" name="location-outline"></ion-icon> Goodwood, Cape Town</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="10">
+        <p class="fz-sm">This is the places bio. Some more text will go that the service provider will enter</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-text-center">
+      <ion-col size="6">
+        <ion-button (click)="openBooking()" fill="solid" color="secondary" expand="block" class="btn-md fw-bold">Book Now</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button (click)="openCue()" fill="solid" color="secondary" expand="block" class="btn-md fw-bold">Join Cue</ion-button>
+      </ion-col>
+
+      <ion-col size="12" class="ion-text-center">
+        <p class="fz-sm">Current in Cue: <span class="fw-bold"> 3 Customers</span> | Wait time: <span class="fw-bold"> 20min</span> </p>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+  <ion-grid class="profile_feed">
+    <ion-row>
+      <ion-col size="6">
+        <img class="feed_image" src="../assets/img/post-image.png"/>
+      </ion-col>
+      <ion-col size="6">
+        <img class="feed_image" src="../assets/img/post-image.png"/>
+      </ion-col>
+      <ion-col size="6">
+        <img class="feed_image" src="../assets/img/post-image.png"/>
+      </ion-col>
+      <ion-col size="6">
+        <img class="feed_image" src="../assets/img/post-image.png"/>
+      </ion-col>
+      <ion-col size="6">
+        <img class="feed_image" src="../assets/img/post-image.png"/>
+      </ion-col>
+      <ion-col size="6">
+        <img class="feed_image" src="../assets/img/post-image.png"/>
+      </ion-col>
+      <ion-col size="6">
+        <img class="feed_image" src="../assets/img/post-image.png"/>
+      </ion-col>
+      <ion-col size="6">
+        <img class="feed_image" src="../assets/img/post-image.png"/>
+      </ion-col>
+      <ion-col size="6">
+        <img class="feed_image" src="../assets/img/post-image.png"/>
+      </ion-col>
+      <ion-col size="6">
+        <img class="feed_image" src="../assets/img/post-image.png"/>
+      </ion-col>
+      <ion-col size="6">
+        <img class="feed_image" src="../assets/img/post-image.png"/>
+      </ion-col>
+      <ion-col size="6">
+        <img class="feed_image" src="../assets/img/post-image.png"/>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

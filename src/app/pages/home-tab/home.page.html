@@ -1,4 +1,13 @@
-
+<ion-header class="ion-header" color="primary">
+  <ion-toolbar>
+    <img class="header_logo" src="../assets/img/iwe_logo.png"/>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="main-menu">
+        <ion-icon class="elipse_menu" name="ellipsis-vertical"></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
   <ion-refresher [disabled]="plt.is('desktop')" slot="fixed" (ionRefresh)="loadFeeds($event)">

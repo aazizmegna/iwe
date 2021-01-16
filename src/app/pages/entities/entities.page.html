@@ -1,19 +1,40 @@
-<ion-header>
+<ion-header class="ion-header">
   <ion-toolbar>
-    <ion-title>
-      {{ 'TAB2_TITLE' | translate }}
-    </ion-title>
+    <img class="header_logo" src="../assets/img/iwe_logo.png"/>
+    <ion-icon class="elipse_menu" name="ellipsis-vertical"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-list>
-    <ion-item *ngFor="let entity of entities" (click)="openPage(entity)">
-      <h2>{{entity.name}}</h2>
-    </ion-item>
-  </ion-list>
+<ion-content class="ion-padding-top">
 
-  <div *ngIf="entities.length === 0">
-    {{ 'EMPTY_ENTITIES_MESSAGE' | translate }}
-  </div>
+  <ion-grid class="padding-y">
+    <ion-row>
+      <ion-col>
+        <form name="searchForm" class="form-inline">
+          <ion-item class="input_grey" color="tertiary">
+            <ion-input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="search for services"></ion-input>
+
+            <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+              <ion-icon color="primary" name="search-outline"></ion-icon>
+            </button>
+
+            <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+              <ion-icon icon="trash-alt"></ion-icon>
+            </button>
+          </ion-item>
+        </form>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="padding-top-md">
+      <h3>Browser Categories</h3>
+    </ion-row>
+
+    <ion-row class="padding-top-sm">
+      <ion-button class="add_space" color="tertiary" shape="rounded">Barber</ion-button> <ion-button color="tertiary" shape="rounded">Beauty Salon</ion-button> <ion-button color="tertiary" shape="rounded">Men's Massage Salon</ion-button>
+    </ion-row>
+
+  </ion-grid>
+
 </ion-content>
+

@@ -39,14 +39,13 @@ export class HomeService {
       };
     });
     const pcpost = [...allPicturePosts.body]
-    const ppost = [...allPosts.body]
-    const mergedPosts = pcpost.map((item, i) => Object.assign({}, item, ppost[i]));
-    const posts: Home[] = mergedPosts.map((post) => {
+    console.log(pcpost)
+    const posts: Home[] = pcpost.map((post) => {
       return {
         id: post.id,
-        location: post.location,
-        timePosted: post.timePosted,
-        name: post.description,
+        location: post.post ? post.post.location : null,
+        timePosted: post.post ? post.post.timePosted : null,
+        name: post.post ? post.post.description : null,
         picture: post.content,
         price: undefined,
         pictureContentType: post.contentContentType

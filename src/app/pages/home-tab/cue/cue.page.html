@@ -1,0 +1,117 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [text]="" [icon]="">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-icon class="elipse_menu" name="ellipsis-vertical"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="padding-y">
+    
+    <ion-row class="ion-align-items-center mt-sm">
+      <ion-col size="4">
+        <img class="profile_image" src="../assets/img/post-image.png"/>
+      </ion-col>
+      <ion-col class="profile_header" size="8">
+        <h2>Barber Barber</h2>
+        <p><ion-icon class="icon" name="location-outline"></ion-icon> Goodwood, Cape Town</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <div class="ion-text-center">
+        <ion-icon class="success_icon" name="checkmark-circle-outline"></ion-icon>
+        <p class="mb-md">You’re <span class="fw-bold">4th </span> in the cue. Your wait time is roughly <span class="fw-bold">45min</span>.</p>
+      </div>
+    </ion-row>
+
+    <ion-row class="ion-text-center ion-justifty-content-center mb-md">
+      <ion-col size="12" class="ion-text-center">
+          <p class="fw-bold">Do you need a ride?</p>
+      </ion-col>
+      <ion-col class="center_button">
+        <ion-button (click)="openCueRide()" fill="solid" color="secondary" expand="fill" class="btn-md fw-bold">Book a ride</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="mt-md">
+      <div class="ion-text-center">
+        <p class="mb-md">Dont want to wait so long? Check out below some close by places.</p>
+      </div>
+    </ion-row>
+
+    <ion-card color="light" class="SP_card" routerLink="" (click)="openCueRide()">
+      <ion-card-header>
+        <ion-grid class="ion-no-padding">
+          <ion-row class="ion-align-items-center ion-no-padding">
+            <ion-col size="8" class="ion-no-padding">
+              <p class="sp_title">Barber Barber</p>
+            </ion-col>
+            <ion-col size="4" class="ion-align-self-end ion-no-padding">
+              <div>
+                <ion-button class="follow_btn">Join Cue</ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+  
+      </ion-card-header>
+    
+      <ion-card-content>
+  
+        <img class="card_image" src="../assets/img/post-image.png"/>
+  
+        <ion-grid class="ion-no-padding">
+          <ion-row class="ion-align-items-center ion-no-padding mb-sm">
+            <ion-col size="8" class="ion-no-padding">
+              <p class="fz-sm"><ion-icon class="icon" name="location-outline"></ion-icon> Goodwood, Cape Town</p>
+            </ion-col>
+            <ion-col size="4" class="ion-align-self-end ion-no-padding ion-text-right">
+                <p class="fz-sm"><ion-icon class="icon" name="pricetag-outline"></ion-icon> R 275</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <p class="fz-sm">People in cue: 2</p>
+      </ion-card-content>
+    </ion-card>
+  
+    <ion-card color="light" class="SP_card" routerLink="" (click)="openCueRide()">
+      <ion-card-header>
+        <ion-grid class="ion-no-padding">
+          <ion-row class="ion-align-items-center ion-no-padding">
+            <ion-col size="8" class="ion-no-padding">
+              <p class="sp_title">Barber Barber</p>
+            </ion-col>
+            <ion-col size="4" class="ion-align-self-end ion-no-padding">
+              <div>
+                <ion-button class="follow_btn">Join Cue</ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+  
+      </ion-card-header>
+    
+      <ion-card-content>
+  
+        <img class="card_image" src="../assets/img/post-image.png"/>
+  
+        <ion-grid class="ion-no-padding">
+          <ion-row class="ion-align-items-center ion-no-padding mb-sm">
+            <ion-col size="8" class="ion-no-padding">
+              <p class="fz-sm"><ion-icon class="icon" name="location-outline"></ion-icon> Goodwood, Cape Town</p>
+            </ion-col>
+            <ion-col size="4" class="ion-align-self-end ion-no-padding ion-text-right">
+                <p class="fz-sm"><ion-icon class="icon" name="pricetag-outline"></ion-icon> R 275</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <p class="fz-sm">People in cue: 2</p>
+      </ion-card-content>
+    </ion-card>
+
+    </ion-grid>
+</ion-content>

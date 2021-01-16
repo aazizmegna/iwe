@@ -12,16 +12,16 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../home/home.module#HomePageModule',
+            loadChildren: '../home-tab/home.module#HomePageModule',
           },
         ],
       },
       {
-        path: 'entities',
+        path: 'search-services',
         children: [
           {
             path: '',
-            loadChildren: '../entities/entities.module#EntitiesPageModule',
+            loadChildren: '../search-services-tab/search-services.module#SearchServicesModule',
           },
         ],
       },

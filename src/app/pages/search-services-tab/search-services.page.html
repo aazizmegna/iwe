@@ -1,0 +1,58 @@
+<ion-header class="ion-header">
+  <ion-toolbar>
+    <img class="header_logo" src="../assets/img/iwe_logo.png"/>
+    <ion-icon class="elipse_menu" name="ellipsis-vertical"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-top">
+
+  <ion-grid class="padding-y">
+    <ion-row>
+      <ion-col>
+        <form name="searchForm" class="form-inline">
+          <ion-item class="input_grey" color="tertiary">
+            <ion-input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
+                       name="currentSearch" placeholder="search for services"></ion-input>
+            <ion-icon (click)="search(currentSearch)" color="primary" name="search-outline"></ion-icon>
+            <!--        <ion-icon (click)="search('')" *ngIf="currentSearch" icon="trash-alt"></ion-icon>-->
+          </ion-item>
+        </form>
+      </ion-col>
+    </ion-row>
+
+    <!--    <ion-row class="padding-top-md">-->
+    <!--      <h3>Browser Categories</h3>-->
+    <!--    </ion-row>-->
+
+    <!--    <ion-row class="padding-top-sm">-->
+    <!--      <ion-button class="add_space" color="tertiary" shape="rounded">Barber</ion-button>-->
+    <!--      <ion-button color="tertiary" shape="rounded">Beauty Salon</ion-button>-->
+    <!--      <ion-button color="tertiary" shape="rounded">Men's Massage Salon</ion-button>-->
+    <!--    </ion-row>-->
+
+    <ion-grid class="padding-y">
+      <ion-row class="mb-header">
+        <h3>Search Results for: <span class="fw-bold">{{currentSearch}}</span></h3>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6" (click)="openProfile(service)" *ngFor="let service of searchServicesModels ;trackBy: trackId">
+        <span *ngIf="service.picture">
+          <div class="card_image_service-search">
+            <img class="card_image" [src]="'data:' + service.pictureContentType + ';base64,' + service.picture"/>
+          </div>
+        </span>
+          <p class="sp_title">{{service.name}}</p>
+          <p class="fz-sm">
+            <ion-icon class="icon" name="location-outline"></ion-icon>
+            {{service.location}}
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+  </ion-grid>
+
+</ion-content>
+

@@ -13,11 +13,11 @@
   <ion-refresher [disabled]="plt.is('desktop')" slot="fixed" (ionRefresh)="loadFeeds($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-card color="light" class="SP_card" *ngFor="let feed of feeds; trackBy: trackId" #slidingItem>
+  <ion-card (click)="openSingle({id: 1})" color="light" class="SP_card" *ngFor="let feed of feeds; trackBy: trackId" #slidingItem>
     <ion-card-header>
       <ion-grid class="ion-no-padding">
         <ion-row class="ion-align-items-center ion-no-padding">
-          <ion-col size="8" class="ion-no-padding" routerLink="">
+          <ion-col size="8" class="ion-no-padding">
             <p class="sp_title">{{feed.name}}</p>
           </ion-col>
           <ion-col size="4" class="ion-no-padding">

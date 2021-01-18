@@ -1,14 +1,16 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ApiService } from '../api/api.service';
+import {User} from '../user/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthServerProvider {
+  public user: User;
   constructor(private http: HttpClient, private $localStorage: LocalStorageService, private $sessionStorage: SessionStorageService) {}
 
   getToken() {
@@ -32,6 +34,11 @@ export class AuthServerProvider {
         return jwt;
       }
     }
+  }
+
+  async fetchUserByLogin(login: string): Promise<void> {
+    const user =  await this.http.get<User>(ApiService.API_URL + '/users/' + login, {observe: 'response'}).toPromise();
+    this.user = user.body;
   }
 
   loginWithToken(jwt, rememberMe) {

@@ -14,16 +14,7 @@
       <ion-col>
         <div class="ion-text-center">
           <ion-icon class="success_icon" name="checkmark-circle-outline"></ion-icon>
-          <p class="mb-md">Thanks Jane Doe. Your booking with Barber Barber is confirm and <span class="fw-bold">John Doe</span> will be picking you up. </p>
-        </div>
-        <div class="ion-text-center">
-          <h3 class="mb-heading">Driver Details:</h3>
-          <div class="circle_image mb-md ion-text-center">
-            <img src="../assets/img/driver.png" />
-          </div>
-          <p class="mb-sm"><span class="fw-bold">John Doe</span></p>
-          <p class="mb-sm">Silver Toyota Corolla</p>
-          <p class="mb-sm">CY 123 456</p>
+          <p class="mb-md">Thanks <span class="fw-bold">{{this.authProvider.user?.firstName}} {{this.authProvider.user?.lastName}}</span>. Your booking with <span class="fw-bold">{{this.bookingProvider.serviceProvider.user?.firstName}} {{this.bookingProvider.serviceProvider.user?.firstName}}</span> is confirm </p>
         </div>
       </ion-col>
       </ion-row>

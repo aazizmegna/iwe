@@ -12,22 +12,19 @@
 
 <ion-content>
 <ion-grid class="padding-y">
+
   <ion-row class="mt-sm">
     <ion-col>
       <div class="ion-text-center">
         <h3 class="mb-heading">Your Booking Overview:</h3>
-        <p class="mb-sm"><span class="fw-bold">Date:</span> 21 May 2020</p>
-        <p class="mb-md"><span class="fw-bold">Time:</span> 21 May 2020</p>
-        <p class="mb-sm"><span class="fw-bold">Pick Up Location</span></p>
-        <img class="mb-md" src="../assets/img/map.png"/>
-        <p class="mb-sm"><span class="fw-bold">Drop Off Location</span></p>
-        <img class="mb-sm" src="../assets/img/map.png"/>
+        <p class="mb-sm"><span class="fw-bold">Date and Time :</span> {{this.bookingProvider.dateTime}}</p>
+        <p class="mb-sm"><span class="fw-bold">Service Provider Location :</span>{{this.bookingProvider.serviceProvider?.location}}</p>
       </div>
     </ion-col>
   </ion-row>
   <ion-row class="ion-align-items-end">
     <ion-col>
-      <ion-button (click)="openBookingConfirm()" fill="solid" color="secondary" expand="block" class="btn-md fw-bold">Confirm</ion-button>
+      <ion-button (click)="save()" fill="solid" color="secondary" expand="block" class="btn-md fw-bold">Confirm</ion-button>
     </ion-col>
   </ion-row>
 </ion-grid>

@@ -13,33 +13,26 @@
 <ion-content>
 
   <ion-grid class="padding-y">
-    
-    <ion-row class="ion-align-items-center">
-      <ion-col size="4">
-        <img class="profile_image" src="../assets/img/post-image.png"/>
+
+    <ion-row class="ion-align-items-center" >
+      <ion-col size="4" >
+        <img class="profile_image" [src]="'data:' + searchServicesModels[0].serviceProvider.contentContentType + ';base64,' + searchServicesModels[0].serviceProvider.content"/>
       </ion-col>
       <ion-col class="profile_header" size="8">
-        <h2>Barber Barber</h2>
-        <p><ion-icon class="icon" name="location-outline"></ion-icon> Goodwood, Cape Town</p>
+        <h2>{{searchServicesModels[0].serviceProvider.user.firstName + ' ' + searchServicesModels[0].serviceProvider.user.lastName}}</h2>
+        <p><ion-icon class="icon" name="location-outline"></ion-icon> {{searchServicesModels[0].serviceProvider.location}}</p>
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col size="10">
-        <p class="fz-sm">This is the places bio. Some more text will go that the service provider will enter</p>
+      <ion-col size="10" class="ion-text-center">
+        <p class="fz-sm">{{searchServicesModels[0].serviceProvider.shortBiography}}</p>
       </ion-col>
     </ion-row>
 
-    <ion-row class="ion-text-center">
-      <ion-col size="6">
-        <ion-button (click)="openBooking()" fill="solid" color="secondary" expand="block" class="btn-md fw-bold">Book Now</ion-button>
-      </ion-col>
-      <ion-col size="6">
-        <ion-button (click)="openCue()" fill="solid" color="secondary" expand="block" class="btn-md fw-bold">Join Cue</ion-button>
-      </ion-col>
-
-      <ion-col size="12" class="ion-text-center">
-        <p class="fz-sm">Current in Cue: <span class="fw-bold"> 3 Customers</span> | Wait time: <span class="fw-bold"> 20min</span> </p>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button (click)="openBooking({id: 1})" fill="solid" color="secondary" expand="full" class="btn-md fw-bold">Book Now</ion-button>
       </ion-col>
     </ion-row>
 
@@ -47,41 +40,17 @@
 
   <ion-grid class="profile_feed">
     <ion-row>
-      <ion-col size="6">
-        <img class="feed_image" src="../assets/img/post-image.png"/>
-      </ion-col>
-      <ion-col size="6">
-        <img class="feed_image" src="../assets/img/post-image.png"/>
-      </ion-col>
-      <ion-col size="6">
-        <img class="feed_image" src="../assets/img/post-image.png"/>
-      </ion-col>
-      <ion-col size="6">
-        <img class="feed_image" src="../assets/img/post-image.png"/>
-      </ion-col>
-      <ion-col size="6">
-        <img class="feed_image" src="../assets/img/post-image.png"/>
-      </ion-col>
-      <ion-col size="6">
-        <img class="feed_image" src="../assets/img/post-image.png"/>
-      </ion-col>
-      <ion-col size="6">
-        <img class="feed_image" src="../assets/img/post-image.png"/>
-      </ion-col>
-      <ion-col size="6">
-        <img class="feed_image" src="../assets/img/post-image.png"/>
-      </ion-col>
-      <ion-col size="6">
-        <img class="feed_image" src="../assets/img/post-image.png"/>
-      </ion-col>
-      <ion-col size="6">
-        <img class="feed_image" src="../assets/img/post-image.png"/>
-      </ion-col>
-      <ion-col size="6">
-        <img class="feed_image" src="../assets/img/post-image.png"/>
-      </ion-col>
-      <ion-col size="6">
-        <img class="feed_image" src="../assets/img/post-image.png"/>
+      <ion-col size="6" *ngFor="let service of searchServicesModels;">
+        <span *ngIf="service.picture" (click)="openBooking(service)">
+          <div class="card_image_service-search">
+            <img class="card_image" [src]="'data:' + service.pictureContentType + ';base64,' + service.picture"/>
+          </div>
+        </span>
+        <p class="sp_title">{{service.name}}</p>
+        <p class="fz-sm">
+          <ion-icon class="icon" name="location-outline"></ion-icon>
+          {{service.location}}
+        </p>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -6,6 +6,7 @@ import { Account } from 'src/model/account.model';
 import {HomeService} from './home.service';
 import {Home} from './home.model';
 import {Service} from '../entities/service';
+import {SearchServicesModel} from '../search-services-tab/search-services.model';
 
 @Component({
   selector: 'app-home',
@@ -53,5 +54,8 @@ export class HomePage implements OnInit {
 
   private goBackToHomePage(): void {
     this.navController.navigateBack('');
+  }
+  openSingle(searchModel: SearchServicesModel) {
+    this.navController.navigateForward('/tabs/home/single/' + searchModel.id + '/view');
   }
 }

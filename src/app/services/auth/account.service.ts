@@ -1,9 +1,10 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { SessionStorageService } from 'ngx-webstorage';
-import { Observable, Subject } from 'rxjs';
-import { Account } from 'src/model/account.model';
-import { ApiService } from '../api/api.service';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {SessionStorageService} from 'ngx-webstorage';
+import {Observable, Subject} from 'rxjs';
+import {Account} from 'src/model/account.model';
+import {ApiService} from '../api/api.service';
+import {User} from '../user/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,14 +14,15 @@ export class AccountService {
   private authenticated = false;
   private authenticationState = new Subject<any>();
 
-  constructor(private sessionStorage: SessionStorageService, private http: HttpClient) {}
+  constructor(private sessionStorage: SessionStorageService, private http: HttpClient) {
+  }
 
   fetch(): Observable<HttpResponse<Account>> {
-    return this.http.get<Account>(ApiService.API_URL + '/account', { observe: 'response' });
+    return this.http.get<Account>(ApiService.API_URL + '/account', {observe: 'response'});
   }
 
   save(account: any): Observable<HttpResponse<any>> {
-    return this.http.post(ApiService.API_URL + '/account', account, { observe: 'response' });
+    return this.http.post(ApiService.API_URL + '/account', account, {observe: 'response'});
   }
 
   authenticate(identity) {

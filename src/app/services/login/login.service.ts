@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AccountService } from '../auth/account.service';
 import { AuthServerProvider } from '../auth/auth-jwt.service';
+import {Account} from '../../../model/account.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,9 +14,9 @@ export class LoginService {
     private translate: TranslateService
   ) {}
 
-  login(credentials, callback?) {
+  async login(credentials: { username: string; password: string; rememberMe: boolean }, callback?) {
     const cb = callback || function () {};
-
+    await this.authServerProvider.fetchUserByLogin(credentials.username)
     return new Promise((resolve, reject) => {
       this.authServerProvider.login(credentials).subscribe(
         (data) => {

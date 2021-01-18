@@ -13,14 +13,15 @@
 <ion-content>
 
   <ion-grid class="padding-y">
+    <form *ngIf="form" name="form" [formGroup]="form" (ngSubmit)="save()">
 
     <ion-row class="ion-align-items-center">
       <ion-col size="4">
-        <img class="profile_image" src="../assets/img/post-image.png"/>
+        <img class="profile_image" [src]="'data:' + searchServicesModels[0].serviceProvider.contentContentType + ';base64,' + searchServicesModels[0].serviceProvider.content"/>
       </ion-col>
       <ion-col class="profile_header" size="8">
-        <h2>Barber Barber</h2>
-        <p>Goodwood, Cape Town</p>
+        <h2>{{searchServicesModels[0].serviceProvider.user.firstName + ' ' + searchServicesModels[0].serviceProvider.user.lastName}}</h2>
+        <p><ion-icon class="icon" name="location-outline"></ion-icon> {{searchServicesModels[0].serviceProvider.location}}</p>
       </ion-col>
     </ion-row>
 
@@ -31,28 +32,11 @@
     </ion-row>
 
     <ion-row class="mt-sm ion-justify-content-center">
+
       <ion-col>
         <ion-item class="input_grey" color="tertiary">
-          <ion-input placeholder="Select a date"></ion-input>
+          <ion-datetime displayFormat="MM/DD/YYYY HH:mm" formControlName="dateTime" id="field_dateTime" placeholder="enter date and time"></ion-datetime>
           <ion-icon name="calendar-outline" slot="end"></ion-icon>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-
-    <ion-row class="mt-sm ion-justify-content-center">
-      <ion-col>
-        <ion-item class="input_grey" color="tertiary">
-          <ion-input placeholder="Select a date"></ion-input>
-          <ion-icon name="timer-outline" slot="end"></ion-icon>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-
-    <ion-row class="mt-sm ion-justify-content-center">
-      <ion-col>
-        <ion-item class="input_grey" color="tertiary">
-          <ion-input placeholder="Select a date"></ion-input>
-          <ion-icon name="location-outline" slot="end"></ion-icon>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -62,7 +46,7 @@
         <ion-button (click)="openBookingOverview()" fill="solid" color="secondary" expand="block" class="btn-md fw-bold">Book Now</ion-button>
       </ion-col>
     </ion-row>
-
+    </form>
   </ion-grid>
 
 </ion-content>

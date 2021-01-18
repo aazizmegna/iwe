@@ -7,6 +7,7 @@ import { Post } from '../post/post.model';
 import { Reaction } from '../reaction/reaction.model';
 import { Connection } from '../connection/connection.model';
 import { Invitation } from '../invitation/invitation.model';
+import {User} from '../../../services/user/user.model';
 
 export class ServiceConsumer implements BaseEntity {
   constructor(
@@ -19,6 +20,7 @@ export class ServiceConsumer implements BaseEntity {
     public posts?: Post[],
     public reactions?: Reaction[],
     public connections?: Connection[],
-    public invitations?: Invitation[]
+    public invitations?: Invitation[],
+    public user?: User
   ) {}
 }

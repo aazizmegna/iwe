@@ -30,7 +30,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../account/account.module#AccountPageModule',
+            loadChildren: '../account-tab/account.module#AccountPageModule',
           },
         ],
       },
@@ -39,7 +39,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../new-post/new-post-tab.module#NewPostTabModule',
+            loadChildren: '../new-post-tab/new-post-tab.module#NewPostTabModule',
           },
         ],
       },

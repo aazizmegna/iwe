@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Booking, BookingService} from '../entities/booking';
 import {PicturePost, PicturePostService, Post, PostService} from '../entities/post';
 import {Service, ServiceService} from '../entities/service';
@@ -25,21 +25,23 @@ export class HomeService {
       this.postService.query().toPromise()
     ]);
 
-    const services: Home[]  = allServices.body.map((service) => {
-      return  {
-         id: service.id,
-         location: service.location,
-         timePosted: service.timePosted,
-         name: service.name,
-         picture: service.picture,
-         price: service.price,
-         pictureContentType: service.pictureContentType
+    const services: Home[] = allServices.body.map((service) => {
+      return {
+        id: service.id,
+        location: service.location,
+        timePosted: service.timePosted,
+        name: service.name,
+        picture: service.picture,
+        price: service.price,
+        pictureContentType: service.pictureContentType,
+        serviceProvider: service.serviceProvider,
+        serviceConsumer: service.serviceConsumer
         // description?: ser, //TODO: ADD DESCRIPTION ON SERVICES ON BACKEND
         // reactions: service.re, //TODO: ADD reactions ON SERVICES ON BACKEND
       };
     });
-    const pcpost = [...allPicturePosts.body]
-    console.log(pcpost)
+    const pcpost = [...allPicturePosts.body];
+    console.log(pcpost);
     const posts: Home[] = pcpost.map((post) => {
       return {
         id: post.id,

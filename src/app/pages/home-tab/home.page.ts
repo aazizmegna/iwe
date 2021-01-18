@@ -7,6 +7,10 @@ import {HomeService} from './home.service';
 import {Home} from './home.model';
 import {Service} from '../entities/service';
 import {SearchServicesModel} from '../search-services-tab/search-services.model';
+import {BookingProvider} from './booking/booking.provider';
+import {FeedsProvider} from './feeds.provider';
+import {Router} from '@angular/router';
+import {Feed} from '../entities/feed';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +21,7 @@ export class HomePage implements OnInit {
   account: Account;
   feeds: Home[];
 
-  constructor(public navController: NavController, private accountService: AccountService, private loginService: LoginService,
+  constructor(public route: Router, private accountService: AccountService, private loginService: LoginService,
               private homeService: HomeService, public plt: Platform) {
   }
 
@@ -53,9 +57,11 @@ export class HomePage implements OnInit {
   }
 
   private goBackToHomePage(): void {
-    this.navController.navigateBack('');
+    this.route.navigate(['']);
   }
-  openSingle(searchModel: SearchServicesModel) {
-    this.navController.navigateForward('/tabs/home/single/' + searchModel.id + '/view');
+  openSingle(feed: Home) {
+    if (feed.price) {
+      this.route.navigate(['/tabs/home/single/' + feed.serviceProvider.id.toString() + '/view']);
+    }
   }
 }

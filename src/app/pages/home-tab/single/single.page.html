@@ -32,7 +32,7 @@
 
     <ion-row>
       <ion-col size="12">
-        <ion-button (click)="openBooking({id: 1})" fill="solid" color="secondary" expand="full" class="btn-md fw-bold">Book Now</ion-button>
+        <ion-button (click)="openBooking(this.searchServicesModels[0].serviceProvider?.id)" fill="solid" color="secondary" expand="full" class="btn-md fw-bold">Book Now</ion-button>
       </ion-col>
     </ion-row>
 
@@ -41,7 +41,7 @@
   <ion-grid class="profile_feed">
     <ion-row>
       <ion-col size="6" *ngFor="let service of searchServicesModels;">
-        <span *ngIf="service.picture" (click)="openBooking(service)">
+        <span *ngIf="service.picture" (click)="openBooking(this.bookingProvider.serviceProvider.id)">
           <div class="card_image_service-search">
             <img class="card_image" [src]="'data:' + service.pictureContentType + ';base64,' + service.picture"/>
           </div>

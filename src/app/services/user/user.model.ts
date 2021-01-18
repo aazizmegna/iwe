@@ -4,7 +4,7 @@ export class User {
   public firstName?: string;
   public lastName?: string;
   public email?: string;
-  public activated?: Boolean;
+  public activated?: boolean;
   public langKey?: string;
   public authorities?: any[];
   public createdBy?: string;
@@ -12,6 +12,8 @@ export class User {
   public lastModifiedBy?: string;
   public lastModifiedDate?: Date;
   public password?: string;
+  public serviceProviderId?: number;
+  public serviceConsumerId?: number;
 
   constructor(
     id?: any,
@@ -19,17 +21,21 @@ export class User {
     firstName?: string,
     lastName?: string,
     email?: string,
-    activated?: Boolean,
+    activated?: boolean,
     langKey?: string,
     authorities?: any[],
     createdBy?: string,
     createdDate?: Date,
     lastModifiedBy?: string,
     lastModifiedDate?: Date,
-    password?: string
+    password?: string,
+    serviceProviderId?: number,
+    serviceConsumerId?: number
   ) {
     this.id = id ? id : null;
     this.login = login ? login : null;
+    this.serviceProviderId = serviceProviderId ? serviceProviderId : null;
+    this.serviceConsumerId = serviceConsumerId ? serviceConsumerId : null;
     this.firstName = firstName ? firstName : null;
     this.lastName = lastName ? lastName : null;
     this.email = email ? email : null;

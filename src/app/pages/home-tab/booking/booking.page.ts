@@ -70,13 +70,19 @@ export class BookingPage implements OnInit {
     });
   }
 
-  private createFromForm(): Booking {
+  createFromForm(): Booking {
+    const serviceConsumer: ServiceConsumer = new ServiceConsumer();
+    serviceConsumer.id = this.authProvider.user.serviceConsumerId;
+    const serviceProvider: ServiceProvider = new ServiceProvider();
+    serviceProvider.id = this.searchServicesModels[0].serviceProvider.id;
+    serviceProvider.location = this.searchServicesModels[0].serviceProvider.location;
+    serviceProvider.user = this.authProvider.user;
     return {
       ...new Booking(),
       id: this.form.get(['id']).value,
       dateTime: new Date(this.form.get(['dateTime']).value),
-      serviceConsumer: this.searchServicesModels[0].serviceConsumer,
-      serviceProvider: this.searchServicesModels[0].serviceProvider
+      serviceConsumer,
+      serviceProvider
     };
   }
 

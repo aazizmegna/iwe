@@ -3,6 +3,8 @@ import {NavController} from '@ionic/angular';
 import {Booking} from '../../entities/booking';
 import {SearchServicesModel} from '../../search-services-tab/search-services.model';
 import {ActivatedRoute} from '@angular/router';
+import {AuthServerProvider} from '../../../services/auth/auth-jwt.service';
+import {BookingProvider} from '../booking/booking.provider';
 
 @Component({
   selector: 'app-single',
@@ -12,7 +14,7 @@ import {ActivatedRoute} from '@angular/router';
 export class SinglePage implements OnInit {
   searchServicesModels: SearchServicesModel[];
 
-  constructor(public navController: NavController, private activatedRoute: ActivatedRoute,
+  constructor(public navController: NavController, private activatedRoute: ActivatedRoute, private bookingProvider: BookingProvider
   ) {
   }
 
@@ -22,8 +24,8 @@ export class SinglePage implements OnInit {
     });
   }
 
-  openBooking(searchServicesModel: SearchServicesModel) {
-    this.navController.navigateForward('tabs/home/booking/' + searchServicesModel.id.toString() + '/view');
+  openBooking(serviceProviderId: number) {
+    this.navController.navigateForward('tabs/home/booking/' + serviceProviderId.toString() + '/view');
   }
 
   view(booking: Booking) {

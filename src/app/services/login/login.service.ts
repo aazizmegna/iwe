@@ -16,7 +16,6 @@ export class LoginService {
 
   async login(credentials: { username: string; password: string; rememberMe: boolean }, callback?) {
     const cb = callback || function () {};
-    await this.authServerProvider.fetchUserByLogin(credentials.username)
     return new Promise((resolve, reject) => {
       this.authServerProvider.login(credentials).subscribe(
         (data) => {
@@ -28,6 +27,7 @@ export class LoginService {
             }
             resolve(data);
           });
+          this.authServerProvider.fetchUserByLogin(credentials.username);
           return cb();
         },
         (err) => {

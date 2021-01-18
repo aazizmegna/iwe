@@ -11,6 +11,9 @@ import {PicturePostService} from './picture-post.service';
 import {Post} from './post.model';
 import {PostService} from './post.service';
 import {Service, ServiceService} from '../entities/service';
+import {AuthServerProvider} from '../../services/auth/auth-jwt.service';
+import {ServiceConsumer} from '../entities/service-consumer';
+import {ServiceProvider} from '../entities/service-provider';
 
 @Component({
   selector: 'app-add-tab',
@@ -51,7 +54,8 @@ export class NewPostTabPage implements OnInit {
     private camera: Camera,
     private postService: PostService,
     private picturePostService: PicturePostService,
-    private serviceService: ServiceService
+    private serviceService: ServiceService,
+    private authProvider: AuthServerProvider
   ) {
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
@@ -169,6 +173,15 @@ export class NewPostTabPage implements OnInit {
   }
 
   private createFromServiceForm(): Service {
+    const serviceProvider: ServiceProvider = new ServiceProvider();
+    const serviceConsumer: ServiceConsumer = new ServiceConsumer();
+    if (this.form.get(['price']).value) {
+      serviceProvider.id = this.authProvider.user.serviceProviderId;
+      serviceProvider.user = this.authProvider.user;
+    } else {
+      serviceConsumer.id = this.authProvider.user.serviceConsumerId;
+      serviceProvider.user = this.authProvider.user;
+    }
     return {
       ...new Service(),
       id: this.form.get(['id']).value,
@@ -178,8 +191,8 @@ export class NewPostTabPage implements OnInit {
       location: this.form.get(['location']).value,
       price: this.form.get(['price']).value,
       timePosted: new Date(),
-      serviceConsumer: this.form.get(['serviceConsumer']).value,
-      serviceProvider: this.form.get(['serviceProvider']).value,
+      serviceConsumer,
+      serviceProvider,
     };
   }
 

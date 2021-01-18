@@ -76,7 +76,7 @@ export class BookingPage implements OnInit {
     const serviceProvider: ServiceProvider = new ServiceProvider();
     serviceProvider.id = this.searchServicesModels[0].serviceProvider.id;
     serviceProvider.location = this.searchServicesModels[0].serviceProvider.location;
-    serviceProvider.user = this.authProvider.user;
+    serviceProvider.user = this.searchServicesModels[0].serviceProvider.user;
     return {
       ...new Booking(),
       id: this.form.get(['id']).value,

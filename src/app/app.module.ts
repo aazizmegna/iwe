@@ -13,6 +13,15 @@ import { AppComponent } from './app.component';
 import { AuthExpiredInterceptor } from './interceptors/auth-expired.interceptor';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import {BookingProvider} from './pages/home-tab/booking/booking.provider';
+import {IonicImageLoader} from 'ionic-image-loader';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+
+declare module '@angular/core' {
+  interface ModuleWithProviders<T = any> {
+    ngModule: Type<T>;
+    providers?: Provider[];
+  }
+}
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -32,6 +41,7 @@ export function createTranslateLoader(http: HttpClient) {
       },
     }),
     IonicModule.forRoot(),
+    IonicImageLoader.forRoot(),
     NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-' }),
     AppRoutingModule,
   ],
@@ -50,6 +60,7 @@ export function createTranslateLoader(http: HttpClient) {
       useClass: AuthExpiredInterceptor,
       multi: true,
     },
+    WebView
   ],
   bootstrap: [AppComponent],
 })

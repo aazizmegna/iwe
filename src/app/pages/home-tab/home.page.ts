@@ -12,6 +12,7 @@ import {FeedsProvider} from './feeds.provider';
 import {Router} from '@angular/router';
 import {Feed} from '../entities/feed';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -44,7 +45,7 @@ export class HomePage implements OnInit {
   }
 
   async loadFeeds(refresher?) {
-    this.feeds = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts();
+    this.feeds = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(undefined, true);
   }
 
   isAuthenticated() {

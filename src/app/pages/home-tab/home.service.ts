@@ -8,24 +8,39 @@ import {Reaction} from '../entities/reaction';
 import {ServiceConsumer} from '../entities/service-consumer';
 import {ServiceProvider} from '../entities/service-provider';
 import {Transaction} from '../entities/transaction';
+import {AuthServerProvider} from '../../services/auth/auth-jwt.service';
+import {filter, map} from 'rxjs/operators';
+import {HttpResponse} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
 
+  services: Service[];
+  picturePosts: PicturePost[];
+
+
   constructor(private postService: PostService, private picturePostService: PicturePostService,
-              private servicesService: ServiceService) {
+              private servicesService: ServiceService, private authProvider: AuthServerProvider) {
+    this.picturePosts = [];
+    this.services = [];
+
   }
 
-  async loadAllFreemiumPostsWithBusinessUsersPosts(): Promise<Home[]> {
-    const [allServices, allPicturePosts, allPosts] = await Promise.all([
-      this.servicesService.query().toPromise(),
-      this.picturePostService.query().toPromise(),
-      this.postService.query().toPromise()
+  async loadAllFreemiumPostsWithBusinessUsersPosts(userId?: number, loading?: boolean, consumer?: boolean): Promise<Home[]> {
+    const [allServices, allPicturePosts] = await Promise.all([this.servicesService
+      .query()
+      .pipe(
+        filter((res: HttpResponse<Service[]>) => res.ok),
+        map((res: HttpResponse<Service[]>) => res.body)).toPromise(),
+      this.picturePostService
+        .query()
+        .pipe(
+          filter((res: HttpResponse<PicturePost[]>) => res.ok),
+          map((res: HttpResponse<PicturePost[]>) => res.body)).toPromise()
     ]);
-
-    const services: Home[] = allServices.body.map((service) => {
+    const services: Home[] = allServices.map((service) => {
       return {
         id: service.id,
         location: service.location,
@@ -40,9 +55,8 @@ export class HomeService {
         // reactions: service.re, //TODO: ADD reactions ON SERVICES ON BACKEND
       };
     });
-    const pcpost = [...allPicturePosts.body];
-    console.log(pcpost);
-    const posts: Home[] = pcpost.map((post) => {
+    console.log(allPicturePosts);
+    const posts: Home[] = allPicturePosts.map((post) => {
       return {
         id: post.id,
         location: post.post ? post.post.location : null,
@@ -50,11 +64,25 @@ export class HomeService {
         name: post.post ? post.post.description : null,
         picture: post.content,
         price: undefined,
-        pictureContentType: post.contentContentType
+        pictureContentType: post.contentContentType,
+        serviceProvider: post.post.serviceProvider,
+        serviceConsumer: post.post.serviceConsumer
       };
     });
 
     const homeFeed = concat(services, posts);
+    if (!loading && !consumer) {
+      console.log(homeFeed);
+
+      return homeFeed.filter((post) => {
+        return post.serviceProvider && !consumer ? post.serviceProvider.id === userId : null;
+      });
+    } else if (!loading && consumer) {
+      console.log(homeFeed);
+      return homeFeed.filter((post) => {
+        return post.serviceConsumer && consumer ? post.serviceConsumer.id === userId : null;
+      });
+    }
     return Promise.resolve(orderBy(homeFeed, ['timePosted'], ['desc']));
   }
 }

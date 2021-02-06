@@ -1,9 +1,52 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      {{ 'TAB3_TITLE' | translate }}
-    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button
+        [text]=""
+        [icon]="">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-icon class="elipse_menu" name="ellipsis-vertical"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <ion-grid class="padding-y">
+    <ion-row class="ion-align-items-center">
+      <ion-col size="4">
+        <img class="profile_image" [src]="'data:' + serviceConsumerPicType ? serviceConsumerPicType : serviceConsumerPicType + ';base64,' + serviceConsumerPic ? serviceConsumerPic : serviceProviderPic"/>
+      </ion-col>
+      <ion-col class="profile_header" size="8">
+        <h2>{{serviceConsumerUName ? serviceConsumerUName : serviceProviderUName}}</h2>
+        <p>
+          <ion-icon class="icon" name="location-outline" *ngIf="location"></ion-icon>
+          {{location}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="10" class="ion-text-center" *ngIf="location">
+        <p class="fz-sm">{{servicesModels[0].serviceProvider?.shortBiography}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="profile_feed">
+    <ion-row>
+      <ion-col size="6" *ngFor="let service of servicesModels;">
+        <span *ngIf="service.picture">
+          <div class="card_image_service-search">
+            <img class="card_image" [src]="'data:' + service.pictureContentType + ';base64,' + service.picture"/>
+          </div>
+        </span>
+        <p class="sp_title">{{service.name}}</p>
+        <p class="fz-sm">
+          <ion-icon class="icon" name="location-outline"></ion-icon>
+          {{service.location}}
+        </p>
+        <p class="fz-sm" *ngIf="service.price">
+          R {{service.price}}
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

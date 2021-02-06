@@ -1,9 +1,9 @@
-import {HttpClient, HttpResponse} from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { ApiService } from '../api/api.service';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {ApiService} from '../api/api.service';
 import {User} from '../user/user.model';
 
 @Injectable({
@@ -11,7 +11,9 @@ import {User} from '../user/user.model';
 })
 export class AuthServerProvider {
   public user: User;
-  constructor(private http: HttpClient, private $localStorage: LocalStorageService, private $sessionStorage: SessionStorageService) {}
+
+  constructor(private http: HttpClient, private $localStorage: LocalStorageService, private $sessionStorage: SessionStorageService) {
+  }
 
   getToken() {
     return this.$localStorage.retrieve('authenticationToken') || this.$sessionStorage.retrieve('authenticationToken');
@@ -24,7 +26,7 @@ export class AuthServerProvider {
       rememberMe: credentials.rememberMe,
     };
 
-    return this.http.post(ApiService.API_URL + '/authenticate', data, { observe: 'response' }).pipe(map(authenticateSuccess.bind(this)));
+    return this.http.post(ApiService.API_URL + '/authenticate', data, {observe: 'response'}).pipe(map(authenticateSuccess.bind(this)));
 
     function authenticateSuccess(resp) {
       const bearerToken = resp.headers.get('Authorization');
@@ -37,7 +39,9 @@ export class AuthServerProvider {
   }
 
   async fetchUserByLogin(login: string): Promise<void> {
-    const user =  await this.http.get<User>(ApiService.API_URL + '/users/' + login, {observe: 'response'}).toPromise();
+    const user = await this.http.get<User>(ApiService.API_URL + '/users/' + login, {
+      observe: 'response'
+    }).toPromise();
     this.user = user.body;
   }
 

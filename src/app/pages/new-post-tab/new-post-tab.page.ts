@@ -79,7 +79,7 @@ export class NewPostTabPage implements OnInit {
   ngOnInit() {
     this.postService.query({filter: 'picturepost-is-null'}).subscribe(
       (data) => {
-        if (!this.picturePost.post || !this.picturePost.post.id) {
+        if (this.picturePost && !this.picturePost.post || !this.picturePost.post.id) {
           this.posts = data.body;
         } else {
           this.postService.find(this.picturePost.post.id).subscribe(
@@ -94,7 +94,7 @@ export class NewPostTabPage implements OnInit {
     );
     this.activatedRoute.data.subscribe((response) => {
       this.picturePost = response.data;
-      this.isNew = this.picturePost.id === null || this.picturePost.id === undefined;
+      this.isNew = this.picturePost && this.picturePost.id === null || this.picturePost.id === undefined;
       this.updateForm(this.picturePost);
     });
 
@@ -132,7 +132,7 @@ export class NewPostTabPage implements OnInit {
 
   protected savePicturePost(post: Post) {
     if (this.form.get(['price']).value) {
-      const service = this.createFromServiceForm()
+      const service = this.createFromServiceForm();
       this.subscribeToSaveResponse(this.serviceService.create(service));
     } else {
       const picturePost = this.createFromForm(post);
@@ -175,13 +175,9 @@ export class NewPostTabPage implements OnInit {
   private createFromServiceForm(): Service {
     const serviceProvider: ServiceProvider = new ServiceProvider();
     const serviceConsumer: ServiceConsumer = new ServiceConsumer();
-    if (this.form.get(['price']).value) {
-      serviceProvider.id = this.authProvider.user.serviceProviderId;
-      serviceProvider.user = this.authProvider.user;
-    } else {
-      serviceConsumer.id = this.authProvider.user.serviceConsumerId;
-      serviceProvider.user = this.authProvider.user;
-    }
+    serviceProvider.id = this.authProvider.user.serviceProviderId;
+    serviceProvider.user = this.authProvider.user;
+    serviceConsumer.id = this.authProvider.user.serviceConsumerId;
     return {
       ...new Service(),
       id: this.form.get(['id']).value,
@@ -197,14 +193,19 @@ export class NewPostTabPage implements OnInit {
   }
 
   private createFromPostForm(): Post {
+    const serviceProvider: ServiceProvider = new ServiceProvider();
+    const serviceConsumer: ServiceConsumer = new ServiceConsumer();
+    serviceProvider.id = this.authProvider.user.serviceProviderId;
+    serviceProvider.user = this.authProvider.user;
+    serviceConsumer.id = this.authProvider.user.serviceConsumerId;
     return {
       ...new Post(),
       id: this.form.get(['id']).value,
       location: this.form.get(['location']).value,
       description: this.form.get(['description']).value,
       timePosted: new Date(),
-      serviceConsumer: this.form.get(['serviceConsumer']).value,
-      serviceProvider: this.form.get(['serviceProvider']).value,
+      serviceConsumer,
+      serviceProvider
     };
   }
 
@@ -222,21 +223,22 @@ export class NewPostTabPage implements OnInit {
   }
 
   getPicture(fieldName) {
-    if (Camera.installed()) {
-      this.camera.getPicture(this.cameraOptions).then(
-        (data) => {
-          this.picturePost[fieldName] = data;
-          this.picturePost[fieldName + 'ContentType'] = 'image/jpeg';
-          this.form.patchValue({[fieldName]: data});
-          this.form.patchValue({[fieldName + 'ContentType']: 'image/jpeg'});
-        },
-        (err) => {
-          alert('Unable to take photo');
-        }
-      );
-    } else {
-      this.fileInput.nativeElement.click();
-    }
+    this.fileInput.nativeElement.click();
+    // if (Camera.installed()) {
+    //   this.camera.getPicture(this.cameraOptions).then(
+    //     (data) => {
+    //       this.picturePost[fieldName] = data;
+    //       this.picturePost[fieldName + 'ContentType'] = 'image/jpeg';
+    //       this.form.patchValue({[fieldName]: data});
+    //       this.form.patchValue({[fieldName + 'ContentType']: 'image/jpeg'});
+    //     },
+    //     (err) => {
+    //       alert('Unable to take photo');
+    //     }
+    //   );
+    // } else {
+    //   this.fileInput.nativeElement.click();
+   // }
   }
 
   processWebImage(event, fieldName) {

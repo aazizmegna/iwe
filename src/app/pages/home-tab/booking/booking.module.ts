@@ -14,14 +14,16 @@ import {HttpResponse} from '@angular/common/http';
 import {UserRouteAccessService} from '../../../services/auth/user-route-access.service';
 import {SearchServicesService} from '../../search-services-tab/search-services.service';
 import {SearchServicesModel} from '../../search-services-tab/search-services.model';
+import {SingleService} from '../single/single.service';
 
 @Injectable({providedIn: 'root'})
 export class BookingResolve implements Resolve<SearchServicesModel[]> {
-  constructor(private service: SearchServicesService) {
+  constructor(private service: SingleService) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<SearchServicesModel[]> {
     const serviceProviderId = route.params.id ? route.params.id : null;
+    console.log(serviceProviderId)
     if (serviceProviderId) {
       return this.service.query(serviceProviderId).pipe(
         filter((response: HttpResponse<SearchServicesModel[]>) => response.ok),

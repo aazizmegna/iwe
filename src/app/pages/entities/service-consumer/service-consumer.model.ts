@@ -21,6 +21,8 @@ export class ServiceConsumer implements BaseEntity {
     public reactions?: Reaction[],
     public connections?: Connection[],
     public invitations?: Invitation[],
-    public user?: User
+    public user?: User,
+    public contentContentType?: string,
+    public content?: any,
   ) {}
 }

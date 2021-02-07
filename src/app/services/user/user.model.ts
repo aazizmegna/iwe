@@ -14,6 +14,10 @@ export class User {
   public password?: string;
   public serviceProviderId?: number;
   public serviceConsumerId?: number;
+  public contentContentType?: string;
+  public location?: string;
+  public content?: any;
+  public imageUrl?: string;
 
   constructor(
     id?: any,
@@ -30,7 +34,11 @@ export class User {
     lastModifiedDate?: Date,
     password?: string,
     serviceProviderId?: number,
-    serviceConsumerId?: number
+    serviceConsumerId?: number,
+    contentContentType?: string,
+    location?: string,
+    content?: any,
+    imageUrl?: string
   ) {
     this.id = id ? id : null;
     this.login = login ? login : null;
@@ -47,5 +55,9 @@ export class User {
     this.lastModifiedBy = lastModifiedBy ? lastModifiedBy : null;
     this.lastModifiedDate = lastModifiedDate ? lastModifiedDate : null;
     this.password = password ? password : null;
+    this.content = content;
+    this.contentContentType = contentContentType;
+    this.location = location;
+    this.imageUrl = imageUrl;
   }
 }

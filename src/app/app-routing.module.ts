@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'signup', loadChildren: './pages/signup/signup.module#SignupPageModule' },
   { path: 'list-bookings', loadChildren: './pages/list-bookings/booking.module#BookingPageModule' },
+  { path: 'personal-information', loadChildren: './pages/personal-information/personal-info-routing.module#PersonalInfoRoutingModule' },
   { path: 'accessdenied', redirectTo: '', pathMatch: 'full' },
 ];
 @NgModule({

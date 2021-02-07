@@ -66,4 +66,9 @@ export class AppComponent {
     this.route.navigate(['list-bookings']);
     this.menuCtrl.close('main-menu');
   }
+
+  private goBackToPersonalInfoPage(): void {
+    this.route.navigate(['personal-information']);
+    this.menuCtrl.close('main-menu');
+  }
 }

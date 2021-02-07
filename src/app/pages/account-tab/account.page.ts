@@ -11,60 +11,59 @@ import {ServiceConsumer} from '../entities/service-consumer';
 import {Home} from '../home-tab/home.model';
 
 @Component({
-  selector: 'app-account',
-  templateUrl: 'account.page.html',
-  styleUrls: ['account.page.scss'],
+    selector: 'app-account',
+    templateUrl: 'account.page.html',
+    styleUrls: ['account.page.scss'],
 })
 export class AccountPage implements OnInit {
-  private servicesModels: Home[];
-  private location: string;
-  private serviceProviderPicType: string;
-  private serviceProviderPic: string;
-  private serviceConsumerPicType: string;
-  private serviceConsumerPic: string;
-  private serviceConsumerUName: string;
-  private serviceProviderUName: string;
+    private servicesModels: Home[];
+    private location: string;
+    private serviceProviderPicType: string;
+    private serviceProviderPic: string;
+    private serviceConsumerPicType: string;
+    private serviceConsumerPic: string;
+    private serviceConsumerUName: string;
+    private serviceProviderUName: string;
 
-  constructor(private service: SingleService, private authProvider: AuthServerProvider, private homeService: HomeService) {
-  }
+    constructor(private service: SingleService, private authProvider: AuthServerProvider, private homeService: HomeService) {
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
-  ionViewWillEnter() {
-    this.loadUserServices();
-  }
+    ionViewWillEnter() {
+        this.loadUserServices();
+    }
 
-  async loadUserServices() {
-    // tslint:disable-next-line:max-line-length
-    this.servicesModels = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(this.authProvider.user.serviceProviderId, false, false);
-    if (this.servicesModels.length === 0) {
+    async loadUserServices() {
+        // tslint:disable-next-line:max-line-length
+        this.servicesModels = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(this.authProvider.user.serviceProviderId, false, false);
+        if (this.servicesModels.length === 0) {
+            // tslint:disable-next-line:max-line-length
+            this.servicesModels = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(this.authProvider.user.serviceConsumerId, false, true);
+        }
       // tslint:disable-next-line:max-line-length
-      this.servicesModels = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(this.authProvider.user.serviceConsumerId, false, true);
-    }
-    this.location = this.servicesModels && this.servicesModels[0].serviceConsumer ? this.servicesModels[0].serviceConsumer.location : '';
+        this.location = this.servicesModels && this.servicesModels[0].serviceConsumer ? this.servicesModels[0].serviceConsumer.location : '';
 
-    if (this.servicesModels && this.servicesModels[0]) {
-      const serviceModel = this.servicesModels[0]
-      if (serviceModel.serviceProvider) {
-        this.serviceProviderPic = serviceModel.serviceProvider.imageUrl;
-        this.serviceProviderPicType = this.servicesModels[0].serviceProvider.contentContentType;
-        if (this.servicesModels[0].serviceConsumer.user) {
-          this.serviceConsumerUName = this.servicesModels[0].serviceConsumer.user.firstName
-            + ' ' + this.servicesModels[0].serviceConsumer.user.lastName;
+        if (this.servicesModels && this.servicesModels[0]) {
+            const serviceModel = this.servicesModels[0];
+            if (serviceModel.serviceProvider) {
+                this.serviceProviderPic = this.authProvider.user.imageUrl;
+                this.serviceProviderPicType = this.servicesModels[0].serviceProvider.contentContentType;
+                this.serviceConsumerUName = this.authProvider.user.firstName
+                    + ' ' + this.authProvider.user.lastName;
+            }
+            if (serviceModel.serviceConsumer) {
+                this.serviceConsumerPic = this.servicesModels[0].serviceConsumer.content;
+                this.serviceConsumerPicType = this.servicesModels[0].serviceConsumer.contentContentType;
+                if (this.servicesModels[0].serviceConsumer.user) {
+                    this.serviceConsumerUName = this.servicesModels[0].serviceConsumer.user.firstName
+                        + ' ' + this.servicesModels[0].serviceConsumer.user.lastName;
+                }
+            }
         }
-      }
-      if (serviceModel.serviceConsumer) {
-        this.serviceConsumerPic = this.servicesModels[0].serviceConsumer.content;
-        this.serviceConsumerPicType = this.servicesModels[0].serviceConsumer.contentContentType;
-        if (this.servicesModels[0].serviceConsumer.user) {
-          this.serviceConsumerUName = this.servicesModels[0].serviceConsumer.user.firstName
-            + ' ' + this.servicesModels[0].serviceConsumer.user.lastName;
-        }
-      }
+
+
+        console.log(this.servicesModels);
     }
-
-
-    console.log(this.servicesModels);
-  }
 }

@@ -13,6 +13,7 @@ export class ServiceConsumer implements BaseEntity {
   constructor(
     public id?: number,
     public location?: string,
+    public imageUrl?: string,
     public rides?: Ride[],
     public bookings?: Booking[],
     public services?: Service[],

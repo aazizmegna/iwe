@@ -22,7 +22,7 @@ export class AppComponent {
     private loginService: LoginService,
     public route: Router,
     private menuCtrl: MenuController
-) {
+  ) {
     this.initializeApp();
     this.imageLoaderConfigService.setImageReturnType('base64');
   }
@@ -60,5 +60,10 @@ export class AppComponent {
 
   private goBackToHomePage(): void {
     this.route.navigate(['']);
+  }
+
+  private goBackToListBookingsPage(): void {
+    this.route.navigate(['list-bookings']);
+    this.menuCtrl.close('main-menu');
   }
 }

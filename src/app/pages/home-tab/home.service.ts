@@ -48,6 +48,7 @@ export class HomeService {
         name: service.name,
         picture: service.picture,
         price: service.price,
+        imageUrl: service.imageUrl,
         pictureContentType: service.pictureContentType,
         serviceProvider: service.serviceProvider,
         serviceConsumer: service.serviceConsumer
@@ -64,9 +65,10 @@ export class HomeService {
         name: post.post ? post.post.description : null,
         picture: post.content,
         price: undefined,
+        imageUrl: post.imageUrl,
         pictureContentType: post.contentContentType,
-        serviceProvider: post.post.serviceProvider,
-        serviceConsumer: post.post.serviceConsumer
+        serviceProvider: post.post ? post.post.serviceProvider : undefined,
+        serviceConsumer: post.post ? post.post.serviceConsumer : undefined
       };
     });
 

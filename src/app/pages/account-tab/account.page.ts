@@ -47,7 +47,7 @@ export class AccountPage implements OnInit {
     if (this.servicesModels && this.servicesModels[0]) {
       const serviceModel = this.servicesModels[0]
       if (serviceModel.serviceProvider) {
-        this.serviceProviderPic = serviceModel.serviceProvider.content;
+        this.serviceProviderPic = serviceModel.serviceProvider.imageUrl;
         this.serviceProviderPicType = this.servicesModels[0].serviceProvider.contentContentType;
         if (this.servicesModels[0].serviceConsumer.user) {
           this.serviceConsumerUName = this.servicesModels[0].serviceConsumer.user.firstName

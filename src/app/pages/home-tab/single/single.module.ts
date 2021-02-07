@@ -12,6 +12,7 @@ import {filter, map} from 'rxjs/operators';
 import {HttpResponse} from '@angular/common/http';
 import {UserRouteAccessService} from '../../../services/auth/user-route-access.service';
 import {SingleService} from './single.service';
+import {IonicImageLoader} from 'ionic-image-loader';
 
 @Injectable({providedIn: 'root'})
 export class SingleResolve implements Resolve<SearchServicesModel[]> {
@@ -49,7 +50,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    [RouterModule.forChild(routes)]
+    [RouterModule.forChild(routes), IonicImageLoader]
   ],
   declarations: [SinglePage]
 })

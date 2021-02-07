@@ -15,6 +15,7 @@ import {UserRouteAccessService} from '../../../services/auth/user-route-access.s
 import {SearchServicesService} from '../../search-services-tab/search-services.service';
 import {SearchServicesModel} from '../../search-services-tab/search-services.model';
 import {SingleService} from '../single/single.service';
+import {IonicImageLoader} from 'ionic-image-loader';
 
 @Injectable({providedIn: 'root'})
 export class BookingResolve implements Resolve<SearchServicesModel[]> {
@@ -49,13 +50,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ReactiveFormsModule,
-    [RouterModule.forChild(routes)]
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        ReactiveFormsModule,
+        [RouterModule.forChild(routes)],
+        IonicImageLoader
+    ],
   declarations: [BookingPage]
 })
 

@@ -16,7 +16,7 @@
 
     <ion-row class="ion-align-items-center" >
       <ion-col size="4" >
-        <img class="profile_image" [src]="'data:' + searchServicesModels[0].serviceProvider.contentContentType + ';base64,' + searchServicesModels[0].serviceProvider.content"/>
+        <img-loader class="profile_image" [src]=searchServicesModels[0].serviceProvider.imageUrl [useImg]="true"></img-loader>
       </ion-col>
       <ion-col class="profile_header" size="8">
         <h2>{{searchServicesModels[0].serviceProvider.user.firstName + ' ' + searchServicesModels[0].serviceProvider.user.lastName}}</h2>
@@ -41,9 +41,9 @@
   <ion-grid class="profile_feed">
     <ion-row>
       <ion-col size="6" *ngFor="let service of searchServicesModels;">
-        <span *ngIf="service.picture" (click)="openBooking(this.bookingProvider.serviceProvider.id)">
+        <span (click)="openBooking(this.bookingProvider.serviceProvider.id)">
           <div class="card_image_service-search">
-            <img class="card_image" [src]="'data:' + service.pictureContentType + ';base64,' + service.picture"/>
+            <img-loader class="card_image" [src]=service.imageUrl [useImg]="true"></img-loader>
           </div>
         </span>
         <p class="sp_title">{{service.name}}</p>

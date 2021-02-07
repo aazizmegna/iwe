@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { UserRouteAccessService } from 'src/app/services/auth/user-route-access.service';
 import { AccountPage } from './account.page';
+import {IonicImageLoader} from 'ionic-image-loader';
 
 const routes: Routes = [
   {
@@ -19,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [IonicModule, CommonModule, FormsModule, RouterModule.forChild(routes), TranslateModule],
+    imports: [IonicModule, CommonModule, FormsModule, RouterModule.forChild(routes), TranslateModule, IonicImageLoader],
   declarations: [AccountPage],
 })
 export class AccountPageModule {}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from 'src/app/services/user/user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -36,7 +37,8 @@ export class SignupPage implements OnInit {
     public navController: NavController,
     public userService: UserService,
     public toastController: ToastController,
-    public translateService: TranslateService
+    public translateService: TranslateService,
+    public route: Router,
   ) {
     this.translateService.get(['SIGNUP_ERROR', 'SIGNUP_SUCCESS', 'EXISTING_USER_ERROR', 'INVALID_PASSWORD_ERROR']).subscribe((values) => {
       this.signupErrorString = values.SIGNUP_ERROR;
@@ -60,6 +62,12 @@ export class SignupPage implements OnInit {
           position: 'top',
         });
         toast.present();
+        this.account.email = '';
+        this.account.login = '';
+        this.account.firstName = '';
+        this.account.lastName = '';
+        this.account.password = '';
+        this.route.navigate(['login']);
       },
       async (response) => {
         // Unable to sign up

@@ -26,7 +26,7 @@
 
     <ion-card-content (click)="openSingle(this.feed)">
       <div class="image_wrapper">
-          <img-loader class="card_image"  src="https://soffoalbert123456.s3.amazonaws.com/27067708_10211444855740385_4128367771632991260_n.jpg" [useImg]="true"></img-loader>
+          <img-loader class="card_image"  [src]=feed.imageUrl [useImg]="true"></img-loader>
       </div>
 
       <ion-grid class="ion-no-padding">

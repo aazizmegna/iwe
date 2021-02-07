@@ -11,6 +11,7 @@ export class Service implements BaseEntity {
     public pictureContentType?: string,
     public picture?: any,
     public location?: string,
+    public imageUrl?: string,
     public price?: number,
     public timePosted?: any,
     public bookings?: Booking[],

@@ -18,6 +18,7 @@ export class Home implements BaseEntity {
     public serviceConsumer?: ServiceConsumer,
     public serviceProvider?: ServiceProvider,
     public name?: string,
+    public imageUrl?: string,
     public pictureContentType?: string,
     public picture?: any,
     public price?: number,

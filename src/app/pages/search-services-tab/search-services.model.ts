@@ -9,6 +9,7 @@ export class SearchServicesModel implements BaseEntity {
   constructor(
     public id?: number,
     public name?: string,
+    public imageUrl?: string,
     public pictureContentType?: string,
     public picture?: any,
     public location?: string,

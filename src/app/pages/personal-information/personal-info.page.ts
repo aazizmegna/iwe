@@ -35,7 +35,7 @@ export class PersonalInfoPage implements OnInit {
     contentContentType: new FormControl([null, []], Validators.required),
     email: [null, []],
     location: [],
-    login:  [null, []],
+    login: [null, []],
   });
 
   constructor(
@@ -75,21 +75,14 @@ export class PersonalInfoPage implements OnInit {
 
   save() {
     this.isSaving = true;
-    const user = this.createFromPostForm();
-    this.subscribeToPostSaveResponse(this.personalInfoService.create(user));
+    const user = this.createUserForm();
+    this.subscribeToUserSaveResponse(this.personalInfoService.create(user));
   }
 
-  protected subscribeToPostSaveResponse(result: Observable<HttpResponse<User>>) {
+  protected subscribeToUserSaveResponse(result: Observable<HttpResponse<User>>) {
     result.subscribe(
-      (res: HttpResponse<User>) => res.body,
-      (res: HttpErrorResponse) => res.error
-    );
-  }
-
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<User>>) {
-    result.subscribe(
-      (res: HttpResponse<User>) => this.onSaveSuccess(res.body),
-      (res: HttpErrorResponse) => this.onError(res.error)
+      (res: HttpResponse<User>) => this.onSaveSuccess(res),
+      (res: HttpErrorResponse) => this.onError(res)
     );
   }
 
@@ -99,9 +92,14 @@ export class PersonalInfoPage implements OnInit {
       action = 'created';
     }
     this.isSaving = false;
-    const toast = await this.toastCtrl.create({message: `PicturePost ${action} successfully.`, duration: 2000, position: 'middle'});
+    const toast = await this.toastCtrl.create({
+      message: `Personal information ${action} successfully.`,
+      duration: 2000,
+      position: 'middle'
+    });
     toast.present();
-    this.navController.navigateBack('/tabs/home');
+    this.form.reset();
+    this.clearInputImage('content', 'contentContentType', 'fileImage')
   }
 
   previousState() {
@@ -115,7 +113,7 @@ export class PersonalInfoPage implements OnInit {
     toast.present();
   }
 
-  private createFromPostForm(): User {
+  private createUserForm(): User {
     return {
       ...new User(),
       id: this.form.get(['id']).value,
@@ -128,6 +126,7 @@ export class PersonalInfoPage implements OnInit {
       lastName: this.form.get(['lastName']).value,
     };
   }
+
   byteSize(field) {
     return this.dataUtils.byteSize(field);
   }

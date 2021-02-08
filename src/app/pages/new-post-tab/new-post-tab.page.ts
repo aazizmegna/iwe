@@ -149,6 +149,7 @@ export class NewPostTabPage implements OnInit {
     const toast = await this.toastCtrl.create({message: `PicturePost ${action} successfully.`, duration: 2000, position: 'middle'});
     toast.present();
     this.form.reset();
+    this.clearInputImage('content', 'contentContentType', 'fileImage')
     this.navController.navigateBack('/tabs/home');
   }
 

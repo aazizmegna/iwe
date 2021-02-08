@@ -6,6 +6,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {ImageLoaderConfigService} from 'ionic-image-loader';
 import {LoginService} from './services/login/login.service';
 import {Router} from '@angular/router';
+import {AuthServerProvider} from './services/auth/auth-jwt.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class AppComponent {
     private imageLoaderConfigService: ImageLoaderConfigService,
     private loginService: LoginService,
     public route: Router,
-    private menuCtrl: MenuController
+    private menuCtrl: MenuController,
+    private authProvider: AuthServerProvider
   ) {
     this.initializeApp();
     this.imageLoaderConfigService.setImageReturnType('base64');

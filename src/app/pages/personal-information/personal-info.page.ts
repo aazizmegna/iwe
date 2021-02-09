@@ -124,6 +124,8 @@ export class PersonalInfoPage implements OnInit {
       login: this.form.get(['login']).value,
       firstName: this.form.get(['firstName']).value,
       lastName: this.form.get(['lastName']).value,
+      serviceConsumerId: this.authProvider.user.serviceConsumerId,
+      serviceProviderId: this.authProvider.user.serviceProviderId
     };
   }
 

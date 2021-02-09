@@ -13,6 +13,7 @@ import {AuthServerProvider} from '../../services/auth/auth-jwt.service';
 export class BookingPage {
   bookings: Booking[];
   profilePicture: string;
+  bookingWith: string;
 
   // todo: add pagination
 
@@ -28,6 +29,7 @@ export class BookingPage {
 
   ionViewWillEnter() {
     this.loadAll();
+    this.determineWhoisBookingWith();
   }
 
   async loadAll(refresher?) {
@@ -83,5 +85,13 @@ export class BookingPage {
 
   trackId(index: number, item: Booking) {
     return item.id;
+  }
+
+  determineWhoisBookingWith() {
+    if (this.authProvider.user.authorities.includes('ROLE_SERVICE_PROVIDER')) {
+        this.bookingWith = this.bookings[0].serviceConsumer.user.firstName + ' ' +  this.bookings[0].serviceConsumer.user.lastName;
+    } else {
+      this.bookingWith = this.bookings[0].serviceProvider.user.firstName + ' ' +  this.bookings[0].serviceProvider.user.lastName;
+    }
   }
 }

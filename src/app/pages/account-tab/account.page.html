@@ -20,7 +20,7 @@
         <h2>{{serviceConsumerUName ? serviceConsumerUName : serviceProviderUName}}</h2>
         <p>
           <ion-icon class="icon" name="location-outline" *ngIf="location"></ion-icon>
-          {{location}}</p>
+        <p>{{this.authProvider.user.location}}</p>
       </ion-col>
     </ion-row>
     <ion-row>

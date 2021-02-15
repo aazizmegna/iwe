@@ -109,7 +109,7 @@ export class PersonalInfoPage implements OnInit {
   async onError(error) {
     this.isSaving = false;
     console.error(error);
-    const toast = await this.toastCtrl.create({message: 'Please Fill in all fields on the form', duration: 2000, position: 'middle'});
+    const toast = await this.toastCtrl.create({message: 'Something went wrong, please double check your details', duration: 2000, position: 'middle'});
     toast.present();
   }
 
@@ -119,9 +119,9 @@ export class PersonalInfoPage implements OnInit {
       id: this.form.get(['id']).value,
       content: this.form.get(['content']).value,
       contentContentType: this.form.get(['contentContentType']).value,
-      email: this.form.get(['email']).value,
+      email: this.form.get(['email']).value.toString().trim(),
       location: this.form.get(['location']).value,
-      login: this.form.get(['login']).value,
+      login: this.form.get(['login']).value.toString().trim(),
       firstName: this.form.get(['firstName']).value,
       lastName: this.form.get(['lastName']).value,
       serviceConsumerId: this.authProvider.user.serviceConsumerId,

@@ -24,8 +24,9 @@
         <ion-thumbnail slot="start">
           <img-loader [src]=profilePicture [useImg]="true"></img-loader>
         </ion-thumbnail>
-        <strong><h2 >{{this.bookingWith}}</h2></strong>
-        <ion-label>{{booking.dateTime | date:'medium'}}</ion-label>
+        <ion-label><strong>Name:</strong> {{name}}<br>
+          <strong>Location:</strong> {{location}}<br>
+          <strong>Time:</strong> {{booking.dateTime | date:'medium'}}</ion-label>
       </ion-item>
     </ion-item-sliding>
   </ion-list>

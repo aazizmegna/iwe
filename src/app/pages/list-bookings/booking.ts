@@ -5,6 +5,7 @@ import {HttpResponse} from '@angular/common/http';
 import {Booking} from './booking.model';
 import {BookingService} from './booking.service';
 import {AuthServerProvider} from '../../services/auth/auth-jwt.service';
+import {orderBy} from 'lodash';
 
 @Component({
   selector: 'page-booking',
@@ -14,6 +15,8 @@ export class BookingPage {
   bookings: Booking[];
   profilePicture: string;
   bookingWith: string;
+  location: string;
+  name: string;
 
   // todo: add pagination
 
@@ -29,10 +32,10 @@ export class BookingPage {
 
   ionViewWillEnter() {
     this.loadAll();
-    this.determineWhoisBookingWith();
   }
 
   async loadAll(refresher?) {
+    console.log(this.authProvider.user.authorities.includes('ROLE_SERVICE_PROVIDER'))
     if (this.authProvider.user.authorities.includes('ROLE_SERVICE_PROVIDER')) {
       this.bookingService
         .queryByServiceProviderId(this.authProvider.user.serviceProviderId)
@@ -42,8 +45,14 @@ export class BookingPage {
         )
         .subscribe(
           (response: Booking[]) => {
-            this.bookings = response;
-            this.profilePicture = this.bookings[0].serviceConsumer.imageUrl;
+            this.bookings = orderBy(response, ['dateTime'], ['desc']);
+            const filteredBooking = this.bookings.filter((booking) => {
+              return booking.serviceConsumer.imageUrl && booking.serviceConsumer.location && booking.serviceConsumer.user &&
+                booking.serviceConsumer.user.firstName && booking.serviceConsumer.user.lastName;
+            })[0];
+            this.profilePicture = filteredBooking.serviceConsumer.imageUrl;
+            this.location = filteredBooking.serviceConsumer.location;
+            this.name = filteredBooking.serviceConsumer.user.firstName + ' ' + filteredBooking.serviceConsumer.user.lastName;
 
             if (typeof refresher !== 'undefined') {
               setTimeout(() => {
@@ -66,8 +75,15 @@ export class BookingPage {
         )
         .subscribe(
           (response: Booking[]) => {
-            this.bookings = response;
-            this.profilePicture = this.bookings[0].serviceProvider.imageUrl;
+            this.bookings = orderBy(response, ['dateTime'], ['desc'])
+            const filteredBooking = this.bookings.filter((booking) => {
+              return booking.serviceProvider.imageUrl && booking.serviceProvider.location && booking.serviceProvider.user &&
+                booking.serviceProvider.user.firstName && booking.serviceProvider.user.lastName;
+            })[0];
+            this.profilePicture = filteredBooking.serviceProvider.imageUrl;
+            this.location = filteredBooking.serviceProvider.location;
+            this.name = filteredBooking.serviceProvider.user.firstName + ' ' + filteredBooking.serviceProvider.user.lastName;
+
             if (typeof refresher !== 'undefined') {
               setTimeout(() => {
                 refresher.target.complete();
@@ -85,13 +101,5 @@ export class BookingPage {
 
   trackId(index: number, item: Booking) {
     return item.id;
-  }
-
-  determineWhoisBookingWith() {
-    if (this.authProvider.user.authorities.includes('ROLE_SERVICE_PROVIDER')) {
-        this.bookingWith = this.bookings[0].serviceConsumer.user.firstName + ' ' +  this.bookings[0].serviceConsumer.user.lastName;
-    } else {
-      this.bookingWith = this.bookings[0].serviceProvider.user.firstName + ' ' +  this.bookings[0].serviceProvider.user.lastName;
-    }
   }
 }

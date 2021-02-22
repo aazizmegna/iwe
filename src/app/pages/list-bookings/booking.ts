@@ -46,14 +46,6 @@ export class BookingPage {
         .subscribe(
           (response: Booking[]) => {
             this.bookings = orderBy(response, ['dateTime'], ['desc']);
-            const filteredBooking = this.bookings.filter((booking) => {
-              return booking.serviceConsumer.imageUrl && booking.serviceConsumer.location && booking.serviceConsumer.user &&
-                booking.serviceConsumer.user.firstName && booking.serviceConsumer.user.lastName;
-            })[0];
-            this.profilePicture = filteredBooking.serviceConsumer.imageUrl;
-            this.location = filteredBooking.serviceConsumer.location;
-            this.name = filteredBooking.serviceConsumer.user.firstName + ' ' + filteredBooking.serviceConsumer.user.lastName;
-
             if (typeof refresher !== 'undefined') {
               setTimeout(() => {
                 refresher.target.complete();
@@ -76,14 +68,6 @@ export class BookingPage {
         .subscribe(
           (response: Booking[]) => {
             this.bookings = orderBy(response, ['dateTime'], ['desc'])
-            const filteredBooking = this.bookings.filter((booking) => {
-              return booking.serviceProvider.imageUrl && booking.serviceProvider.location && booking.serviceProvider.user &&
-                booking.serviceProvider.user.firstName && booking.serviceProvider.user.lastName;
-            })[0];
-            this.profilePicture = filteredBooking.serviceProvider.imageUrl;
-            this.location = filteredBooking.serviceProvider.location;
-            this.name = filteredBooking.serviceProvider.user.firstName + ' ' + filteredBooking.serviceProvider.user.lastName;
-
             if (typeof refresher !== 'undefined') {
               setTimeout(() => {
                 refresher.target.complete();

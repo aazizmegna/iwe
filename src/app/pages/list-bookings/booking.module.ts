@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BookingPage } from './booking';
 import {UserRouteAccessService} from '../../services/auth/user-route-access.service';
 import {IonicImageLoader} from 'ionic-image-loader';
+import {IweMobileSharedModule} from '../../shared/shared.module';
 
 const routes: Routes = [
   {
@@ -22,6 +23,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [BookingPage],
-  imports: [IonicModule, FormsModule, ReactiveFormsModule, CommonModule, TranslateModule, RouterModule.forChild(routes), IonicImageLoader],
+  imports: [IonicModule, FormsModule, ReactiveFormsModule, CommonModule, TranslateModule, RouterModule.forChild(routes), IonicImageLoader, IweMobileSharedModule],
 })
 export class BookingPageModule {}

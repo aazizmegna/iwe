@@ -10,9 +10,6 @@
 </ion-header>
 
 <ion-content>
-  <ion-refresher [disabled]="plt.is('desktop')" slot="fixed" (ionRefresh)="loadFeeds($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
   <ion-card  color="light" class="SP_card" *ngFor="let feed of feeds; trackBy: trackId" #slidingItem>
     <ion-card-header>
       <ion-grid class="ion-no-padding">

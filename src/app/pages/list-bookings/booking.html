@@ -20,12 +20,20 @@
   </p>
   <ion-list>
     <ion-item-sliding *ngFor="let booking of bookings; trackBy: trackId" #slidingItem>
-      <ion-item>
+      <ion-item *appHasAnyAuthority="'ROLE_SERVICE_PROVIDER'">
         <ion-thumbnail slot="start">
-          <img-loader [src]=profilePicture [useImg]="true"></img-loader>
+          <img-loader [src]=booking.serviceConsumer.imageUrl [useImg]="true"></img-loader>
         </ion-thumbnail>
-        <ion-label><strong>Name:</strong> {{name}}<br>
-          <strong>Location:</strong> {{location}}<br>
+        <ion-label><strong>Name:</strong> {{booking.serviceConsumer.user ? booking.serviceConsumer.user.firstName  + ' ' +  booking.serviceConsumer.user.lastName : ''}}<br>
+          <strong>Location:</strong> {{booking.serviceConsumer.location}}<br>
+          <strong>Time:</strong> {{booking.dateTime | date:'medium'}}</ion-label>
+      </ion-item>
+      <ion-item *appHasAnyAuthority="'ROLE_USER'">
+        <ion-thumbnail slot="start">
+          <img-loader [src]=booking.serviceProvider.imageUrl [useImg]="true"></img-loader>
+        </ion-thumbnail>
+        <ion-label><strong>Name:</strong> {{booking.serviceProvider.user ?  booking.serviceProvider.user.firstName + ' ' +  booking.serviceProvider.user.lastName : ''}}<br>
+          <strong>Location:</strong> {{booking.serviceProvider.location}}<br>
           <strong>Time:</strong> {{booking.dateTime | date:'medium'}}</ion-label>
       </ion-item>
     </ion-item-sliding>

@@ -9,7 +9,6 @@ import { Observable, of } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { filter, map } from 'rxjs/operators';
 
-import { PostPage } from './post';
 import { PostUpdatePage } from './post-update';
 import { Post, PostService, PostDetailPage } from '.';
 import { Camera } from '@ionic-native/camera/ngx';
@@ -31,14 +30,6 @@ export class PostResolve implements Resolve<Post> {
 }
 
 const routes: Routes = [
-  {
-    path: '',
-    component: PostPage,
-    data: {
-      authorities: ['ROLE_USER'],
-    },
-    canActivate: [UserRouteAccessService],
-  },
   {
     path: 'new',
     component: PostUpdatePage,
@@ -75,7 +66,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [PostPage, PostUpdatePage, PostDetailPage],
+  declarations: [PostUpdatePage, PostDetailPage],
   imports: [IonicModule, FormsModule, ReactiveFormsModule, CommonModule, TranslateModule, RouterModule.forChild(routes)],
   providers: [Camera],
 })

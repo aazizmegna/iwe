@@ -4,11 +4,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {IonicModule} from '@ionic/angular';
 
-import {NewPostTabRoutingModule} from './new-post-tab-routing.module';
-
 import {NewPostTabPage} from './new-post-tab.page';
 import {RouterModule, Routes} from '@angular/router';
-import {PicturePostPage} from './picture-post';
 import {UserRouteAccessService} from '../../services/auth/user-route-access.service';
 import {TranslateModule} from '@ngx-translate/core';
 import {Camera} from '@ionic-native/camera/ngx';

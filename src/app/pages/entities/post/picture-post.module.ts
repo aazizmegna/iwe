@@ -10,7 +10,6 @@ import { Observable, of } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { filter, map } from 'rxjs/operators';
 
-import { PicturePostPage } from './picture-post';
 import { PicturePostUpdatePage } from './picture-post-update';
 import { PicturePost, PicturePostService, PicturePostDetailPage } from '.';
 
@@ -31,14 +30,6 @@ export class PicturePostResolve implements Resolve<PicturePost> {
 }
 
 const routes: Routes = [
-  {
-    path: '',
-    component: PicturePostPage,
-    data: {
-      authorities: ['ROLE_USER'],
-    },
-    canActivate: [UserRouteAccessService],
-  },
   {
     path: 'new',
     component: PicturePostUpdatePage,
@@ -75,7 +66,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [PicturePostPage, PicturePostUpdatePage, PicturePostDetailPage],
+  declarations: [PicturePostUpdatePage, PicturePostDetailPage],
   imports: [IonicModule, FormsModule, ReactiveFormsModule, CommonModule, TranslateModule, RouterModule.forChild(routes)],
   providers: [Camera],
 })

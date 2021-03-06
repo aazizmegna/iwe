@@ -1,0 +1,54 @@
+<ion-header class="ion-header">
+  <ion-toolbar>
+    <img class="header_logo" src="../assets/img/iwe_logo.png" />
+    <ion-buttons slot="end">
+      <ion-menu-button menu="main-menu"><ion-icon class="elipse_menu" name="ellipsis-vertical"></ion-icon></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid class="padding-y">
+
+    <ion-row class="ion-align-items-center mt-sm">
+      <ion-col size="4">
+        <img-loader class="profile_image" [src]=serviceProvider.imageUrl [useImg]="true"></img-loader>
+      </ion-col>
+      <ion-col class="profile_header" size="8">
+        <h2>{{serviceProvider.user ? serviceProvider.user.firstName + ' ' +serviceProvider.user.lastName : ''}}</h2>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-start mt-sm">
+      <ion-col size="8" class="incoming_msg">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea</p>
+        <p class="time">11.14am</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-end ion-text-right mt-sm">
+      <ion-col size="8" class="outgoing_msg">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eir</p>
+        <p class="time">11.14am</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-start mt-sm">
+      <ion-col size="8" class="incoming_msg">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea</p>
+        <p class="time">11.14am</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-align-items-end mt-sm">
+      <ion-col size="12">
+        <ion-item class="input_grey" color="tertiary">
+          <ion-input placeholder="...Typing"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>

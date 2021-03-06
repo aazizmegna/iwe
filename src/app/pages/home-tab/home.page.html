@@ -10,12 +10,20 @@
 </ion-header>
 
 <ion-content>
-  <ion-card  color="light" class="SP_card" *ngFor="let feed of feeds; trackBy: trackId" #slidingItem>
+  <ion-card color="light" class="SP_card" *ngFor="let feed of feeds; trackBy: trackId" #slidingItem>
     <ion-card-header>
       <ion-grid class="ion-no-padding">
         <ion-row class="ion-align-items-center ion-no-padding">
           <ion-col size="8" class="ion-no-padding">
             <p class="sp_title">{{feed.name}}</p>
+          </ion-col>
+          <ion-col *ngIf="feed.price" size="2" class="ion-no-padding">
+            <ion-button (click)="openChatPage(this.feed)" class="chat_btn">Chat</ion-button>
+            <div class="clear"></div>
+          </ion-col>
+          <ion-col *ngIf="feed.price" size="2" class="ion-no-padding">
+            <ion-button class="chat_btn">Follow</ion-button>
+            <div class="clear"></div>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -23,7 +31,7 @@
 
     <ion-card-content (click)="openSingle(this.feed)">
       <div class="image_wrapper">
-          <img-loader class="card_image"  [src]=feed.imageUrl [useImg]="true"></img-loader>
+        <img-loader class="card_image" [src]=feed.imageUrl [useImg]="true"></img-loader>
       </div>
 
       <ion-grid class="ion-no-padding">
@@ -40,10 +48,25 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-      <p class="fz-sm">
-        {{feed.description}}
-      </p>
-      {{feed.timePosted | date:'medium'}}
+      <ion-row>
+        <p class="fz-sm">
+          {{feed.description}}
+        </p>
+        {{feed.timePosted | date:'medium'}}
+      </ion-row>
+      <ion-row>
+        <div class="like">
+          <ion-icon name="heart-outline"></ion-icon>
+        </div>
+        <div class="like">
+          <ion-icon name="chatbubbles-outline"></ion-icon>
+        </div>
+      </ion-row>
+      <ion-row>
+        <p class="fz-sm">
+          10 likes
+        </p>
+      </ion-row>
     </ion-card-content>
   </ion-card>
 </ion-content>

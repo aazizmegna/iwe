@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NavController, Platform} from '@ionic/angular';
-import { AccountService } from 'src/app/services/auth/account.service';
-import { LoginService } from 'src/app/services/login/login.service';
-import { Account } from 'src/model/account.model';
+import {AccountService} from 'src/app/services/auth/account.service';
+import {LoginService} from 'src/app/services/login/login.service';
+import {Account} from 'src/model/account.model';
 import {HomeService} from './home.service';
 import {Home} from './home.model';
 import {Service} from '../entities/service';
@@ -60,9 +60,20 @@ export class HomePage implements OnInit {
   private goBackToHomePage(): void {
     this.route.navigate(['']);
   }
+
   openSingle(feed: Home) {
     if (feed.price) {
       this.route.navigate(['/tabs/home/single/' + feed.serviceProvider.id.toString() + '/view']);
     }
+  }
+
+  openChatPage(feed: Home) {
+    if (feed.price) {
+      this.route.navigate(['/tabs/home/chat/' + feed.serviceProvider.id.toString()]);
+    }
+  }
+
+  initiateFollowing() {
+
   }
 }

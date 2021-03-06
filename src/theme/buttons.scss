@@ -2,7 +2,7 @@
   text-decoration: underline;
 }
 
-ion-button.follow_btn {
+ion-button.chat_btn {
   --background: #c2c5ca;
   --background-activated: #c2c5ca;
   --background-activated-opacity: 1;
@@ -29,6 +29,35 @@ ion-button.follow_btn {
   font-size: 10px;
   height: 25px;
   margin-left: 10px;
+}
+
+ion-button.follow_btn {
+  --background: #c2c5ca;
+  --background-activated: #c2c5ca;
+  --background-activated-opacity: 1;
+  --background-focused: #c2c5ca;
+  --background-focused-opacity: 1;
+  --background-hover: #c2c5ca;
+  --background-hover-opacity: 1;
+  --border-color: #c2c5ca;
+  --border-radius: 5px;
+  --border-style: solid;
+  --border-width: 8px;
+  --box-shadow: 0;
+  --color: #ffffff;
+  --color-activated: #ffffff;
+  --color-focused: #ffffff;
+  --color-hover: #ffffff;
+  --opacity: 1;
+  --padding-bottom: 2px;
+  --padding-end: 2px;
+  --padding-start: 2px;
+  --padding-top: 2px;
+  --ripple-color: #1e1e1e;
+  --transition: background-color 15ms linear;
+  font-size: 10px;
+  height: 25px;
+  margin-left: 15px;
 }
 
 .btn-back {

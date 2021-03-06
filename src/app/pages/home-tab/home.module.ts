@@ -72,6 +72,14 @@ const routes: Routes = [
     },
     canActivate: [UserRouteAccessService],
     loadChildren: () => import('./cu-ride-confirm/cu-ride-confirm.module').then( m => m.CuRideConfirmPageModule)
+  },
+  {
+    path: 'chat',
+    data: {
+      authorities: ['ROLE_USER'],
+    },
+    canActivate: [UserRouteAccessService],
+    loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
   }
 ];
 

@@ -1,0 +1,18 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ApiService } from 'src/app/services/api/api.service';
+import {ServiceProvider} from '../../entities/service-provider';
+
+
+
+@Injectable({ providedIn: 'root' })
+export class ChatService {
+  private resourceUrl = ApiService.API_URL + '/service-providers';
+
+  constructor(protected http: HttpClient) {}
+
+  find(id: number): Observable<HttpResponse<ServiceProvider>> {
+    return this.http.get(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+}

@@ -3,7 +3,11 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "types": [],
+    "emitDecoratorMetadata": false
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["src/test.ts", "src/**/*.spec.ts"]
+  "exclude": ["src/test.ts", "src/**/*.spec.ts"],
+  "files": [
+    "node_modules/ng2-stomp-service/dist/stomp.service.ts"
+  ]
 }

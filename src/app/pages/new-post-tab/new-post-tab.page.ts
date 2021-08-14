@@ -240,7 +240,7 @@ export class NewPostTabPage implements OnInit {
     //   );
     // } else {
     //   this.fileInput.nativeElement.click();
-   // }
+    // }
   }
 
   processWebImage(event, fieldName) {

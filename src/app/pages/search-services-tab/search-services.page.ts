@@ -13,7 +13,8 @@ import {SearchServicesModel} from './search-services.model';
 })
 export class SearchServicesPage {
   searchServicesModels: SearchServicesModel[];
-  currentSearch: string;
+  location: string;
+  price: number;
 
   constructor(
     private dataUtils: JhiDataUtils,
@@ -24,7 +25,11 @@ export class SearchServicesPage {
     protected activatedRoute: ActivatedRoute
   ) {
     this.searchServicesModels = [];
-    this.currentSearch =
+    this.location =
+      this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams.search
+        ? this.activatedRoute.snapshot.queryParams.search
+        : '';
+    this.price =
       this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams.search
         ? this.activatedRoute.snapshot.queryParams.search
         : '';
@@ -35,11 +40,11 @@ export class SearchServicesPage {
   }
 
   async loadAll(refresher?) {
-    if (this.currentSearch) {
+    if (this.price) {
       this.searchServicesService
-        .search({
-          query: this.currentSearch,
-        }).pipe(
+        .searchByPrice(
+           this.price,
+        ).pipe(
         filter((res: HttpResponse<SearchServicesModel[]>) => res.ok),
         map((res: HttpResponse<SearchServicesModel[]>) => res.body)
       ).subscribe(
@@ -59,6 +64,31 @@ export class SearchServicesPage {
       );
       return;
     }
+    if (this.location) {
+      this.searchServicesService
+        .searchByLocation(
+          this.location,
+        ).pipe(
+        filter((res: HttpResponse<SearchServicesModel[]>) => res.ok),
+        map((res: HttpResponse<SearchServicesModel[]>) => res.body)
+      ).subscribe(
+        (response: SearchServicesModel[]) => {
+          this.searchServicesModels = response;
+          if (typeof refresher !== 'undefined') {
+            setTimeout(() => {
+              refresher.target.complete();
+            }, 750);
+          }
+        },
+        async (error) => {
+          console.error(error);
+          const toast = await this.toastCtrl.create({message: 'Failed to load data', duration: 2000, position: 'middle'});
+          toast.present();
+        }
+      );
+      return;
+    }
+
     this.searchServicesService
       .query()
       .pipe(
@@ -98,8 +128,13 @@ export class SearchServicesPage {
     this.navController.navigateForward('/tabs/entities/service-provider/' + serviceProvider.id + '/view');
   }
 
-  search(query: string): void {
-    this.currentSearch = query;
+  searchByLocation(location: string): void {
+    this.location = location;
+    this.loadAll();
+  }
+
+  searchByPrice(price: number): void {
+    this.price = price;
     this.loadAll();
   }
 }

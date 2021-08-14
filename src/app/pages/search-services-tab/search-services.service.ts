@@ -10,13 +10,14 @@ import * as moment from 'moment';
 type EntityArrayResponseType = HttpResponse<SearchServicesModel[]>;
 
 export interface Search {
-  query: string;
+  price?: number;
 }
 
 @Injectable({ providedIn: 'root' })
 export class SearchServicesService {
   private resourceUrl = ApiService.API_URL + '/services';
-  public resourceSearchUrl = ApiService.API_URL + '/_search/services';
+  public resourceSearchUrlByPrice = ApiService.API_URL + '/_search/servicesByPrice';
+  public resourceSearchUrlByLocation = ApiService.API_URL + '/_search/servicesByLocation';
 
   constructor(protected http: HttpClient) {}
 
@@ -31,10 +32,17 @@ export class SearchServicesService {
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
-  search(req: Search): Observable<EntityArrayResponseType> {
-    const options = createRequestOption(req);
+  searchByPrice(price: number): Observable<EntityArrayResponseType> {
+    const options = createRequestOption({price});
     return this.http
-      .get<SearchServicesModel[]>(this.resourceSearchUrl, { params: options, observe: 'response' })
+      .get<SearchServicesModel[]>(this.resourceSearchUrlByPrice, { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
+  searchByLocation(location: string): Observable<EntityArrayResponseType> {
+    const options = createRequestOption({location});
+    return this.http
+      .get<SearchServicesModel[]>(this.resourceSearchUrlByLocation, { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 

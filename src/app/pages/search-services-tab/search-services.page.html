@@ -12,9 +12,21 @@
       <ion-col>
         <form name="searchForm" class="form-inline">
           <ion-item class="input_grey" color="tertiary">
-            <ion-input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
-                       name="currentSearch" placeholder="search for services"></ion-input>
-            <ion-icon (click)="search(currentSearch)" color="primary" name="search-outline"></ion-icon>
+            <ion-input type="text" class="form-control" [(ngModel)]="location" id="location"
+                       name="location" placeholder="search for services by location"></ion-input>
+            <ion-icon (click)="searchByLocation(location)" color="primary" name="search-outline"></ion-icon>
+          </ion-item>
+        </form>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <form name="searchForm" class="form-inline">
+          <ion-item class="input_grey" color="tertiary">
+            <ion-input type="number" class="form-control" [(ngModel)]="price" id="price"
+                       name="price" placeholder="search for services by price"></ion-input>
+            <ion-icon (click)="searchByPrice(price)" color="primary" name="search-outline"></ion-icon>
             <!--        <ion-icon (click)="search('')" *ngIf="currentSearch" icon="trash-alt"></ion-icon>-->
           </ion-item>
         </form>

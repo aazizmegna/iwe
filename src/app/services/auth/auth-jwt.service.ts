@@ -32,7 +32,7 @@ export class AuthServerProvider {
       const bearerToken = resp.headers.get('Authorization');
       if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
         const jwt = bearerToken.slice(7, bearerToken.length);
-        this.storeAuthenticationToken(jwt, credentials.rememberMe);
+        this.storeAuthenticationToken(jwt, credentials.rememberMe, credentials.username.trim());
         return jwt;
       }
     }
@@ -54,7 +54,9 @@ export class AuthServerProvider {
     }
   }
 
-  storeAuthenticationToken(jwt, rememberMe) {
+  storeAuthenticationToken(jwt, rememberMe, email?: string) {
+    this.$localStorage.store('email', email);
+
     if (rememberMe) {
       this.$localStorage.store('authenticationToken', jwt);
     } else {

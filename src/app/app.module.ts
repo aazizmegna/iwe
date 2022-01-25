@@ -4,7 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
-import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
+import {IonicModule, IonicRouteStrategy, Platform} from '@ionic/angular';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {NgxWebstorageModule} from 'ngx-webstorage';
@@ -17,6 +17,11 @@ import {IonicImageLoader} from 'ionic-image-loader';
 import {WebView} from '@ionic-native/ionic-webview/ngx';
 import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory, StompService} from '@stomp/ng2-stompjs';
 import {stompConfig} from './pages/home-tab/chat/stomp-config';
+import { FCM } from '@ionic-native/fcm/ngx';
+import {DeviceAccounts} from '@awesome-cordova-plugins/device-accounts/ngx';
+
+import OneSignal from 'onesignal-cordova-plugin';
+
 
 declare module '@angular/core' {
   interface ModuleWithProviders<T = any> {
@@ -52,6 +57,8 @@ export function createTranslateLoader(http: HttpClient) {
     StatusBar,
     SplashScreen,
     StompService,
+    DeviceAccounts,
+    FCM,
     {
       provide: InjectableRxStompConfig,
       useValue: stompConfig,

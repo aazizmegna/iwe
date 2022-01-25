@@ -11,6 +11,9 @@ import {BookingProvider} from './booking/booking.provider';
 import {FeedsProvider} from './feeds.provider';
 import {Router} from '@angular/router';
 import {Feed} from '../entities/feed';
+import {FCM, NotificationData} from '@ionic-native/fcm/ngx';
+import {AlertController} from '@ionic/angular';
+import OneSignal from 'onesignal-cordova-plugin';
 
 
 @Component({
@@ -23,8 +26,58 @@ export class HomePage implements OnInit {
   feeds: Home[];
 
   constructor(public route: Router, private accountService: AccountService, private loginService: LoginService,
-              private homeService: HomeService, public plt: Platform) {
+              private homeService: HomeService, public plt: Platform, private fcm: FCM, public alertController: AlertController) {
+
+    plt.ready().then(() => {
+    });
+    // this.plt.ready()
+    //   .then(async () => {
+    //     await this.fcm.subscribeToTopic('enappd');
+    //     this.fcm.onNotification().subscribe(async (data: NotificationData) => {
+    //       if (data.wasTapped) {
+    //           await this.route.navigate([data.calls_page, data.msg]);
+    //           const alert = await this.alertController.create({
+    //           cssClass: 'my-custom-class',
+    //           header: 'Alert',
+    //           subHeader: 'Subtitle',
+    //           message: 'This is an alert message.',
+    //           buttons: ['OK']
+    //         });
+    //
+    //           await alert.present();
+    //
+    //           const { role } = await alert.onDidDismiss();
+    //           console.log('onDidDismiss resolved with role', role);
+    //           console.log('Received in background');
+    //       } else {
+    //         console.log('Received in foreground');
+    //       }
+    //     });
+    //
+    //     this.fcm.onTokenRefresh().subscribe(token => {
+    //       // Register your new token in your back-end if you want
+    //       // backend.registerToken(token);
+    //     });
+    //   });
   }
+
+
+
+
+  // async subscribeToTopic() {
+  //   await this.fcm.subscribeToTopic('enappd');
+  // }
+  //
+  // getToken() {
+  //   this.fcm.getToken().then(token => {
+  //     // Register your new token in your back-end if you want
+  //     // backend.registerToken(token);
+  //   });
+  // }
+  //
+  // unsubscribeFromTopic() {
+  //   this.fcm.unsubscribeFromTopic('enappd');
+  // }
 
   ngOnInit() {
     this.accountService.identity().then((account) => {

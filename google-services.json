@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "449824726523",
+    "project_id": "iwe-co",
+    "storage_bucket": "iwe-co.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:449824726523:android:f47ddf4936142685c2bf5e",
+        "android_client_info": {
+          "package_name": "co.za.iwe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "449824726523-g3buj9ei5qb2kv8ukmiet95an6bba2pd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdoyMRYjN1CJqOWIy2ZI8eiNYpTzns-oo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "449824726523-g3buj9ei5qb2kv8ukmiet95an6bba2pd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -73,18 +73,18 @@ export class HomeService {
     });
 
     const homeFeed = concat(services, posts);
-    if (!loading && !consumer) {
-      console.log(homeFeed);
-
-      return homeFeed.filter((post) => {
-        return post.serviceProvider && !consumer ? post.serviceProvider.id === userId : null;
-      });
-    } else if (!loading && consumer) {
-      console.log(homeFeed);
-      return homeFeed.filter((post) => {
-        return post.serviceConsumer && consumer ? post.serviceConsumer.id === userId : null;
-      });
-    }
+    // if (!loading && !consumer) {
+    //   console.log(homeFeed);
+    //
+    //   // return homeFeed.filter((post) => {
+    //   //   return post.serviceProvider && !consumer ? post.serviceProvider.id === userId : null;
+    //   // });
+    // } else if (!loading && consumer) {
+    //   console.log(homeFeed);
+    //   return homeFeed.filter((post) => {
+    //     return post.serviceConsumer && consumer ? post.serviceConsumer.id === userId : null;
+    //   });
+    // }
     return Promise.resolve(orderBy(homeFeed, ['timePosted'], ['desc']));
   }
 }

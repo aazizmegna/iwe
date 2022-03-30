@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
 
   constructor(
     public translateService: TranslateService,
-    public loginService: LoginService,
+    // public loginService: LoginService,
     public toastController: ToastController,
     public navController: NavController
   ) {}
@@ -32,22 +32,25 @@ export class LoginPage implements OnInit {
     });
   }
 
-  doLogin() {
-    this.loginService.login(this.account).then(
-      () => {
-        this.navController.navigateRoot('/tabs');
-      },
-      async (err) => {
-        // Unable to log in
-        this.account.password = '';
-        const toast = await this.toastController.create({
-          message: this.loginErrorString,
-          duration: 3000,
-          position: 'top',
-        });
-        toast.present();
-      }
-    );
+  async doLogin() {
+    console.log('in login');
+    await this.navController.navigateRoot('/tabs/home');
+
+    // this.loginService.login(this.account).then(
+    //   () => {
+    //     this.navController.navigateRoot('/tabs');
+    //   },
+    //   async (err) => {
+    //     // Unable to log in
+    //     this.account.password = '';
+    //     const toast = await this.toastController.create({
+    //       message: this.loginErrorString,
+    //       duration: 3000,
+    //       position: 'top',
+    //     });
+    //     toast.present();
+    //   }
+    // );
   }
 
 }

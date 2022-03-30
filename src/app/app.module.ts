@@ -17,11 +17,7 @@ import {IonicImageLoader} from 'ionic-image-loader';
 import {WebView} from '@ionic-native/ionic-webview/ngx';
 import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory, StompService} from '@stomp/ng2-stompjs';
 import {stompConfig} from './pages/home-tab/chat/stomp-config';
-import { FCM } from '@ionic-native/fcm/ngx';
 import {DeviceAccounts} from '@awesome-cordova-plugins/device-accounts/ngx';
-
-import OneSignal from 'onesignal-cordova-plugin';
-
 
 declare module '@angular/core' {
   interface ModuleWithProviders<T = any> {
@@ -58,7 +54,6 @@ export function createTranslateLoader(http: HttpClient) {
     SplashScreen,
     StompService,
     DeviceAccounts,
-    FCM,
     {
       provide: InjectableRxStompConfig,
       useValue: stompConfig,

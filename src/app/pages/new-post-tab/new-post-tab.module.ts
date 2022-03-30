@@ -15,10 +15,6 @@ const routes: Routes = [
   {
     path: '',
     component: NewPostTabPage,
-    data: {
-      authorities: ['ROLE_USER'],
-    },
-    canActivate: [UserRouteAccessService],
   }
 ];
 

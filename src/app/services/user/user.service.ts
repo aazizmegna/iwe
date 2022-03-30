@@ -41,6 +41,10 @@ export class UserService {
     return this.apiService.post('register', accountInfo, { responseType: 'text' as 'text' }).pipe(share());
   }
 
+  storePlayerId(accountInfo: any) {
+    return this.apiService.post('storePlayerId', accountInfo, { responseType: 'text' as 'text' }).pipe(share());
+  }
+
   /**
    * Log the user out, which forgets the session
    */

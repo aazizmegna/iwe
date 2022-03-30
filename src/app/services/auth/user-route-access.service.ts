@@ -22,33 +22,34 @@ export class UserRouteAccessService implements CanActivate {
   }
 
   checkLogin(authorities: string[], url: string): Promise<boolean> {
-    return this.accountService.identity().then((account) => {
-      if (!authorities || authorities.length === 0) {
-        return true;
-      }
-
-      if (account) {
-        const hasAnyAuthority = this.accountService.hasAnyAuthority(authorities);
-        if (hasAnyAuthority) {
-          return true;
-        }
-        if (isDevMode()) {
-          console.error('User has not any of required authorities: ', authorities);
-        }
-        return false;
-      }
-
-      // this.stateStorageService.storeUrl(url);
-      // this.router.navigate(['accessdenied']).then(() => {
-      //     // only show the login dialog, if the user hasn't logged in yet
-      //     if (!account) {
-      //         // this.loginModalService.open();
-      //         console.log('go to login page');
-      //     }
-      // });
-      this.navController.navigateRoot('/accessdenied');
-
-      return false;
-    });
+   return Promise.resolve(true);
+    // return this.accountService.identity().then((account) => {
+    //   if (!authorities || authorities.length === 0) {
+    //     return true;
+    //   }
+    //
+    //   if (account) {
+    //     const hasAnyAuthority = this.accountService.hasAnyAuthority(authorities);
+    //     if (hasAnyAuthority) {
+    //       return true;
+    //     }
+    //     if (isDevMode()) {
+    //       console.error('User has not any of required authorities: ', authorities);
+    //     }
+    //     return false;
+    //   }
+    //
+    //   // this.stateStorageService.storeUrl(url);
+    //   // this.router.navigate(['accessdenied']).then(() => {
+    //   //     // only show the login dialog, if the user hasn't logged in yet
+    //   //     if (!account) {
+    //   //         // this.loginModalService.open();
+    //   //         console.log('go to login page');
+    //   //     }
+    //   // });
+    //   this.navController.navigateRoot('/accessdenied');
+    //
+    //   return false;
+    // });
   }
 }

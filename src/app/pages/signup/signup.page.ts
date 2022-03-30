@@ -11,13 +11,14 @@ import {Router} from '@angular/router';
 })
 export class SignupPage implements OnInit {
   // The account fields for the signup form
-  account: {
+  public account: {
     login: string;
     email: string;
     firstName: string;
     lastName: string;
     password: string;
     langKey: string;
+    oneSignalPlayerId: string;
   } = {
     login: '',
     email: '',
@@ -25,6 +26,7 @@ export class SignupPage implements OnInit {
     lastName: '',
     password: '',
     langKey: 'en',
+    oneSignalPlayerId: '',
   };
 
   // Our translated text strings

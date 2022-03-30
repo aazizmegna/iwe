@@ -26,67 +26,17 @@ export class HomePage implements OnInit {
   feeds: Home[];
 
   constructor(public route: Router, private accountService: AccountService, private loginService: LoginService,
-              private homeService: HomeService, public plt: Platform, private fcm: FCM, public alertController: AlertController) {
-
-    plt.ready().then(() => {
-    });
-    // this.plt.ready()
-    //   .then(async () => {
-    //     await this.fcm.subscribeToTopic('enappd');
-    //     this.fcm.onNotification().subscribe(async (data: NotificationData) => {
-    //       if (data.wasTapped) {
-    //           await this.route.navigate([data.calls_page, data.msg]);
-    //           const alert = await this.alertController.create({
-    //           cssClass: 'my-custom-class',
-    //           header: 'Alert',
-    //           subHeader: 'Subtitle',
-    //           message: 'This is an alert message.',
-    //           buttons: ['OK']
-    //         });
-    //
-    //           await alert.present();
-    //
-    //           const { role } = await alert.onDidDismiss();
-    //           console.log('onDidDismiss resolved with role', role);
-    //           console.log('Received in background');
-    //       } else {
-    //         console.log('Received in foreground');
-    //       }
-    //     });
-    //
-    //     this.fcm.onTokenRefresh().subscribe(token => {
-    //       // Register your new token in your back-end if you want
-    //       // backend.registerToken(token);
-    //     });
-    //   });
+              private homeService: HomeService, public plt: Platform, public alertController: AlertController) {
   }
 
-
-
-
-  // async subscribeToTopic() {
-  //   await this.fcm.subscribeToTopic('enappd');
-  // }
-  //
-  // getToken() {
-  //   this.fcm.getToken().then(token => {
-  //     // Register your new token in your back-end if you want
-  //     // backend.registerToken(token);
-  //   });
-  // }
-  //
-  // unsubscribeFromTopic() {
-  //   this.fcm.unsubscribeFromTopic('enappd');
-  // }
-
   ngOnInit() {
-    this.accountService.identity().then((account) => {
-      if (account === null) {
-        this.goBackToHomePage();
-      } else {
-        this.account = account;
-      }
-    });
+    // this.accountService.identity().then((account) => {
+    //   if (account === null) {
+    //     this.goBackToHomePage();
+    //   } else {
+    //     this.account = account;
+    //   }
+    // });
   }
 
   ionViewWillEnter() {
@@ -101,9 +51,9 @@ export class HomePage implements OnInit {
     this.feeds = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(undefined, true);
   }
 
-  isAuthenticated() {
-    return this.accountService.isAuthenticated();
-  }
+  // isAuthenticated() {
+  //   return this.accountService.isAuthenticated();
+  // }
 
   logout() {
     this.loginService.logout();

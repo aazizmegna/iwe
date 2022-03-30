@@ -178,8 +178,8 @@ export class NewPostTabPage implements OnInit {
     const serviceProvider: ServiceProvider = new ServiceProvider();
     const serviceConsumer: ServiceConsumer = new ServiceConsumer();
     serviceProvider.id = this.authProvider.user.serviceProviderId;
-    serviceProvider.user = this.authProvider.user;
-    serviceConsumer.id = this.authProvider.user.serviceConsumerId;
+    // serviceProvider.user = this.authProvider.user;
+    // serviceConsumer.id = this.authProvider.user.serviceConsumerId;
     return {
       ...new Service(),
       id: this.form.get(['id']).value,
@@ -195,19 +195,17 @@ export class NewPostTabPage implements OnInit {
   }
 
   private createFromPostForm(): Post {
-    const serviceProvider: ServiceProvider = new ServiceProvider();
-    const serviceConsumer: ServiceConsumer = new ServiceConsumer();
-    serviceProvider.id = this.authProvider.user.serviceProviderId;
-    serviceProvider.user = this.authProvider.user;
-    serviceConsumer.id = this.authProvider.user.serviceConsumerId;
+    // const serviceProvider: ServiceProvider = new ServiceProvider();
+    // const serviceConsumer: ServiceConsumer = new ServiceConsumer();
+    // serviceProvider.id = this.authProvider.user.serviceProviderId;
+    // serviceProvider.user = this.authProvider.user;
+    // serviceConsumer.id = this.authProvider.user.serviceConsumerId;
     return {
       ...new Post(),
       id: this.form.get(['id']).value,
       location: this.form.get(['location']).value,
       description: this.form.get(['description']).value,
-      timePosted: new Date(),
-      serviceConsumer,
-      serviceProvider
+      timePosted: new Date()
     };
   }
 

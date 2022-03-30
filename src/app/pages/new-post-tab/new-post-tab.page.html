@@ -30,27 +30,35 @@
               PLEASE CHOOSE IMAGE
             </ion-button>
           </div>
-          <ion-col size="12" *appHasAnyAuthority="'ROLE_SERVICE_PROVIDER'">
+          <!--          <ion-col size="12" *appHasAnyAuthority="'ROLE_SERVICE_PROVIDER'">-->
+          <ion-col size="12">
+
             <ion-item class="input_grey" color="tertiary">
-              <ion-input type="text" name="name" formControlName="name" placeholder="please enter the name of the service"></ion-input>
+              <ion-input type="text" name="name" formControlName="name"
+                         placeholder="please enter the name of the service"></ion-input>
             </ion-item>
           </ion-col>
           <ion-col size="12">
             <ion-item class="input_grey" color="tertiary">
-              <ion-input type="text" name="location" formControlName="location" placeholder="please enter location"></ion-input>
+              <ion-input type="text" name="location" formControlName="location"
+                         placeholder="please enter location"></ion-input>
             </ion-item>
           </ion-col>
           <ion-col size="12">
             <ion-item class="input_grey" color="tertiary">
-              <ion-input type="text" name="description" formControlName="description" placeholder="please enter description"></ion-input>
+              <ion-input type="text" name="description" formControlName="description"
+                         placeholder="please enter description"></ion-input>
             </ion-item>
           </ion-col>
-          <ion-col size="12" *appHasAnyAuthority="'ROLE_SERVICE_PROVIDER'">
+          <!--          <ion-col size="12" *appHasAnyAuthority="'ROLE_SERVICE_PROVIDER'"*/>-->
+          <ion-col size="12">
+
             <ion-item class="input_grey" color="tertiary">
-              <ion-input type="number" name="price" formControlName="price" placeholder="please enter the price"></ion-input>
+              <ion-input type="number" name="price" formControlName="price"
+                         placeholder="please enter the price"></ion-input>
             </ion-item>
           </ion-col>
-          <ion-col size="12" >
+          <ion-col size="12">
             <ion-button type="submit" fill="solid" color="secondary" expand="block" class="btn-md fw-bold">Post
             </ion-button>
           </ion-col>

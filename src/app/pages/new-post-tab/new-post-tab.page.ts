@@ -177,7 +177,7 @@ export class NewPostTabPage implements OnInit {
   private createFromServiceForm(): Service {
     const serviceProvider: ServiceProvider = new ServiceProvider();
     const serviceConsumer: ServiceConsumer = new ServiceConsumer();
-    serviceProvider.id = this.authProvider.user.serviceProviderId;
+    // serviceProvider.id = this.authProvider.user.serviceProviderId;
     // serviceProvider.user = this.authProvider.user;
     // serviceConsumer.id = this.authProvider.user.serviceConsumerId;
     return {

@@ -16,6 +16,7 @@ import {AlertController} from '@ionic/angular';
 import OneSignal from 'onesignal-cordova-plugin';
 import {ServiceProviderService} from '../entities/service-provider';
 import {LocalStorageService} from 'ngx-webstorage';
+import {ServiceConsumerService} from '../entities/service-consumer';
 
 
 @Component({
@@ -29,7 +30,8 @@ export class HomePage implements OnInit {
 
   constructor(public route: Router, private accountService: AccountService, private loginService: LoginService,
               private homeService: HomeService, public plt: Platform, public alertController: AlertController,
-              private serviceProviderService: ServiceProviderService, private $localstorage: LocalStorageService
+              private serviceProviderService: ServiceProviderService, private $localstorage: LocalStorageService,
+              private serviceConsumerService: ServiceConsumerService
               ) {
   }
 
@@ -53,7 +55,14 @@ export class HomePage implements OnInit {
 
   async loadFeeds(refresher?) {
     const provider = await this.serviceProviderService.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
-    this.feeds = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(provider.body.id, true);
+    const consumer = await this.serviceConsumerService.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
+    let userId;
+    if (consumer && !provider) {
+      userId = consumer.body.id.toString();
+    } else if (!consumer && provider) {
+      userId = provider.body.id.toString();
+    }
+    this.feeds = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(userId, true);
   }
 
   // isAuthenticated() {

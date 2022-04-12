@@ -23,6 +23,10 @@ export class ServiceConsumerService {
     return this.http.get(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  findByUserEmail(email: string): Observable<HttpResponse<ServiceConsumer>> {
+    return this.http.get(`${this.resourceUrl}/user/${email}`, { observe: 'response' });
+  }
+
   query(req?: any): Observable<HttpResponse<ServiceConsumer[]>> {
     const options = createRequestOption(req);
     return this.http.get<ServiceConsumer[]>(this.resourceUrl, { params: options, observe: 'response' });

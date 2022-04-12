@@ -11,6 +11,7 @@ import {Observable} from 'rxjs';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {BookingProvider} from './booking.provider';
 import {AuthServerProvider} from '../../../services/auth/auth-jwt.service';
+import {LocalStorageService} from 'ngx-webstorage';
 
 @Component({
   selector: 'app-booking',
@@ -48,7 +49,8 @@ export class BookingPage implements OnInit {
     private bookingService: BookingService,
     private bookingProvider: BookingProvider,
     private route: Router,
-    private authProvider: AuthServerProvider
+    private authProvider: AuthServerProvider,
+    private $localstorage: LocalStorageService
   ) {
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
@@ -56,12 +58,12 @@ export class BookingPage implements OnInit {
     });
   }
 
-  openBookingOverview() {
-    const form = this.createFromForm();
-    this.bookingProvider.dateTime = form.dateTime;
+  async openBookingOverview() {
+    const form = await this.createFromForm();
+    this.bookingProvider.dateTime =  form.dateTime;
     this.bookingProvider.serviceConsumer = form.serviceConsumer;
     this.bookingProvider.serviceProvider = form.serviceProvider;
-    this.route.navigate(['tabs/home/booking-overview']);
+    await this.route.navigate(['tabs/home/booking-overview']);
   }
 
   ngOnInit(): void {
@@ -70,15 +72,19 @@ export class BookingPage implements OnInit {
     });
   }
 
-  createFromForm(): Booking {
+  async createFromForm(): Promise<{
+    booking: Booking, serviceConsumer: ServiceConsumer,
+    serviceProvider: ServiceProvider, id: string, dateTime: Date
+  }> {
+    const serviceConsumerRes = await this.serviceConsumerService.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
     const serviceConsumer: ServiceConsumer = new ServiceConsumer();
-    serviceConsumer.id = this.authProvider.user.serviceConsumerId;
+    serviceConsumer.id = serviceConsumerRes.body.id;
     const serviceProvider: ServiceProvider = new ServiceProvider();
     serviceProvider.id = this.searchServicesModels[0].serviceProvider.id;
     serviceProvider.location = this.searchServicesModels[0].serviceProvider.location;
     serviceProvider.user = this.searchServicesModels[0].serviceProvider.user;
     return {
-      ...new Booking(),
+      booking: new Booking(),
       id: this.form.get(['id']).value,
       dateTime: new Date(this.form.get(['dateTime']).value),
       serviceConsumer,

@@ -16,7 +16,7 @@
 
     <ion-row class="ion-align-items-center" >
       <ion-col size="4" >
-        <img-loader class="profile_image" [src]=searchServicesModels[0].serviceProvider.imageUrl [useImg]="true"></img-loader>
+        <img-loader class="profile_image" [src]=searchServicesModels[0].profileImageUrl [useImg]="true"></img-loader>
       </ion-col>
       <ion-col class="profile_header" size="8">
         <h2>{{searchServicesModels[0].serviceProvider.user.firstName + ' ' + searchServicesModels[0].serviceProvider.user.lastName}}</h2>
@@ -42,7 +42,7 @@
     <ion-row>
       <ion-col size="6" *ngFor="let service of searchServicesModels;">
           <div class="card_image_service-search">
-            <img-loader class="card_image" [src]=service.imageUrl [useImg]="true"></img-loader>
+            <img-loader class="card_image" [src]=service.profileImageUrl [useImg]="true"></img-loader>
           </div>
         <p class="sp_title">{{service.name}}</p>
         <p class="fz-sm">

@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
 
   constructor(
     public translateService: TranslateService,
-    // public loginService: LoginService,
+    public loginService: LoginService,
     public toastController: ToastController,
     public navController: NavController
   ) {}
@@ -35,7 +35,7 @@ export class LoginPage implements OnInit {
   async doLogin() {
     console.log('in login');
     await this.navController.navigateRoot('/tabs/home');
-
+    await this.loginService.login(this.account);
     // this.loginService.login(this.account).then(
     //   () => {
     //     this.navController.navigateRoot('/tabs');

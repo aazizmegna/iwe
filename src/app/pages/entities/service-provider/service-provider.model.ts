@@ -14,7 +14,7 @@ export class ServiceProvider implements BaseEntity {
   constructor(
     public id?: number,
     public taxRegistrationContentType?: string,
-    public imageUrl?: string,
+    public profileImageUrl?: string,
     public taxRegistration?: any,
     public licenseOfTradeContentType?: string,
     public licenseOfTrade?: any,

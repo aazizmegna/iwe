@@ -149,7 +149,7 @@ export class NewPostTabPage implements OnInit {
     const toast = await this.toastCtrl.create({message: `PicturePost ${action} successfully.`, duration: 2000, position: 'middle'});
     toast.present();
     this.form.reset();
-    this.clearInputImage('content', 'contentContentType', 'fileImage')
+    this.clearInputImage('content', 'contentContentType', 'fileImage');
     this.navController.navigateBack('/tabs/home');
   }
 
@@ -177,9 +177,8 @@ export class NewPostTabPage implements OnInit {
   private createFromServiceForm(): Service {
     const serviceProvider: ServiceProvider = new ServiceProvider();
     const serviceConsumer: ServiceConsumer = new ServiceConsumer();
-    // serviceProvider.id = this.authProvider.user.serviceProviderId;
-    // serviceProvider.user = this.authProvider.user;
-    // serviceConsumer.id = this.authProvider.user.serviceConsumerId;
+    serviceProvider.id = 1; // TODO: CHANGE THIS TO ACTUAL CURRENTLY LOGGEDIN PROVIDER ID
+    serviceProvider.user = this.authProvider.user;
     return {
       ...new Service(),
       id: this.form.get(['id']).value,

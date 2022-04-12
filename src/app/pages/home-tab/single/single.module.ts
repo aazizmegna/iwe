@@ -22,10 +22,14 @@ export class SingleResolve implements Resolve<SearchServicesModel[]> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<SearchServicesModel[]> {
     const serviceProviderId = route.params.id ? route.params.id : null;
     if (serviceProviderId) {
-      return this.service.query(serviceProviderId).pipe(
+      const res = this.service.query(serviceProviderId).pipe(
         filter((response: HttpResponse<SearchServicesModel[]>) => response.ok),
-        map((booking: HttpResponse<SearchServicesModel[]>) => booking.body)
+        map((searchModel: HttpResponse<SearchServicesModel[]>) => {
+          console.log(searchModel.body);
+          return searchModel.body;
+        })
       );
+      return res;
     }
     return of(new Array<SearchServicesModel>());
   }

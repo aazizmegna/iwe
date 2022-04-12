@@ -19,23 +19,26 @@ export class AuthServerProvider {
     return this.$localStorage.retrieve('authenticationToken') || this.$sessionStorage.retrieve('authenticationToken');
   }
 
-  login(credentials): Observable<any> {
+  login(credentials): any {
     const data = {
       username: credentials.username.trim(),
       password: credentials.password,
       rememberMe: credentials.rememberMe,
     };
 
-    return this.http.post(ApiService.API_URL + '/authenticate', data, {observe: 'response'}).pipe(map(authenticateSuccess.bind(this)));
+    this.$localStorage.store('email', credentials.username.trim());
 
-    function authenticateSuccess(resp) {
-      const bearerToken = resp.headers.get('Authorization');
-      if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
-        const jwt = bearerToken.slice(7, bearerToken.length);
-        this.storeAuthenticationToken(jwt, credentials.rememberMe, credentials.username.trim());
-        return jwt;
-      }
-    }
+
+    // return this.http.post(ApiService.API_URL + '/authenticate', data, {observe: 'response'}).pipe(map(authenticateSuccess.bind(this)));
+
+    // function authenticateSuccess(resp) {
+    //   const bearerToken = resp.headers.get('Authorization');
+    //   if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
+    //     const jwt = bearerToken.slice(7, bearerToken.length);
+    //     this.storeAuthenticationToken(jwt, credentials.rememberMe, credentials.username.trim());
+    //     return jwt;
+    //   }
+    // }
   }
 
   async fetchUserByLogin(login: string): Promise<void> {

@@ -14,6 +14,8 @@ import {Feed} from '../entities/feed';
 import {FCM, NotificationData} from '@ionic-native/fcm/ngx';
 import {AlertController} from '@ionic/angular';
 import OneSignal from 'onesignal-cordova-plugin';
+import {ServiceProviderService} from '../entities/service-provider';
+import {LocalStorageService} from 'ngx-webstorage';
 
 
 @Component({
@@ -26,7 +28,9 @@ export class HomePage implements OnInit {
   feeds: Home[];
 
   constructor(public route: Router, private accountService: AccountService, private loginService: LoginService,
-              private homeService: HomeService, public plt: Platform, public alertController: AlertController) {
+              private homeService: HomeService, public plt: Platform, public alertController: AlertController,
+              private serviceProviderService: ServiceProviderService, private $localstorage: LocalStorageService
+              ) {
   }
 
   ngOnInit() {
@@ -48,7 +52,8 @@ export class HomePage implements OnInit {
   }
 
   async loadFeeds(refresher?) {
-    this.feeds = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(undefined, true);
+    const provider = await this.serviceProviderService.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
+    this.feeds = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(provider.body.id, true);
   }
 
   // isAuthenticated() {

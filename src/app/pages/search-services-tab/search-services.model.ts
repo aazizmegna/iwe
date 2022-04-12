@@ -10,6 +10,7 @@ export class SearchServicesModel implements BaseEntity {
     public id?: number,
     public name?: string,
     public imageUrl?: string,
+    public profileImageUrl?: string,
     public pictureContentType?: string,
     public picture?: any,
     public location?: string,

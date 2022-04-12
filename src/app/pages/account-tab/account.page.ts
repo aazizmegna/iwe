@@ -46,16 +46,12 @@ export class AccountPage implements OnInit {
     this.provider = await this.serviceProviderService.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
     this.consumer = await this.serviceConsumerService.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
     let userId;
-    if (this.consumer && !this.provider) {
-      userId = this.consumer.body.id.toString();
-    } else if (!this.consumer && this.provider) {
-      userId = this.provider.body.id.toString();
+    if (this.consumer.body && !this.provider.body) {
+      userId = this.consumer.body.id;
+    } else if (!this.consumer.body && this.provider.body) {
+      userId = this.provider.body.id;
     }
-    this.servicesModels = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(userId, false, false);
-    if (this.servicesModels.length === 0) {
-      // tslint:disable-next-line:max-line-length
-      this.servicesModels = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(userId, false, true);
-    }
+    this.servicesModels = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(userId, false);
 
     if (this.servicesModels && this.servicesModels[0]) {
       const serviceModel = this.servicesModels[0];

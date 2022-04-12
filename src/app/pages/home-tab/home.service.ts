@@ -28,7 +28,7 @@ export class HomeService {
 
   }
 
-  async loadAllFreemiumPostsWithBusinessUsersPosts(userId?: number, loading?: boolean, consumer?: boolean): Promise<Home[]> {
+  async loadAllFreemiumPostsWithBusinessUsersPosts(userId?: number, loading?: boolean): Promise<Home[]> {
     const [allServices, allPicturePosts] = await Promise.all([this.servicesService
       .query()
       .pipe(
@@ -73,18 +73,18 @@ export class HomeService {
     });
 
     const homeFeed = concat(services, posts);
-    if (!loading && !consumer) {
+    if (!loading) {
       console.log(homeFeed);
 
       return homeFeed.filter((post) => {
         // TODO: CHANGE THE PROVIDER ID CHECK TO CHECK USER ID FROM COGNITO
-        return post.serviceProvider && !consumer ? post.serviceProvider.id === userId : null;
+        return post.serviceProvider ? post.serviceProvider.id === userId : null;
       });
-    } else if (!loading && consumer) {
+    } else if (!loading) {
       console.log(homeFeed);
       return homeFeed.filter((post) => {
         // TODO: CHANGE THE CONSUMER ID CHECK TO CHECK USER ID FROM COGNITO
-        return post.serviceConsumer && consumer ? post.serviceConsumer.id === userId : null;
+        return post.serviceConsumer ? post.serviceConsumer.id === userId : null;
       });
     }
     return Promise.resolve(orderBy(homeFeed, ['timePosted'], ['desc']));

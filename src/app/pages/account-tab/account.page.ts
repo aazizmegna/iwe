@@ -6,64 +6,79 @@ import {SearchServicesModel} from '../search-services-tab/search-services.model'
 import {AuthServerProvider} from '../../services/auth/auth-jwt.service';
 import {HomeService} from '../home-tab/home.service';
 import {BaseEntity} from '../../../model/base-entity';
-import {ServiceProvider} from '../entities/service-provider';
-import {ServiceConsumer} from '../entities/service-consumer';
+import {ServiceProvider, ServiceProviderService} from '../entities/service-provider';
+import {ServiceConsumer, ServiceConsumerService} from '../entities/service-consumer';
 import {Home} from '../home-tab/home.model';
+import {LocalStorageService} from 'ngx-webstorage';
 
 @Component({
-    selector: 'app-account',
-    templateUrl: 'account.page.html',
-    styleUrls: ['account.page.scss'],
+  selector: 'app-account',
+  templateUrl: 'account.page.html',
+  styleUrls: ['account.page.scss'],
 })
 export class AccountPage implements OnInit {
-    private servicesModels: Home[];
-    private location: string;
-    private serviceProviderPicType: string;
-    private serviceProviderPic: string;
-    private serviceConsumerPicType: string;
-    private serviceConsumerPic: string;
-    private serviceConsumerUName: string;
-    private serviceProviderUName: string;
+  private servicesModels: Home[];
+  private location: string;
+  private serviceProviderPicType: string;
+  private serviceProviderPic: string;
+  private serviceConsumerPicType: string;
+  private serviceConsumerPic: string;
+  private serviceConsumerUName: string;
+  private serviceProviderUName: string;
+  private provider;
+  private consumer;
 
-    constructor(private service: SingleService, private authProvider: AuthServerProvider, private homeService: HomeService) {
+
+  constructor(private service: SingleService, private authProvider: AuthServerProvider, private homeService: HomeService,
+              private serviceProviderService: ServiceProviderService, private $localstorage: LocalStorageService,
+              private serviceConsumerService: ServiceConsumerService) {
+  }
+
+  ngOnInit(): void {
+  }
+
+  ionViewWillEnter() {
+    this.loadUserServices();
+  }
+
+  async loadUserServices() {
+    // tslint:disable-next-line:max-line-length
+    this.provider = await this.serviceProviderService.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
+    this.consumer = await this.serviceConsumerService.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
+    let userId;
+    if (this.consumer && !this.provider) {
+      userId = this.consumer.body.id.toString();
+    } else if (!this.consumer && this.provider) {
+      userId = this.provider.body.id.toString();
     }
-
-    ngOnInit(): void {
-    }
-
-    ionViewWillEnter() {
-        this.loadUserServices();
-    }
-
-    async loadUserServices() {
-        // tslint:disable-next-line:max-line-length
-        this.servicesModels = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(this.authProvider.user.serviceProviderId, false, false);
-        if (this.servicesModels.length === 0) {
-            // tslint:disable-next-line:max-line-length
-            this.servicesModels = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(this.authProvider.user.serviceConsumerId, false, true);
-        }
+    this.servicesModels = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(userId, false, false);
+    if (this.servicesModels.length === 0) {
       // tslint:disable-next-line:max-line-length
-        this.location = this.servicesModels && this.servicesModels[0].serviceConsumer ? this.servicesModels[0].serviceConsumer.location : '';
-
-        if (this.servicesModels && this.servicesModels[0]) {
-            const serviceModel = this.servicesModels[0];
-            if (serviceModel.serviceProvider) {
-                this.serviceProviderPic = this.authProvider.user.imageUrl;
-                this.serviceProviderPicType = this.servicesModels[0].serviceProvider.contentContentType;
-                this.serviceConsumerUName = this.authProvider.user.firstName
-                    + ' ' + this.authProvider.user.lastName;
-            }
-            if (serviceModel.serviceConsumer) {
-                this.serviceConsumerPic = this.servicesModels[0].serviceConsumer.content;
-                this.serviceConsumerPicType = this.servicesModels[0].serviceConsumer.contentContentType;
-                if (this.servicesModels[0].serviceConsumer.user) {
-                    this.serviceConsumerUName = this.servicesModels[0].serviceConsumer.user.firstName
-                        + ' ' + this.servicesModels[0].serviceConsumer.user.lastName;
-                }
-            }
-        }
-
-
-        console.log(this.servicesModels);
+      this.servicesModels = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(userId, false, true);
     }
+
+    if (this.servicesModels && this.servicesModels[0]) {
+      const serviceModel = this.servicesModels[0];
+      if (serviceModel.serviceProvider) {
+        this.serviceProviderPic = this.provider.body.user.imageUrl;
+        this.serviceProviderPicType = this.servicesModels[0].serviceProvider.contentContentType;
+        this.serviceConsumerUName = this.provider.body.user.firstName
+          + ' ' + this.provider.body.user.lastName;
+        this.location = this.provider.body.user.location;
+      }
+      if (serviceModel.serviceConsumer) {
+        this.serviceConsumerPic = this.servicesModels[0].serviceConsumer.content;
+        this.serviceConsumerPicType = this.servicesModels[0].serviceConsumer.contentContentType;
+        if (this.servicesModels[0].serviceConsumer.user) {
+          this.serviceConsumerUName = this.servicesModels[0].serviceConsumer.user.firstName
+            + ' ' + this.servicesModels[0].serviceConsumer.user.lastName;
+        }
+        this.location = this.consumer.body.user.location;
+
+      }
+    }
+
+
+    console.log(this.servicesModels);
+  }
 }

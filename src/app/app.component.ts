@@ -11,6 +11,8 @@ import OneSignal from 'onesignal-cordova-plugin';
 import {LocalStorageService} from 'ngx-webstorage';
 import {DeviceAccounts} from '@awesome-cordova-plugins/device-accounts/ngx';
 import {UserService} from './services/user/user.service';
+import {ServiceProviderService} from './pages/entities/service-provider';
+import {ServiceConsumerService} from './pages/entities/service-consumer';
 
 
 @Component({
@@ -30,18 +32,20 @@ export class AppComponent {
     private menuCtrl: MenuController,
     private authProvider: AuthServerProvider,
     public deviceAccounts: DeviceAccounts,
-    private $localStorage: LocalStorageService
+    private $localStorage: LocalStorageService,
+
   ) {
     this.initializeApp();
     this.imageLoaderConfigService.setImageReturnType('base64');
   }
 
-  initializeApp() {
+  async initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
     this.initTranslate();
+    await this.authProvider.fetchUserByLogin(this.$localStorage.retrieve('email'));
   }
 
   initTranslate() {

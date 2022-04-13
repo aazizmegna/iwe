@@ -5,6 +5,8 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {ApiService} from '../api/api.service';
 import {User} from '../user/user.model';
+import {ServiceProviderService} from '../../pages/entities/service-provider';
+import {ServiceConsumerService} from '../../pages/entities/service-consumer';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +14,10 @@ import {User} from '../user/user.model';
 export class AuthServerProvider {
   public user: User;
 
-  constructor(private http: HttpClient, private $localStorage: LocalStorageService, private $sessionStorage: SessionStorageService) {
+  constructor(private http: HttpClient, private $localStorage: LocalStorageService,
+              private $sessionStorage: SessionStorageService,
+              private serviceProviderService: ServiceProviderService,
+              private serviceConsumerService: ServiceConsumerService) {
   }
 
   getToken() {
@@ -29,6 +34,7 @@ export class AuthServerProvider {
     this.$localStorage.store('email', credentials.username.trim());
 
 
+
     // return this.http.post(ApiService.API_URL + '/authenticate', data, {observe: 'response'}).pipe(map(authenticateSuccess.bind(this)));
 
     // function authenticateSuccess(resp) {
@@ -41,11 +47,20 @@ export class AuthServerProvider {
     // }
   }
 
-  async fetchUserByLogin(login: string): Promise<void> {
-    const user = await this.http.get<User>(ApiService.API_URL + '/users/' + login, {
-      observe: 'response'
-    }).toPromise();
-    this.user = user.body;
+
+
+  async fetchUserByLogin(email: string): Promise<void> {
+    // const user = await this.http.get<User>(ApiService.API_URL + '/users/' + login, {
+    //   observe: 'response'
+    // }).toPromise();
+    // // this.user = user.body;
+    const provider = await this.serviceProviderService.findByUserEmail(email).toPromise();
+    const consumer =  await this.serviceConsumerService.findByUserEmail(email).toPromise();
+    if (consumer.body && !provider.body) {
+      this.user = consumer.body.user;
+    } else if (!consumer.body && provider.body) {
+      this.user = provider.body.user;
+    }
   }
 
   loginWithToken(jwt, rememberMe) {

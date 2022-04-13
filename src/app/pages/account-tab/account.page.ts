@@ -56,20 +56,20 @@ export class AccountPage implements OnInit {
     if (this.servicesModels && this.servicesModels[0]) {
       const serviceModel = this.servicesModels[0];
       if (serviceModel.serviceProvider) {
-        this.serviceProviderPic = this.provider.body.user.imageUrl;
+        this.serviceProviderPic = serviceModel.serviceProvider.user.imageUrl;
         this.serviceProviderPicType = this.servicesModels[0].serviceProvider.contentContentType;
-        this.serviceConsumerUName = this.provider.body.user.firstName
-          + ' ' + this.provider.body.user.lastName;
-        this.location = this.provider.body.user.location;
+        this.serviceConsumerUName = serviceModel.serviceProvider.user.firstName
+          + ' ' + serviceModel.serviceProvider.user.lastName;
+        this.location = serviceModel.serviceProvider.user.location;
       }
       if (serviceModel.serviceConsumer) {
-        this.serviceConsumerPic = this.servicesModels[0].serviceConsumer.content;
+        this.serviceConsumerPic = this.servicesModels[0].serviceConsumer.user.imageUrl;
         this.serviceConsumerPicType = this.servicesModels[0].serviceConsumer.contentContentType;
         if (this.servicesModels[0].serviceConsumer.user) {
           this.serviceConsumerUName = this.servicesModels[0].serviceConsumer.user.firstName
             + ' ' + this.servicesModels[0].serviceConsumer.user.lastName;
         }
-        this.location = this.consumer.body.user.location;
+        this.location = serviceModel.serviceConsumer.user.location;
 
       }
     }

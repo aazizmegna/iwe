@@ -33,11 +33,11 @@ export class AppComponent {
     private authProvider: AuthServerProvider,
     public deviceAccounts: DeviceAccounts,
     private $localStorage: LocalStorageService,
-
   ) {
     this.initializeApp();
     this.imageLoaderConfigService.setImageReturnType('base64');
   }
+
 
   async initializeApp() {
     this.platform.ready().then(() => {
@@ -85,3 +85,4 @@ export class AppComponent {
     this.menuCtrl.close('main-menu');
   }
 }
+

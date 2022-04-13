@@ -14,6 +14,7 @@ import {ServiceProvider} from '../entities/service-provider';
 import {User} from '../../services/user/user.model';
 import {PostService} from '../new-post-tab/post.service';
 import {PicturePostService} from '../new-post-tab/picture-post.service';
+import {LocalStorageService} from 'ngx-webstorage';
 
 @Component({
   selector: 'app-personal-info',
@@ -49,6 +50,7 @@ export class PersonalInfoPage implements OnInit {
     private authProvider: AuthServerProvider,
     private personalInfoService: PersonalInfoService,
     private camera: Camera,
+    private $localstorage: LocalStorageService
   ) {
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
@@ -99,7 +101,7 @@ export class PersonalInfoPage implements OnInit {
     });
     toast.present();
     this.form.reset();
-    this.clearInputImage('content', 'contentContentType', 'fileImage')
+    this.clearInputImage('content', 'contentContentType', 'fileImage');
   }
 
   previousState() {
@@ -119,9 +121,8 @@ export class PersonalInfoPage implements OnInit {
       id: this.form.get(['id']).value,
       content: this.form.get(['content']).value,
       contentContentType: this.form.get(['contentContentType']).value,
-      email: this.form.get(['email']).value.toString().trim(),
+      email: this.$localstorage.retrieve('email'),
       location: this.form.get(['location']).value,
-      login: this.form.get(['login']).value.toString().trim(),
       firstName: this.form.get(['firstName']).value,
       lastName: this.form.get(['lastName']).value,
       serviceConsumerId: this.authProvider.user.serviceConsumerId,

@@ -63,6 +63,7 @@ export class BookingPage implements OnInit {
     this.bookingProvider.dateTime =  form.dateTime;
     this.bookingProvider.serviceConsumer = form.serviceConsumer;
     this.bookingProvider.serviceProvider = form.serviceProvider;
+    this.bookingProvider.service = form.service;
     await this.route.navigate(['tabs/home/booking-overview']);
   }
 
@@ -74,12 +75,14 @@ export class BookingPage implements OnInit {
 
   async createFromForm(): Promise<{
     booking: Booking, serviceConsumer: ServiceConsumer,
-    serviceProvider: ServiceProvider, id: string, dateTime: Date
+    serviceProvider: ServiceProvider, id: string, dateTime: Date, service: Service
   }> {
     const serviceConsumerRes = await this.serviceConsumerService.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
     const serviceConsumer: ServiceConsumer = new ServiceConsumer();
-    serviceConsumer.id = serviceConsumerRes.body.id;
+    serviceConsumer.id = serviceConsumerRes.body ? serviceConsumerRes.body.id : undefined;
     const serviceProvider: ServiceProvider = new ServiceProvider();
+    const service: ServiceProvider = new Service();
+    service.id = this.searchServicesModels[0].id;
     serviceProvider.id = this.searchServicesModels[0].serviceProvider.id;
     serviceProvider.location = this.searchServicesModels[0].serviceProvider.location;
     serviceProvider.user = this.searchServicesModels[0].serviceProvider.user;
@@ -88,7 +91,8 @@ export class BookingPage implements OnInit {
       id: this.form.get(['id']).value,
       dateTime: new Date(this.form.get(['dateTime']).value),
       serviceConsumer,
-      serviceProvider
+      serviceProvider,
+      service
     };
   }
 

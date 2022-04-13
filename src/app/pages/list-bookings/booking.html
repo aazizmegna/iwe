@@ -18,24 +18,71 @@
       No upcoming bookings found.
     </ion-label>
   </p>
-  <ion-list>
-    <ion-item-sliding *ngFor="let booking of bookings; trackBy: trackId" #slidingItem>
-      <ion-item *appHasAnyAuthority="'ROLE_SERVICE_PROVIDER'">
-        <ion-thumbnail slot="start">
-          <img-loader [src]=booking.serviceConsumer.imageUrl [useImg]="true"></img-loader>
-        </ion-thumbnail>
-        <ion-label><strong>Name:</strong> {{booking.serviceConsumer.user ? booking.serviceConsumer.user.firstName  + ' ' +  booking.serviceConsumer.user.lastName : ''}}<br>
-          <strong>Location:</strong> {{booking.serviceConsumer.location}}<br>
-          <strong>Time:</strong> {{booking.dateTime | date:'medium'}}</ion-label>
-      </ion-item>
-      <ion-item *appHasAnyAuthority="'ROLE_USER'">
-        <ion-thumbnail slot="start">
-          <img-loader [src]=booking.serviceProvider.imageUrl [useImg]="true"></img-loader>
-        </ion-thumbnail>
-        <ion-label><strong>Name:</strong> {{booking.serviceProvider.user ?  booking.serviceProvider.user.firstName + ' ' +  booking.serviceProvider.user.lastName : ''}}<br>
-          <strong>Location:</strong> {{booking.serviceProvider.location}}<br>
-          <strong>Time:</strong> {{booking.dateTime | date:'medium'}}</ion-label>
-      </ion-item>
-    </ion-item-sliding>
-  </ion-list>
+    <ion-card color="light" class="SP_card" *ngFor="let booking of bookings; trackBy: trackId" >
+      <div *ngIf="provider.body">
+        <ion-card-header  color="light">
+          <ion-grid class="ion-no-padding">
+            <ion-row class="ion-align-items-center ion-no-padding">
+              <ion-col size="8" class="ion-no-padding">
+                <p class="sp_title"><strong>With</strong>: {{booking.serviceProvider.user ?  booking.serviceProvider.user.firstName + ' ' +  booking.serviceProvider.user.lastName : ''}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-header>
+
+        <ion-card-content>
+          <div class="image_wrapper">
+            <img-loader class="card_image" [src]=booking.serviceProvider.user.imageUrl [useImg]="true"></img-loader>
+          </div>
+
+          <ion-grid class="ion-no-padding">
+            <ion-row class="ion-align-items-center ion-no-padding mb-sm">
+              <ion-col size="8" class="ion-no-padding">
+                <p class="fz-sm">
+                  <ion-icon class="icon" name="location-outline"></ion-icon>
+                  {{booking.serviceProvider.location}}</p>
+              </ion-col>
+              <ion-col size="4" class="ion-align-self-end ion-no-padding ion-text-right">
+                <p class="fz-sm">
+                  <ion-icon class="icon" name="pricetag-outline"></ion-icon>
+                  {{booking.dateTime | date:'medium'}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </div>
+
+      <div *ngIf="consumer.body">
+        <ion-card-header  color="light">
+          <ion-grid class="ion-no-padding">
+            <ion-row class="ion-align-items-center ion-no-padding">
+              <ion-col size="8" class="ion-no-padding">
+                <p class="sp_title"><strong>With</strong>: {{booking.serviceConsumer.user ?  booking.serviceConsumer.user.firstName + ' ' +  booking.serviceConsumer.user.lastName : ''}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-header>
+
+        <ion-card-content>
+          <div class="image_wrapper">
+            <img-loader class="card_image" [src]=booking.serviceConsumer.user.imageUrl [useImg]="true"></img-loader>
+          </div>
+
+          <ion-grid class="ion-no-padding">
+            <ion-row class="ion-align-items-center ion-no-padding mb-sm">
+              <ion-col size="8" class="ion-no-padding">
+                <p class="fz-sm">
+                  <ion-icon class="icon" name="location-outline"></ion-icon>
+                  {{booking.serviceConsumer.location}}</p>
+              </ion-col>
+              <ion-col size="4" class="ion-align-self-end ion-no-padding ion-text-right">
+                <p class="fz-sm">
+                  <ion-icon class="icon" name="pricetag-outline"></ion-icon>
+                  {{booking.dateTime | date:'medium'}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </div>
+    </ion-card>
 </ion-content>

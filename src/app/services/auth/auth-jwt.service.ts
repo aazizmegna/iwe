@@ -73,7 +73,7 @@ export class AuthServerProvider {
   }
 
   storeAuthenticationToken(jwt, rememberMe, email?: string) {
-    this.$localStorage.store('login', email);
+    this.$localStorage.store('email', email);
 
     if (rememberMe) {
       this.$localStorage.store('authenticationToken', jwt);

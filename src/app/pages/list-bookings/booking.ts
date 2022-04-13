@@ -6,10 +6,14 @@ import {Booking} from './booking.model';
 import {BookingService} from './booking.service';
 import {AuthServerProvider} from '../../services/auth/auth-jwt.service';
 import {orderBy} from 'lodash';
+import {ServiceProvider, ServiceProviderService} from '../entities/service-provider';
+import {LocalStorageService} from 'ngx-webstorage';
+import {ServiceConsumerService} from '../entities/service-consumer';
 
 @Component({
   selector: 'page-booking',
   templateUrl: 'booking.html',
+  styleUrls: ['booking.page.scss'],
 })
 export class BookingPage {
   bookings: Booking[];
@@ -17,6 +21,8 @@ export class BookingPage {
   bookingWith: string;
   location: string;
   name: string;
+  consumer;
+  provider;
 
   // todo: add pagination
 
@@ -25,7 +31,10 @@ export class BookingPage {
     private bookingService: BookingService,
     private toastCtrl: ToastController,
     public plt: Platform,
-    private authProvider: AuthServerProvider
+    private authProvider: AuthServerProvider,
+    private serviceProvider: ServiceProviderService,
+    private serviceConsumer: ServiceConsumerService,
+    private $localstorage: LocalStorageService
   ) {
     this.bookings = [];
   }
@@ -35,10 +44,10 @@ export class BookingPage {
   }
 
   async loadAll(refresher?) {
-    console.log(this.authProvider.user.authorities.includes('ROLE_SERVICE_PROVIDER'))
-    if (this.authProvider.user.authorities.includes('ROLE_SERVICE_PROVIDER')) {
+    this.provider = await this.serviceProvider.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
+    if (this.provider.body) {
       this.bookingService
-        .queryByServiceProviderId(this.authProvider.user.serviceProviderId)
+        .queryByServiceProviderId(this.provider.body.id)
         .pipe(
           filter((res: HttpResponse<Booking[]>) => res.ok),
           map((res: HttpResponse<Booking[]>) => res.body)
@@ -59,8 +68,10 @@ export class BookingPage {
           }
         );
     } else {
+      this.consumer = await this.serviceConsumer.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
+
       this.bookingService
-        .queryByServiceConsumerId(this.authProvider.user.serviceConsumerId)
+        .queryByServiceConsumerId(this.consumer.body.id)
         .pipe(
           filter((res: HttpResponse<Booking[]>) => res.ok),
           map((res: HttpResponse<Booking[]>) => res.body)

@@ -2,7 +2,7 @@ import {Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import {JhiDataUtils} from 'ng-jhipster';
 import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
-import {NavController, Platform, ToastController} from '@ionic/angular';
+import {LoadingController, NavController, Platform, ToastController} from '@ionic/angular';
 import {HttpResponse, HttpErrorResponse} from '@angular/common/http';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
@@ -27,6 +27,7 @@ export class NewPostTabPage implements OnInit {
   cameraOptions: CameraOptions;
   isSaving = false;
   isNew = true;
+  loading;
   isReadyToSave: boolean;
 
   form = this.formBuilder.group({
@@ -55,12 +56,15 @@ export class NewPostTabPage implements OnInit {
     private postService: PostService,
     private picturePostService: PicturePostService,
     private serviceService: ServiceService,
-    private authProvider: AuthServerProvider
+    private authProvider: AuthServerProvider,
+    public loadingController: LoadingController
   ) {
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
       this.isReadyToSave = this.form.valid;
     });
+
+
 
     // Set the Camera options
     this.cameraOptions = {
@@ -76,7 +80,20 @@ export class NewPostTabPage implements OnInit {
     };
   }
 
-  ngOnInit() {
+  async presentLoading() {
+    if (this.isSaving) {
+      await this.loading.present();
+    }
+    if (!this.isSaving) {
+      await this.loading.dismiss();
+    }
+  }
+
+  async ngOnInit() {
+    this.loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+    });
     this.postService.query({filter: 'picturepost-is-null'}).subscribe(
       (data) => {
         if (this.picturePost && !this.picturePost.post || !this.picturePost.post.id) {
@@ -125,14 +142,17 @@ export class NewPostTabPage implements OnInit {
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<Post>>) {
     result.subscribe(
-      (res: HttpResponse<Post>) => this.onSaveSuccess(res.body),
-      (res: HttpErrorResponse) => this.onError(res.error)
-    );
+      async (res: HttpResponse<Post>) => {
+        this.isSaving = true;
+        await this.onSaveSuccess(res.body);
+      },
+      (res: HttpErrorResponse) => this.onError(res.error));
   }
 
-  protected savePicturePost(post: Post) {
+  protected async savePicturePost(post: Post) {
     if (this.form.get(['price']).value) {
       const service = this.createFromServiceForm();
+      await this.presentLoading();
       this.subscribeToSaveResponse(this.serviceService.create(service));
     } else {
       const picturePost = this.createFromForm(post);
@@ -146,11 +166,12 @@ export class NewPostTabPage implements OnInit {
       action = 'created';
     }
     this.isSaving = false;
+    await this.presentLoading();
     const toast = await this.toastCtrl.create({message: `PicturePost ${action} successfully.`, duration: 2000, position: 'middle'});
-    toast.present();
+    await toast.present();
     this.form.reset();
     this.clearInputImage('content', 'contentContentType', 'fileImage');
-    this.navController.navigateBack('/tabs/home');
+    await this.navController.navigateBack('/tabs/home');
   }
 
   previousState() {

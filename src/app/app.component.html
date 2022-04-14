@@ -2,12 +2,12 @@
     <ion-menu class="MainMenu" menuId="main-menu" content-id="main">
       <ion-content class="padding-top-md">
         <ion-list color="light">
-          <ion-item>
-            <ion-avatar slot="start">
-              <img-loader [src]=this.authProvider.user.imageUrl [useImg]="true"></img-loader>
-            </ion-avatar>
-            <ion-label>{{this.authProvider.user.firstName}} {{this.authProvider.user.lastName}}</ion-label>
-          </ion-item>
+<!--          <ion-item>-->
+<!--            <ion-avatar slot="start">-->
+<!--              <img-loader [src]=this.authProvider.user.imageUrl [useImg]="true"></img-loader>-->
+<!--            </ion-avatar>-->
+<!--            <ion-label>{{this.authProvider.user.firstName}} {{this.authProvider.user.lastName}}</ion-label>-->
+<!--          </ion-item>-->
           <ion-item>
             <ion-label (click)="goBackToPersonalInfoPage()">Personal Information</ion-label>
           </ion-item>

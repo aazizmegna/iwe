@@ -65,7 +65,6 @@ export class NewPostTabPage implements OnInit {
     });
 
 
-
     // Set the Camera options
     this.cameraOptions = {
       quality: 100,
@@ -127,10 +126,18 @@ export class NewPostTabPage implements OnInit {
     });
   }
 
-  save() {
+  async save() {
     this.isSaving = true;
-    const post = this.createFromPostForm();
-    this.subscribeToPostSaveResponse(this.postService.create(post));
+    if (this.form.get(['price']).value) {
+      const service = this.createFromServiceForm();
+      await this.presentLoading();
+      this.subscribeToSaveResponse(this.serviceService.create(service));
+    } else {
+      const post = this.createFromPostForm();
+      const picturePost = this.createFromForm(post);
+      this.subscribeToPostSaveResponse(this.postService.create(post));
+      this.subscribeToSaveResponse(this.picturePostService.create(picturePost));
+    }
   }
 
   protected subscribeToPostSaveResponse(result: Observable<HttpResponse<Post>>) {
@@ -150,14 +157,7 @@ export class NewPostTabPage implements OnInit {
   }
 
   protected async savePicturePost(post: Post) {
-    if (this.form.get(['price']).value) {
-      const service = this.createFromServiceForm();
-      await this.presentLoading();
-      this.subscribeToSaveResponse(this.serviceService.create(service));
-    } else {
-      const picturePost = this.createFromForm(post);
-      this.subscribeToSaveResponse(this.picturePostService.create(picturePost));
-    }
+
   }
 
   async onSaveSuccess(response) {
@@ -183,6 +183,7 @@ export class NewPostTabPage implements OnInit {
     console.error(error);
     const toast = await this.toastCtrl.create({message: 'Please Fill in all fields on the form', duration: 2000, position: 'middle'});
     toast.present();
+    await this.presentLoading();
   }
 
   private createFromForm(post: Post): PicturePost {

@@ -19,7 +19,7 @@
     </ion-label>
   </p>
     <ion-card color="light" class="SP_card" *ngFor="let booking of bookings; trackBy: trackId" >
-      <div *ngIf="provider.body">
+      <div *ngIf="!isConsumer">
         <ion-card-header  color="light">
           <ion-grid class="ion-no-padding">
             <ion-row class="ion-align-items-center ion-no-padding">
@@ -52,7 +52,7 @@
         </ion-card-content>
       </div>
 
-      <div *ngIf="consumer.body">
+      <div *ngIf="isConsumer">
         <ion-card-header  color="light">
           <ion-grid class="ion-no-padding">
             <ion-row class="ion-align-items-center ion-no-padding">

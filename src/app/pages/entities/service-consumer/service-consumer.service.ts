@@ -7,29 +7,29 @@ import { ServiceConsumer } from './service-consumer.model';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceConsumerService {
-  private resourceUrl = ApiService.API_URL + '/service-consumers';
+  private resourceUrl = ApiService.API_URL;
 
   constructor(protected http: HttpClient) {}
 
   create(serviceConsumer: ServiceConsumer): Observable<HttpResponse<ServiceConsumer>> {
-    return this.http.post<ServiceConsumer>(this.resourceUrl, serviceConsumer, { observe: 'response' });
+    return this.http.post<ServiceConsumer>(`${this.resourceUrl}/service-consumers`, serviceConsumer, { observe: 'response' });
   }
 
   update(serviceConsumer: ServiceConsumer): Observable<HttpResponse<ServiceConsumer>> {
-    return this.http.put(this.resourceUrl, serviceConsumer, { observe: 'response' });
+    return this.http.put(`${this.resourceUrl}/service-consumers`, serviceConsumer, { observe: 'response' });
   }
 
   find(id: number): Observable<HttpResponse<ServiceConsumer>> {
-    return this.http.get(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    return this.http.get(`${this.resourceUrl}/findServiceConsumerById/?id=${id}`, { observe: 'response' });
   }
 
   findByUserEmail(email: string): Observable<HttpResponse<ServiceConsumer>> {
-    return this.http.get(`${this.resourceUrl}/user/${email}`, { observe: 'response' });
+    return this.http.get(`${this.resourceUrl}/findConsumerByEmail/?email=${email}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<HttpResponse<ServiceConsumer[]>> {
     const options = createRequestOption(req);
-    return this.http.get<ServiceConsumer[]>(this.resourceUrl, { params: options, observe: 'response' });
+    return this.http.get<ServiceConsumer[]>(`${this.resourceUrl}/listAllServiceConsumers`, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<any>> {

@@ -15,9 +15,9 @@ export interface Search {
 
 @Injectable({ providedIn: 'root' })
 export class SearchServicesService {
-  private resourceUrl = ApiService.API_URL + '/services';
-  public resourceSearchUrlByPrice = ApiService.API_URL + '/_search/servicesByPrice';
-  public resourceSearchUrlByLocation = ApiService.API_URL + '/_search/servicesByLocation';
+  private resourceUrl = ApiService.API_URL;
+  public resourceSearchUrlByPrice = ApiService.API_URL + '/_searchServicesByPrice';
+  public resourceSearchUrlByLocation = ApiService.API_URL + '/_searchServicesByLocation';
 
   constructor(protected http: HttpClient) {}
 
@@ -28,21 +28,19 @@ export class SearchServicesService {
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
-      .get<SearchServicesModel[]>(this.resourceUrl , { params: options, observe: 'response' })
+      .get<SearchServicesModel[]>(`${this.resourceUrl}/listAllServices` , { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
   searchByPrice(price: number): Observable<EntityArrayResponseType> {
-    const options = createRequestOption({price});
     return this.http
-      .get<SearchServicesModel[]>(this.resourceSearchUrlByPrice, { params: options, observe: 'response' })
+      .get<SearchServicesModel[]>(`${this.resourceSearchUrlByPrice}/?price=${price}`, {observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
   searchByLocation(location: string): Observable<EntityArrayResponseType> {
-    const options = createRequestOption({location});
     return this.http
-      .get<SearchServicesModel[]>(this.resourceSearchUrlByLocation, { params: options, observe: 'response' })
+      .get<SearchServicesModel[]>(`${this.resourceSearchUrlByLocation}/?location=${location}`, { observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 

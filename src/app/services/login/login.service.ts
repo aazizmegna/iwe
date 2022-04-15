@@ -18,6 +18,8 @@ export class LoginService {
 
   async login(credentials: { username: string; password: string; rememberMe: boolean }, callback?) {
     this.$localStorage.store('email', credentials.username.trim());
+    await this.authServerProvider.fetchUserByLogin(credentials.username);
+
     // const cb = callback || function () {};
     // return new Promise( (resolve, reject) => {
     //   this.authServerProvider.login(credentials).subscribe(

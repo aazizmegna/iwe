@@ -39,13 +39,12 @@ export class AppComponent {
   }
 
 
-  async initializeApp() {
+  initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
     this.initTranslate();
-    await this.authProvider.fetchUserByLogin(this.$localStorage.retrieve('email'));
   }
 
   initTranslate() {

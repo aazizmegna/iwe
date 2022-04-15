@@ -7,25 +7,25 @@ import { PicturePost } from './picture-post.model';
 
 @Injectable({ providedIn: 'root' })
 export class PicturePostService {
-  private resourceUrl = ApiService.API_URL + '/picture-posts';
+  private resourceUrl = ApiService.API_URL;
 
   constructor(protected http: HttpClient) {}
 
   create(picturePost: PicturePost): Observable<HttpResponse<PicturePost>> {
-    return this.http.post<PicturePost>(this.resourceUrl, picturePost, { observe: 'response' });
+    return this.http.post<PicturePost>(`${this.resourceUrl}/picture-posts`, picturePost, { observe: 'response' });
   }
 
   update(picturePost: PicturePost): Observable<HttpResponse<PicturePost>> {
-    return this.http.put(this.resourceUrl, picturePost, { observe: 'response' });
+    return this.http.put(`${this.resourceUrl}/picture-posts`, picturePost, { observe: 'response' });
   }
 
   find(id: number): Observable<HttpResponse<PicturePost>> {
-    return this.http.get(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    return this.http.get(`${this.resourceUrl}/findPostById/?id=${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<HttpResponse<PicturePost[]>> {
     const options = createRequestOption(req);
-    return this.http.get<PicturePost[]>(this.resourceUrl, { params: options, observe: 'response' });
+    return this.http.get<PicturePost[]>(`${this.resourceUrl}/listAllPosts`, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<any>> {

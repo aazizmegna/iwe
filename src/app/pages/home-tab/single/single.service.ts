@@ -20,14 +20,13 @@ export class SingleService {
 
   constructor(protected http: HttpClient) {}
 
-  query(req?: any): Observable<EntityArrayResponseType> {
-    const options = createRequestOption(req);
+  query(id?: any): Observable<EntityArrayResponseType> {
     return this.http
-      .get<SearchServicesModel[]>(this.resourceUrl + '/' + req, { params: options, observe: 'response' })
+      .get<SearchServicesModel[]>(`${this.resourceUrl}/?serviceProviderId=${id}`, { observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => res));
   }
 
   find(id: number): Observable<HttpResponse<ServiceProvider>> {
-    return this.http.get(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    return this.http.get(`${this.resourceUrl}/?id=${id}`, { observe: 'response' });
   }
 }

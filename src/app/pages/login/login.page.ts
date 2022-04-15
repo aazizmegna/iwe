@@ -36,6 +36,7 @@ export class LoginPage implements OnInit {
     console.log('in login');
     await this.navController.navigateRoot('/tabs/home');
     await this.loginService.login(this.account);
+
     // this.loginService.login(this.account).then(
     //   () => {
     //     this.navController.navigateRoot('/tabs');

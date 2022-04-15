@@ -23,6 +23,7 @@ export class BookingPage {
   name: string;
   consumer;
   provider;
+  isConsumer: boolean;
 
   // todo: add pagination
 
@@ -46,6 +47,7 @@ export class BookingPage {
   async loadAll(refresher?) {
     this.provider = await this.serviceProvider.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
     if (this.provider.body) {
+      this.isConsumer = false;
       this.bookingService
         .queryByServiceProviderId(this.provider.body.id)
         .pipe(
@@ -69,6 +71,7 @@ export class BookingPage {
         );
     } else {
       this.consumer = await this.serviceConsumer.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
+      this.isConsumer = true;
 
       this.bookingService
         .queryByServiceConsumerId(this.consumer.body.id)

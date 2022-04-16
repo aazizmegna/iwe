@@ -20,6 +20,18 @@ ion-content {
   width: 100%;
 }
 
+.pageTitle{
+  top: 0px;
+  left: 2px;
+  font-size:30px;
+  text-align: center;
+  font-family: Archivo Black;
+}
+
+.subtitle {
+  text-align: center;
+}
+
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
   only screen and (min--moz-device-pixel-ratio: 2),

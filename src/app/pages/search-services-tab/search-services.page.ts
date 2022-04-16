@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, ToastController, Platform, IonItemSliding} from '@ionic/angular';
+import {NavController, ToastController, Platform, IonItemSliding, LoadingController} from '@ionic/angular';
 import {filter, map} from 'rxjs/operators';
 import {HttpResponse} from '@angular/common/http';
 import {JhiDataUtils} from 'ng-jhipster';
@@ -15,6 +15,8 @@ export class SearchServicesPage {
   searchServicesModels: SearchServicesModel[];
   location: string;
   price: number;
+  isLoading = false;
+  loading;
 
   constructor(
     private dataUtils: JhiDataUtils,
@@ -22,7 +24,8 @@ export class SearchServicesPage {
     private searchServicesService: SearchServicesService,
     private toastCtrl: ToastController,
     public plt: Platform,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    public loadingController: LoadingController
   ) {
     this.searchServicesModels = [];
     this.location =
@@ -39,6 +42,23 @@ export class SearchServicesPage {
     this.loadAll();
   }
 
+  async ngOnInit() {
+    this.loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+    });
+  }
+
+
+  async presentLoading() {
+    if (this.isLoading) {
+      await this.loading.present();
+    }
+    if (!this.isLoading) {
+      await this.loading.dismiss();
+    }
+  }
+
   async loadAll(refresher?) {
     if (this.price) {
       this.searchServicesService
@@ -49,7 +69,11 @@ export class SearchServicesPage {
         map((res: HttpResponse<SearchServicesModel[]>) => res.body)
       ).subscribe(
         (response: SearchServicesModel[]) => {
+          this.isLoading = true;
+          this.presentLoading();
           this.searchServicesModels = response;
+          this.isLoading = false;
+          this.presentLoading();
           if (typeof refresher !== 'undefined') {
             setTimeout(() => {
               refresher.target.complete();

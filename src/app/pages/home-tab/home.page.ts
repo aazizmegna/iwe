@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NavController, Platform} from '@ionic/angular';
+import {LoadingController, NavController, Platform} from '@ionic/angular';
 import {AccountService} from 'src/app/services/auth/account.service';
 import {LoginService} from 'src/app/services/login/login.service';
 import {Account} from 'src/model/account.model';
@@ -27,15 +27,17 @@ import {ServiceConsumerService} from '../entities/service-consumer';
 export class HomePage implements OnInit {
   account: Account;
   feeds: Home[];
+  isLoading = false;
+  loading;
 
   constructor(public route: Router, private accountService: AccountService, private loginService: LoginService,
               private homeService: HomeService, public plt: Platform, public alertController: AlertController,
               private serviceProviderService: ServiceProviderService, private $localstorage: LocalStorageService,
-              private serviceConsumerService: ServiceConsumerService
-              ) {
+              private serviceConsumerService: ServiceConsumerService, public loadingController: LoadingController
+  ) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     // this.accountService.identity().then((account) => {
     //   if (account === null) {
     //     this.goBackToHomePage();
@@ -43,6 +45,19 @@ export class HomePage implements OnInit {
     //     this.account = account;
     //   }
     // });
+    this.loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+    });
+  }
+
+  async presentLoading() {
+    if (this.isLoading) {
+      await this.loading.present();
+    }
+    if (!this.isLoading) {
+      await this.loading.dismiss();
+    }
   }
 
   ionViewWillEnter() {
@@ -62,7 +77,11 @@ export class HomePage implements OnInit {
     } else if (!consumer && provider) {
       userId = provider.body.id.toString();
     }
+    this.isLoading = true;
+    await this.presentLoading();
     this.feeds = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(userId, true);
+    this.isLoading = false;
+    await this.presentLoading();
   }
 
   // isAuthenticated() {

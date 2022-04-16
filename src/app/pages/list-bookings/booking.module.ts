@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { BookingPage } from './booking';
+import { BookingPage } from './booking.page';
 import {UserRouteAccessService} from '../../services/auth/user-route-access.service';
 import {IonicImageLoader} from 'ionic-image-loader';
 import {IweMobileSharedModule} from '../../shared/shared.module';

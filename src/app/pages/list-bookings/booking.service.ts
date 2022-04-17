@@ -30,17 +30,13 @@ export class BookingService {
   }
 
   queryByServiceConsumerId(id?: any): Observable<HttpResponse<Booking[]>> {
-    const options = createRequestOption(id);
     return this.http.get<Booking[]>(`${this.resourceUrl}/consumerBookings/?serviceConsumerId=${id}`, {
-      params: options,
       observe: 'response'
     });
   }
 
   queryByServiceProviderId(id?: any): Observable<HttpResponse<Booking[]>> {
-    const options = createRequestOption(id);
     return this.http.get<Booking[]>(`${this.resourceUrl}/providerBookings/?serviceProviderId=${id}`, {
-      params: options,
       observe: 'response'
     });
   }

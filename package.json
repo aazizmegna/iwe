@@ -146,12 +146,15 @@
       },
       "onesignal-cordova-plugin": {},
       "cordova-device-accounts-v2": {},
-      "phonegap-plugin-push": {}
+      "phonegap-plugin-push": {
+        "ANDROID_SUPPORT_V13_VERSION": "27.+",
+        "FCM_VERSION": "17.0.+"
+      }
     },
     "platforms": [
       "browser",
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   },
   "jest": {

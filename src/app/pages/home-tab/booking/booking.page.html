@@ -2,8 +2,8 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button
-          [text]=""
-          [icon]="">
+        [text]=""
+        [icon]="">
       </ion-back-button>
     </ion-buttons>
     <ion-icon class="elipse_menu" name="ellipsis-vertical"></ion-icon>
@@ -15,39 +15,46 @@
   <ion-grid class="padding-y">
     <form *ngIf="form" name="form" [formGroup]="form">
 
-    <ion-row class="ion-align-items-center">
-      <ion-col size="4">
-        <img-loader class="profile_image" [src]=searchServicesModels[0].serviceProvider.user.imageUrl [useImg]="true"></img-loader>
-      </ion-col>
-      <ion-col class="profile_header" size="8">
-        <h2>{{searchServicesModels[0].serviceProvider.user.firstName + ' ' + searchServicesModels[0].serviceProvider.user.lastName}}</h2>
-        <p><ion-icon class="icon" name="location-outline"></ion-icon> {{searchServicesModels[0].serviceProvider.location}}</p>
-      </ion-col>
-    </ion-row>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="4">
+          <img-loader class="profile_image" [src]=searchServicesModels[0].serviceProvider.user.imageUrl
+                      [useImg]="true"></img-loader>
+        </ion-col>
+        <ion-col class="profile_header" size="8">
+          <h2>{{searchServicesModels[0].serviceProvider.user.firstName + ' ' + searchServicesModels[0].serviceProvider.user.lastName}}</h2>
+          <p>
+            <ion-icon class="icon" name="location-outline"></ion-icon>
+            {{searchServicesModels[0].serviceProvider.location}}</p>
+        </ion-col>
+      </ion-row>
 
       <img src="assets/undraw_date_picker_re_r0p8.svg" style="padding-top: 30px">
 
-    <ion-row class="mt-sm">
-      <ion-col>
-        <h3 class="pageTitle">Make a booking</h3>
-      </ion-col>
-    </ion-row>
+      <ion-row class="mt-sm">
+        <ion-col>
+          <h3 class="pageTitle">Make a booking</h3>
+        </ion-col>
+      </ion-row>
 
-    <ion-row class="mt-sm ion-justify-content-center">
+      <ion-row class="mt-sm ion-justify-content-center">
 
-      <ion-col>
-        <ion-item class="input_grey" color="tertiary">
-          <ion-datetime displayFormat="MM/DD/YYYY HH:mm" formControlName="dateTime" id="field_dateTime" placeholder="enter date and time"></ion-datetime>
-          <ion-icon name="calendar-outline" slot="end"></ion-icon>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+        <ion-col>
+          <ion-item class="input_grey" color="tertiary">
+            <ion-datetime [(ngModel)]="date"
+                          [min]="date" displayFormat="MM/DD/YYYY HH:mm" formControlName="dateTime" id="field_dateTime"
+                          placeholder="enter date and time"></ion-datetime>
+            <ion-icon name="calendar-outline" slot="end"></ion-icon>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-    <ion-row class="ion-justify-content-end">
-      <ion-col>
-        <ion-button (click)="openBookingOverview()" fill="solid" color="secondary" expand="block" class="btn-md fw-bold">Book Now</ion-button>
-      </ion-col>
-    </ion-row>
+      <ion-row class="ion-justify-content-end">
+        <ion-col>
+          <ion-button (click)="openBookingOverview()" fill="solid" color="secondary" expand="block"
+                      class="btn-md fw-bold">Book Now
+          </ion-button>
+        </ion-col>
+      </ion-row>
     </form>
   </ion-grid>
 

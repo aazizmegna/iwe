@@ -27,6 +27,7 @@ export class BookingPage implements OnInit {
   services: Service[];
   dateTime: string;
   isSaving = false;
+  date = new Date().toISOString();
   isNew = true;
   isReadyToSave: boolean;
   form = this.formBuilder.group({

@@ -26,8 +26,6 @@
             {{searchServicesModels[0].serviceProvider.location}}</p>
         </ion-col>
       </ion-row>
-      <img src="assets/undraw_date_picker_re_r0p8.svg" style="padding-top: 20px">
-
       <img src="assets/undraw_date_picker_re_r0p8.svg" style="padding-top: 30px">
 
       <ion-row class="mt-sm">
@@ -41,7 +39,7 @@
         <ion-col>
           <ion-item class="input_grey" color="tertiary">
             <ion-datetime [(ngModel)]="date"
-                          [min]="date" displayFormat="MM/DD/YYYY HH:mm" formControlName="dateTime" id="field_dateTime"
+                          [min]="minDate" displayFormat="MM/DD/YYYY HH:mm" formControlName="dateTime" id="field_dateTime"
                           placeholder="enter date and time"></ion-datetime>
             <ion-icon name="calendar-outline" slot="end"></ion-icon>
           </ion-item>

@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  // apiUrl: 'http://localhost:8081/api'
+  apiUrl: 'http://localhost:8081/api'
   // apiUrl: 'http://iweapi-env.eba-k3mmuucp.eu-central-1.elasticbeanstalk.com/api',
-  apiUrl: 'https://r5r9tt6cxb.execute-api.eu-central-1.amazonaws.com/Prod/api'
+  // apiUrl: 'https://r5r9tt6cxb.execute-api.eu-central-1.amazonaws.com/Prod/api'
 };
 
 /*

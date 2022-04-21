@@ -9,7 +9,8 @@
 
     <ion-row class="mt-sm">
       <ion-col class="mb-md">
-        <h2 class="pageTitle">Add new post</h2>
+        <h2 class="pageTitle" *ngIf="isProvider">Post your service</h2>
+        <h2 class="pageTitle" *ngIf="!isProvider">Post your experience</h2>
         <form *ngIf="form" name="form" [formGroup]="form" (ngSubmit)="save()">
           <div>
             <img
@@ -32,8 +33,7 @@
               PLEASE CHOOSE IMAGE
             </ion-button>
           </div>
-          <!--          <ion-col size="12" *appHasAnyAuthority="'ROLE_SERVICE_PROVIDER'">-->
-          <ion-col size="12">
+          <ion-col size="12" *ngIf="isProvider">
 
             <ion-item class="input_grey" color="tertiary">
               <ion-input type="text" name="name" formControlName="name"
@@ -52,8 +52,7 @@
                          placeholder="please enter description"></ion-input>
             </ion-item>
           </ion-col>
-          <!--          <ion-col size="12" *appHasAnyAuthority="'ROLE_SERVICE_PROVIDER'"*/>-->
-          <ion-col size="12">
+          <ion-col size="12" *ngIf="isProvider">
 
             <ion-item class="input_grey" color="tertiary">
               <ion-input type="number" name="price" formControlName="price"

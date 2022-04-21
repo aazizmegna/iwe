@@ -12,8 +12,9 @@ import {Post} from './post.model';
 import {PostService} from './post.service';
 import {Service, ServiceService} from '../entities/service';
 import {AuthServerProvider} from '../../services/auth/auth-jwt.service';
-import {ServiceConsumer} from '../entities/service-consumer';
-import {ServiceProvider} from '../entities/service-provider';
+import {ServiceConsumer, ServiceConsumerService} from '../entities/service-consumer';
+import {ServiceProvider, ServiceProviderService} from '../entities/service-provider';
+import {LocalStorageService} from 'ngx-webstorage';
 
 @Component({
   selector: 'app-add-tab',
@@ -29,7 +30,7 @@ export class NewPostTabPage implements OnInit {
   isNew = true;
   loading;
   isReadyToSave: boolean;
-
+  isProvider: boolean;
   form = this.formBuilder.group({
     id: [],
     price: [],
@@ -57,7 +58,10 @@ export class NewPostTabPage implements OnInit {
     private picturePostService: PicturePostService,
     private serviceService: ServiceService,
     private authProvider: AuthServerProvider,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    private serviceProviderService: ServiceProviderService,
+    private $localstorage: LocalStorageService,
+    private serviceConsumerService: ServiceConsumerService
   ) {
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
@@ -88,11 +92,27 @@ export class NewPostTabPage implements OnInit {
     }
   }
 
-  async ngOnInit() {
+  async isConsumer() {
+    console.log('in IsConsumer');
+    const provider = await this.serviceProviderService.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
+    const consumer = await this.serviceConsumerService.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
+    if (consumer.body && !provider.body) {
+      this.isProvider = false;
+    } else if (!consumer.body && provider.body) {
+      this.isProvider = true;
+    }
+  }
+
+  async ionViewWillEnter() {
+    await this.isConsumer();
     this.loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'Please wait...',
     });
+  }
+
+
+  async ngOnInit() {
     this.postService.query({filter: 'picturepost-is-null'}).subscribe(
       (data) => {
         if (this.picturePost && !this.picturePost.post || !this.picturePost.post.id) {
@@ -126,23 +146,26 @@ export class NewPostTabPage implements OnInit {
     });
   }
 
+
   async save() {
     this.isSaving = true;
     if (this.form.get(['price']).value) {
       const service = this.createFromServiceForm();
       await this.presentLoading();
-      this.subscribeToSaveResponse(this.serviceService.create(service));
+      await this.subscribeToSaveResponse(this.serviceService.create(await service));
     } else {
       const post = this.createFromPostForm();
-      const picturePost = this.createFromForm(post);
-      this.subscribeToPostSaveResponse(this.postService.create(post));
-      this.subscribeToSaveResponse(this.picturePostService.create(picturePost));
+      this.subscribeToPostSaveResponse(this.postService.create(await post));
     }
   }
 
-  protected subscribeToPostSaveResponse(result: Observable<HttpResponse<Post>>) {
-    result.subscribe(
-      (res: HttpResponse<Post>) => this.savePicturePost(res.body),
+  protected subscribeToPostSaveResponse(picturePost: Observable<HttpResponse<Post>>) {
+    picturePost.subscribe(
+      (res: HttpResponse<Post>) => {
+        const picturePostValues = this.createFromForm(res.body);
+        this.subscribeToSaveResponse(this.picturePostService.create(picturePostValues));
+      }
+      ,
       (res: HttpErrorResponse) => this.onError(res.error)
     );
   }
@@ -154,10 +177,6 @@ export class NewPostTabPage implements OnInit {
         await this.onSaveSuccess(res.body);
       },
       (res: HttpErrorResponse) => this.onError(res.error));
-  }
-
-  protected async savePicturePost(post: Post) {
-
   }
 
   async onSaveSuccess(response) {
@@ -196,10 +215,10 @@ export class NewPostTabPage implements OnInit {
     };
   }
 
-  private createFromServiceForm(): Service {
+  private async createFromServiceForm(): Promise<Service> {
     const serviceProvider: ServiceProvider = new ServiceProvider();
-    const serviceConsumer: ServiceConsumer = new ServiceConsumer();
-    serviceProvider.id = 1; // TODO: CHANGE THIS TO ACTUAL CURRENTLY LOGGEDIN PROVIDER ID
+    const provider = await this.serviceProviderService.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
+    serviceProvider.id = provider.body.id; // TODO: CHANGE THIS TO ACTUAL CURRENTLY LOGGEDIN PROVIDER ID
     serviceProvider.user = this.authProvider.user;
     return {
       ...new Service(),
@@ -210,23 +229,20 @@ export class NewPostTabPage implements OnInit {
       location: this.form.get(['location']).value,
       price: this.form.get(['price']).value,
       timePosted: new Date(),
-      serviceConsumer,
       serviceProvider,
     };
   }
 
-  private createFromPostForm(): Post {
-    // const serviceProvider: ServiceProvider = new ServiceProvider();
-    // const serviceConsumer: ServiceConsumer = new ServiceConsumer();
-    // serviceProvider.id = this.authProvider.user.serviceProviderId;
-    // serviceProvider.user = this.authProvider.user;
-    // serviceConsumer.id = this.authProvider.user.serviceConsumerId;
+  private async createFromPostForm(): Promise<Post> {
+    const consumer = await this.serviceConsumerService.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
+    const serviceConsumer: ServiceConsumer = new ServiceConsumer();
+    serviceConsumer.id = consumer.body.id;
     return {
       ...new Post(),
-      id: this.form.get(['id']).value,
       location: this.form.get(['location']).value,
       description: this.form.get(['description']).value,
-      timePosted: new Date()
+      timePosted: new Date(),
+      serviceConsumer
     };
   }
 

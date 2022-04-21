@@ -25,7 +25,7 @@ export class PicturePostService {
 
   query(req?: any): Observable<HttpResponse<PicturePost[]>> {
     const options = createRequestOption(req);
-    return this.http.get<PicturePost[]>(`${this.resourceUrl}/listAllPosts`, { params: options, observe: 'response' });
+    return this.http.get<PicturePost[]>(`${this.resourceUrl}/listAllPicturePosts`, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<any>> {

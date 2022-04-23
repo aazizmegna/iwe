@@ -18,6 +18,7 @@ import {WebView} from '@ionic-native/ionic-webview/ngx';
 import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory, StompService} from '@stomp/ng2-stompjs';
 import {stompConfig} from './pages/home-tab/chat/stomp-config';
 import {DeviceAccounts} from '@awesome-cordova-plugins/device-accounts/ngx';
+import { WonderPush } from '@awesome-cordova-plugins/wonderpush/ngx';
 
 declare module '@angular/core' {
   interface ModuleWithProviders<T = any> {
@@ -54,6 +55,7 @@ export function createTranslateLoader(http: HttpClient) {
     SplashScreen,
     StompService,
     DeviceAccounts,
+    WonderPush,
     {
       provide: InjectableRxStompConfig,
       useValue: stompConfig,

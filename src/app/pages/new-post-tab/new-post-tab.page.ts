@@ -105,14 +105,14 @@ export class NewPostTabPage implements OnInit {
 
   async ionViewWillEnter() {
     await this.isConsumer();
-    this.loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'Please wait...',
-    });
   }
 
 
   async ngOnInit() {
+    this.loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+    });
     this.postService.query({filter: 'picturepost-is-null'}).subscribe(
       (data) => {
         if (this.picturePost && !this.picturePost.post || !this.picturePost.post.id) {

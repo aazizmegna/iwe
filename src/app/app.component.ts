@@ -13,6 +13,7 @@ import {DeviceAccounts} from '@awesome-cordova-plugins/device-accounts/ngx';
 import {UserService} from './services/user/user.service';
 import {ServiceProviderService} from './pages/entities/service-provider';
 import {ServiceConsumerService} from './pages/entities/service-consumer';
+import { WonderPush } from '@awesome-cordova-plugins/wonderpush/ngx';
 
 
 @Component({
@@ -33,16 +34,20 @@ export class AppComponent {
     private authProvider: AuthServerProvider,
     public deviceAccounts: DeviceAccounts,
     private $localStorage: LocalStorageService,
+    private wonderPush: WonderPush,
   ) {
     this.initializeApp();
     this.imageLoaderConfigService.setImageReturnType('base64');
+
   }
 
 
   initializeApp() {
-    this.platform.ready().then(() => {
+    this.platform.ready().then(async () => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      await this.wonderPush.setLogging(true);
+      await this.wonderPush.subscribeToNotifications();
     });
     this.initTranslate();
   }

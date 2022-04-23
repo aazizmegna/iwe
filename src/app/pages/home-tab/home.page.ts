@@ -17,6 +17,7 @@ import OneSignal from 'onesignal-cordova-plugin';
 import {ServiceProviderService} from '../entities/service-provider';
 import {LocalStorageService} from 'ngx-webstorage';
 import {ServiceConsumerService} from '../entities/service-consumer';
+import {WonderPush} from '@awesome-cordova-plugins/wonderpush/ngx';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class HomePage implements OnInit {
   constructor(public route: Router, private accountService: AccountService, private loginService: LoginService,
               private homeService: HomeService, public plt: Platform, public alertController: AlertController,
               private serviceProviderService: ServiceProviderService, private $localstorage: LocalStorageService,
-              private serviceConsumerService: ServiceConsumerService, public loadingController: LoadingController
+              private serviceConsumerService: ServiceConsumerService, public loadingController: LoadingController,
+              private wonderPush: WonderPush
   ) {
   }
 
@@ -45,10 +47,12 @@ export class HomePage implements OnInit {
     //     this.account = account;
     //   }
     // });
+
     this.loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'Please wait...',
     });
+    await this.wonderPush.setUserId(this.$localstorage.retrieve('email'));
   }
 
   async presentLoading() {

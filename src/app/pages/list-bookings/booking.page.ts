@@ -118,7 +118,7 @@ export class BookingPage implements OnInit {
           (response: Booking[]) => {
             this.isLoading = true;
             this.presentLoading();
-            this.bookings = orderBy(response, ['dateTime'], ['desc'])
+            this.bookings = orderBy(response, ['dateTime'], ['desc']);
             this.isLoading = false;
             this.presentLoading();
             if (typeof refresher !== 'undefined') {

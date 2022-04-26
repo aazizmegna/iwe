@@ -4,10 +4,8 @@ import {PicturePost, PicturePostService, Post, PostService} from '../entities/po
 import {Service, ServiceService} from '../entities/service';
 import {concat, orderBy} from 'lodash';
 import {Home} from './home.model';
-import {Reaction} from '../entities/reaction';
 import {ServiceConsumer} from '../entities/service-consumer';
 import {ServiceProvider} from '../entities/service-provider';
-import {Transaction} from '../entities/transaction';
 import {AuthServerProvider} from '../../services/auth/auth-jwt.service';
 import {filter, map} from 'rxjs/operators';
 import {HttpResponse} from '@angular/common/http';

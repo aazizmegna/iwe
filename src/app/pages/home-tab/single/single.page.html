@@ -2,8 +2,8 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button
-          [text]=""
-          [icon]="">
+        [text]=""
+        [icon]="">
       </ion-back-button>
     </ion-buttons>
     <ion-icon class="elipse_menu" name="ellipsis-vertical"></ion-icon>
@@ -14,13 +14,16 @@
 
   <ion-grid class="padding-y">
 
-    <ion-row class="ion-align-items-center" >
-      <ion-col size="4" >
-        <img-loader class="profile_image" [src]=searchServicesModels[0].serviceProvider.user.imageUrl [useImg]="true"></img-loader>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="4">
+        <img-loader class="profile_image" [src]=searchServicesModels[0].serviceProvider.user.imageUrl
+                    [useImg]="true"></img-loader>
       </ion-col>
       <ion-col class="profile_header" size="8">
         <h2>{{searchServicesModels[0].serviceProvider.user.firstName + ' ' + searchServicesModels[0].serviceProvider.user.lastName}}</h2>
-        <p><ion-icon class="icon" name="location-outline"></ion-icon> {{searchServicesModels[0].serviceProvider.user.location}}</p>
+        <p>
+          <ion-icon class="icon" name="location-outline"></ion-icon>
+          {{searchServicesModels[0].serviceProvider.user.location}}</p>
       </ion-col>
     </ion-row>
 
@@ -32,7 +35,7 @@
 
     <ion-row>
       <ion-col size="12">
-        <ion-button (click)="openBooking(this.searchServicesModels[0].serviceProvider?.id)" fill="solid" color="secondary" expand="full" class="btn-md fw-bold">Book Now</ion-button>
+        <h2 class="pageTitle"> Available Services </h2>
       </ion-col>
     </ion-row>
 
@@ -40,17 +43,23 @@
 
   <ion-grid class="profile_feed">
     <ion-row>
-      <ion-col size="6" *ngFor="let service of searchServicesModels;">
-          <div class="card_image_service-search">
-            <img-loader class="card_image" [src]=service.imageUrl [useImg]="true"></img-loader>
-          </div>
-        <p class="sp_title">{{service.name}}</p>
+      <ion-col size="6" *ngFor="let service of searchServicesModels; let i = index">
+        <div class="card_image_service-search">
+          <img-loader class="card_image" [src]=service.imageUrl [useImg]="true"></img-loader>
+        </div>
+        <p class="fz-sm">{{service.name}}</p>
         <p class="fz-sm">
-          <ion-icon class="icon" name="location-outline"></ion-icon>
+          <ion-icon class="icon " name="location-outline"></ion-icon>
           {{service.location}}
         </p>
+        <ion-button (click)="openBooking(this.service.id)"
+                    fill="solid"
+                    color="secondary" expand="full" class="btn-md fw-bold ">Book Now
+        </ion-button>
       </ion-col>
+
     </ion-row>
+
   </ion-grid>
 
 </ion-content>

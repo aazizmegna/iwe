@@ -48,24 +48,27 @@ export class HomePage implements OnInit {
     //   }
     // });
 
-    this.loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'Please wait...',
-    });
+
     await this.wonderPush.setUserId(this.$localstorage.retrieve('email'));
   }
 
   async presentLoading() {
-    if (this.isLoading) {
+    if (this.isLoading && this.loading) {
       await this.loading.present();
     }
-    if (!this.isLoading) {
+    if (!this.isLoading && this.loading) {
       await this.loading.dismiss();
     }
   }
 
-  ionViewWillEnter() {
-    this.loadFeeds();
+  async ionViewWillEnter() {
+    this.loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+    });
+    this.isLoading = true;
+    await this.presentLoading();
+    await this.loadFeeds();
   }
 
   trackId(index: number, item: Home) {
@@ -78,11 +81,10 @@ export class HomePage implements OnInit {
     let userId;
     if (consumer && !provider) {
       userId = consumer.body.id.toString();
+      this.$localstorage.store('user', consumer.body.user.firstName + ' ' + consumer.body.user.firstName);
     } else if (!consumer && provider) {
       userId = provider.body.id.toString();
     }
-    this.isLoading = true;
-    await this.presentLoading();
     this.feeds = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(userId, true);
     this.isLoading = false;
     await this.presentLoading();

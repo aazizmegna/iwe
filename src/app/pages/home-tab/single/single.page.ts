@@ -24,8 +24,9 @@ export class SinglePage implements OnInit {
     });
   }
 
-  openBooking(serviceProviderId: number) {
-    this.navController.navigateForward('tabs/home/booking/' + serviceProviderId.toString() + '/view');
+  openBooking(serviceId: number) {
+    console.log(serviceId);
+    this.navController.navigateForward('tabs/home/booking/' + serviceId.toString() + '/view');
   }
 
   view(booking: Booking) {

@@ -31,6 +31,7 @@ export class NewPostTabPage implements OnInit {
   loading;
   isReadyToSave: boolean;
   isProvider: boolean;
+  errorOccurred = false;
   form = this.formBuilder.group({
     id: [],
     price: [],
@@ -101,6 +102,9 @@ export class NewPostTabPage implements OnInit {
     } else if (!consumer.body && provider.body) {
       this.isProvider = true;
     }
+    if (!consumer.body && !provider.body) {
+      this.errorOccurred = true;
+    }
   }
 
   async ionViewWillEnter() {
@@ -113,9 +117,9 @@ export class NewPostTabPage implements OnInit {
       cssClass: 'my-custom-class',
       message: 'Please wait...',
     });
-    this.postService.query({filter: 'picturepost-is-null'}).subscribe(
+    this.postService.query().subscribe(
       (data) => {
-        if (this.picturePost && !this.picturePost.post || !this.picturePost.post.id) {
+        if (this.picturePost && !this.picturePost.post) {
           this.posts = data.body;
         } else {
           this.postService.find(this.picturePost.post.id).subscribe(
@@ -130,22 +134,10 @@ export class NewPostTabPage implements OnInit {
     );
     this.activatedRoute.data.subscribe((response) => {
       this.picturePost = response.data;
-      this.isNew = this.picturePost && this.picturePost.id === null || this.picturePost.id === undefined;
-      this.updateForm(this.picturePost);
     });
 
     console.log(this.picturePost);
   }
-
-  updateForm(picturePost: PicturePost) {
-    this.form.patchValue({
-      id: picturePost.id,
-      content: picturePost.content,
-      contentContentType: picturePost.contentContentType,
-      post: picturePost.post,
-    });
-  }
-
 
   async save() {
     this.isSaving = true;
@@ -198,11 +190,13 @@ export class NewPostTabPage implements OnInit {
   }
 
   async onError(error) {
-    this.isSaving = false;
-    console.error(error);
-    const toast = await this.toastCtrl.create({message: 'Please Fill in all fields on the form', duration: 2000, position: 'middle'});
-    toast.present();
-    await this.presentLoading();
+    if (this.errorOccurred) {
+      this.isSaving = false;
+      console.error(error);
+      const toast = await this.toastCtrl.create({message: 'Please Fill in all fields on the form', duration: 2000, position: 'middle'});
+      toast.present();
+      await this.presentLoading();
+    }
   }
 
   private createFromForm(post: Post): PicturePost {

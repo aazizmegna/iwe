@@ -25,6 +25,7 @@ export class BookingPage implements OnInit {
   serviceConsumers: ServiceConsumer[];
   serviceProviders: ServiceProvider[];
   services: Service[];
+  service: Service;
   dateTime: string;
   isSaving = false;
   date = new Date().toISOString();
@@ -71,7 +72,7 @@ export class BookingPage implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe((response) => {
-      this.searchServicesModels = response.data;
+      this.service = response.data;
     });
   }
 
@@ -84,10 +85,10 @@ export class BookingPage implements OnInit {
     serviceConsumer.id = serviceConsumerRes.body ? serviceConsumerRes.body.id : undefined;
     const serviceProvider: ServiceProvider = new ServiceProvider();
     const service: ServiceProvider = new Service();
-    service.id = this.searchServicesModels[0].id;
-    serviceProvider.id = this.searchServicesModels[0].serviceProvider.id;
-    serviceProvider.location = this.searchServicesModels[0].serviceProvider.location;
-    serviceProvider.user = this.searchServicesModels[0].serviceProvider.user;
+    service.id = this.service.id;
+    serviceProvider.id = this.service.serviceProvider.id;
+    serviceProvider.location = this.service.serviceProvider.location;
+    serviceProvider.user = this.service.serviceProvider.user;
     console.log(serviceConsumer);
     return {
       booking: new Booking(),

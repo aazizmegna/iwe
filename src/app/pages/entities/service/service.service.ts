@@ -20,7 +20,7 @@ export class ServiceService {
   }
 
   find(id: number): Observable<HttpResponse<Service>> {
-    return this.http.get(`${this.resourceUrl}/?id=${id}`, { observe: 'response' });
+    return this.http.get(`${this.resourceUrl}/findOneServices?id=${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<HttpResponse<Service[]>> {

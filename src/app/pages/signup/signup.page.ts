@@ -1,3 +1,4 @@
+import { Auth } from 'aws-amplify';
 import { Component, OnInit } from '@angular/core';
 import { NavController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -51,6 +52,17 @@ export class SignupPage implements OnInit {
   }
 
   ngOnInit() {}
+
+  facebookSignUp(){
+    const URL = "https://iwemobilea81946ca-a81946ca-dev.auth.us-east-1.amazoncognito.com/signup?response_type=code&client_id=6e56kqscc3dcieq6hl2alrdsm&redirect_uri=http://localhost:8100/tabs/home/"
+    window.location.assign(URL)
+  }
+
+  googleSignUp(){
+    const URL = "https://iwemobilea81946ca-a81946ca-dev.auth.us-east-1.amazoncognito.com/signup?response_type=code&client_id=6e56kqscc3dcieq6hl2alrdsm&redirect_uri=http://localhost:8100/tabs/home/"
+    window.location.assign(URL)
+  }
+
 
   doSignup() {
     // set login to same as email

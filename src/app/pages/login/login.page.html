@@ -40,6 +40,12 @@
       <ion-row class="ion-justify-content-center ion-margin-top">
         <ion-col size="4"><ion-button type="submit" fill="solid" color="secondary" expand="block" id="login">Login</ion-button></ion-col>
       </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="8"><ion-button fill="outline" color="secondary" expand="block" id="login" (click)="facebookLogin()">Login with Facebook</ion-button></ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="8"><ion-button fill="outline" color="secondary" expand="block" id="login" (click)="googleLogin()">Login with Google</ion-button></ion-col>
+      </ion-row>
     </ion-grid>
   </form>
 </ion-content>

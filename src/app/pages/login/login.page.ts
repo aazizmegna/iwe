@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LoginService } from 'src/app/services/login/login.service';
+import { Auth } from 'aws-amplify';
+import { AWSLexProvider } from '@aws-amplify/interactions';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +32,14 @@ export class LoginPage implements OnInit {
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
     });
+  }
+
+  facebookLogin(){
+    Auth.federatedSignIn({customProvider: 'Facebook'})
+  }
+
+  googleLogin(){
+    Auth.federatedSignIn({customProvider: 'Google'})
   }
 
   async doLogin() {

@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-iwemobile-dev-50229-authRole",
+      "UnauthRoleArn": "arn:aws:iam::858813658654:role/amplify-iwemobile-dev-50229-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::858813658654:role/amplify-iwemobile-dev-50229-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-iwemobile-dev-50229-deployment",
+      "UnauthRoleName": "amplify-iwemobile-dev-50229-unauthRole",
+      "StackName": "amplify-iwemobile-dev-50229",
+      "StackId": "arn:aws:cloudformation:us-east-1:858813658654:stack/amplify-iwemobile-dev-50229/44cd7680-c697-11ec-8319-0af40d247689",
+      "AmplifyAppId": "d3nxzzyfpnbkgo"
+    },
+    "categories": {
+      "auth": {
+        "iwemobilea81946ca": {}
+      }
+    }
+  }
+}

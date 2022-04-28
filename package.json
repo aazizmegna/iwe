@@ -46,6 +46,7 @@
     "@ngx-translate/http-loader": "6.0.0",
     "@stomp/ng2-stompjs": "^8.0.0",
     "@types/lodash": "^4.14.168",
+    "aws-amplify": "^4.3.20",
     "compare-func": "^2.0.0",
     "cordova": "^10.0.0",
     "cordova-browser": "6.0.0",

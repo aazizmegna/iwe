@@ -1,7 +1,7 @@
-.pageTitle{
+.pageTitle {
   top: 0px;
   left: 2px;
-  font-size:30px;
+  font-size: 30px;
   font-family: Archivo Black;
 }
 
@@ -11,4 +11,10 @@
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+}
+
+.redTxt {
+  font-family: Archivo Black;;
+  cursor: pointer;
+  font-size: 9px;
 }

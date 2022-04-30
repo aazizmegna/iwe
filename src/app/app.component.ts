@@ -71,6 +71,7 @@ export class AppComponent {
 
   logout() {
     this.loginService.logout();
+    this.$localStorage.clear('email');
     this.goBackToHomePage();
     this.menuCtrl.close('main-menu');
   }

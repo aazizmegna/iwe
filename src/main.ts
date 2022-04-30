@@ -11,18 +11,18 @@ Amplify.configure(awsconfig);
 
 const oauth = {
   // Domain name
-  domain : 'iwemobilea81946ca-a81946ca-dev.auth.us-east-1.amazoncognito.com', 
-  
+  domain : 'iwemobilea81946ca-a81946ca-dev.auth.us-east-1.amazoncognito.com',
+
   // Authorized scopes
-  scope : ['phone', 'email', 'profile', 'openid','aws.cognito.signin.user.admin'], 
+  scope : ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
 
   // Callback URL
-  redirectSignIn : 'http://localhost:8100/tabs/home/', 
+  redirectSignIn : 'http://localhost:8100/tabs/home/',
 
   // Sign out URL
   redirectSignOut : 'http://localhost:8100/',
 
-  // 'code' for Authorization code grant, 
+  // 'code' for Authorization code grant,
   // 'token' for Implicit grant
   responseType: 'code',
 
@@ -31,10 +31,10 @@ const oauth = {
       // Indicates if the data collection is enabled to support Cognito advanced security features. By default, this flag is set to true.
       AdvancedSecurityDataCollectionFlag : false
   }
-}
+};
 
 Auth.configure({
-  oauth:oauth
+  oauth
 });
 
 

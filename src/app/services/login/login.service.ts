@@ -16,9 +16,9 @@ export class LoginService {
     private $localStorage: LocalStorageService
   ) {}
 
-  async login(credentials: { username: string; password: string; rememberMe: boolean }, callback?) {
-    this.$localStorage.store('email', credentials.username.trim());
-    await this.authServerProvider.fetchUserByLogin(credentials.username);
+  async login(credentials: { email: string; password: string; rememberMe: boolean }, callback?) {
+    this.$localStorage.store('email', credentials.email.trim());
+    await this.authServerProvider.fetchUserByLogin(credentials.email);
 
     // const cb = callback || function () {};
     // return new Promise( (resolve, reject) => {

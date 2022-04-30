@@ -16,8 +16,12 @@ import {AlertController} from '@ionic/angular';
 import OneSignal from 'onesignal-cordova-plugin';
 import {ServiceProviderService} from '../entities/service-provider';
 import {LocalStorageService} from 'ngx-webstorage';
-import {ServiceConsumerService} from '../entities/service-consumer';
+import {ServiceConsumer, ServiceConsumerService} from '../entities/service-consumer';
 import {WonderPush} from '@awesome-cordova-plugins/wonderpush/ngx';
+import {Auth} from 'aws-amplify';
+import {User} from '../../services/user/user.model';
+import jwtDecode from 'jwt-decode';
+import {CognitoServiceProvider} from '../../providers/cognito-service/cognito-service';
 
 
 @Component({
@@ -35,19 +39,11 @@ export class HomePage implements OnInit {
               private homeService: HomeService, public plt: Platform, public alertController: AlertController,
               private serviceProviderService: ServiceProviderService, private $localstorage: LocalStorageService,
               private serviceConsumerService: ServiceConsumerService, public loadingController: LoadingController,
-              private wonderPush: WonderPush
+              private wonderPush: WonderPush, public CognitoService: CognitoServiceProvider,
   ) {
   }
 
   async ngOnInit() {
-    // this.accountService.identity().then((account) => {
-    //   if (account === null) {
-    //     this.goBackToHomePage();
-    //   } else {
-    //     this.account = account;
-    //   }
-    // });
-
 
     await this.wonderPush.setUserId(this.$localstorage.retrieve('email'));
   }
@@ -79,11 +75,39 @@ export class HomePage implements OnInit {
     const provider = await this.serviceProviderService.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
     const consumer = await this.serviceConsumerService.findByUserEmail(this.$localstorage.retrieve('email')).toPromise();
     let userId;
-    if (consumer && !provider) {
+    if (consumer.body && !provider.body) {
       userId = consumer.body.id.toString();
       this.$localstorage.store('user', consumer.body.user.firstName + ' ' + consumer.body.user.firstName);
-    } else if (!consumer && provider) {
+    } else if (!consumer.body && provider.body) {
       userId = provider.body.id.toString();
+    } else if (!consumer.body && !provider.body) {
+      const user = await Auth.currentUserInfo();
+      let consumerToStore: ServiceConsumer;
+      console.log('User email', user);
+      if (user.attributes) {
+        const userToStore: User = {
+          email: user.attributes.email
+        };
+        consumerToStore = {
+          user: userToStore,
+        };
+        await this.serviceConsumerService.create(consumerToStore).toPromise();
+        this.$localstorage.store('email', user.attributes.email);
+      } else if (!user.attributes) {
+        const emailUser = await this.CognitoService.getLoggedUser();
+        if (emailUser) {
+          console.log(jwtDecode(emailUser as string));
+          const decodedUser = jwtDecode(emailUser as string);
+          const userToStore: User = {
+            email: decodedUser['cognito:username']
+          };
+          consumerToStore = {
+            user: userToStore,
+          };
+          await this.serviceConsumerService.create(consumerToStore).toPromise();
+          this.$localstorage.store('email', decodedUser['cognito:username']);
+        }
+      }
     }
     this.feeds = await this.homeService.loadAllFreemiumPostsWithBusinessUsersPosts(userId, true);
     this.isLoading = false;

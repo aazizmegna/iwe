@@ -12,7 +12,7 @@
   </div>
   <h1 class="ion-padding-top ion-text-center pageTitle">Sign Up</h1>
 
-  <form (submit)="doSignup()">
+  <form (submit)="register()">
     <ion-grid class="ion-margin-top">
       <ion-row class="ion-justify-content-center">
         <ion-col size="8">
@@ -83,12 +83,6 @@
       <ion-col size="4">
         <ion-button expand="block" fill="solid" type="submit" color="secondary">Sign Up</ion-button>
       </ion-col>
-    </ion-row>
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="8"><ion-button fill="outline" color="secondary" expand="block" id="login" (click)="facebookSignUp()">Sign Up with Facebook</ion-button></ion-col>
-    </ion-row>
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="8"><ion-button fill="outline" color="secondary" expand="block" id="login" (click)="googleSignUp()">Sign Up with Google</ion-button></ion-col>
     </ion-row>
   </form>
 </ion-content>

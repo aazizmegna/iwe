@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ToastController } from '@ionic/angular';
+import {AlertController, NavController, ToastController} from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Auth } from 'aws-amplify';
-import { AWSLexProvider } from '@aws-amplify/interactions';
+import { CognitoServiceProvider } from '../../providers/cognito-service/cognito-service';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +12,8 @@ import { AWSLexProvider } from '@aws-amplify/interactions';
 })
 export class LoginPage implements OnInit {
   // The account fields for the login form.
-  account: { username: string; password: string; rememberMe: boolean } = {
-    username: '',
+  account: { email: string; password: string; rememberMe: boolean } = {
+    email: '',
     password: '',
     rememberMe: false,
   };
@@ -25,7 +25,9 @@ export class LoginPage implements OnInit {
     public translateService: TranslateService,
     public loginService: LoginService,
     public toastController: ToastController,
-    public navController: NavController
+    public navController: NavController,
+    public CognitoService: CognitoServiceProvider,
+    public alertController: AlertController,
   ) {}
 
   ngOnInit() {
@@ -34,34 +36,38 @@ export class LoginPage implements OnInit {
     });
   }
 
-  facebookLogin(){
-    Auth.federatedSignIn({customProvider: 'Facebook'})
+  async facebookLogin() {
+    await Auth.federatedSignIn({customProvider: 'Facebook'});
   }
 
-  googleLogin(){
-    Auth.federatedSignIn({customProvider: 'Google'})
+  async googleLogin() {
+    await Auth.federatedSignIn({customProvider: 'Google'});
   }
 
   async doLogin() {
     console.log('in login');
-    await this.navController.navigateRoot('/tabs/home');
-    await this.loginService.login(this.account);
-
-    // this.loginService.login(this.account).then(
-    //   () => {
-    //     this.navController.navigateRoot('/tabs');
-    //   },
-    //   async (err) => {
-    //     // Unable to log in
-    //     this.account.password = '';
-    //     const toast = await this.toastController.create({
-    //       message: this.loginErrorString,
-    //       duration: 3000,
-    //       position: 'top',
-    //     });
-    //     toast.present();
-    //   }
-    // );
+    this.CognitoService.authenticate(this.account.email, this.account.password)
+      .then(async (res) => {
+        await this.navController.navigateRoot('/tabs/home');
+        await this.loginService.login(this.account);
+        console.log(res);
+      }, async (err) => {
+        const alert = await this.alertController.create({
+          header: 'An Error occurred',
+          subHeader: err.message,
+          buttons: [
+            {
+              text: 'Retry',
+              role: 'cancel',
+              handler: data => {
+                console.log('Cancel clicked');
+              }
+            },
+          ]
+        });
+        await alert.present();
+        console.log(err);
+      });
   }
 
 }

@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "iwemobilea81946ca_identitypool_a81946ca",
+    "identityPoolName": "iwemobileb83bc155_identitypool_b83bc155",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "iwemoba81946ca",
-    "userPoolName": "iwemobilea81946ca_userpool_a81946ca",
+    "resourceNameTruncated": "iwemobb83bc155",
+    "userPoolName": "iwemobileb83bc155_userpool_b83bc155",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -31,14 +31,17 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "iwemoba81946ca_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "iwemobb83bc155_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "a81946ca",
-    "resourceName": "iwemobilea81946ca",
+    "sharedId": "b83bc155",
+    "resourceName": "iwemobileb83bc155",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "defaultSocial",
     "hostedUI": true,
-    "hostedUIDomainName": "iwemobilea81946ca-a81946ca",
+    "usernameAttributes": [
+      "email"
+    ],
+    "hostedUIDomainName": "iwemobile",
     "authProvidersUserPool": [
       "Facebook",
       "Google"

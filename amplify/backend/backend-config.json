@@ -1,6 +1,6 @@
 {
   "auth": {
-    "iwemobilea81946ca": {
+    "iwemobileb83bc155": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -10,7 +10,9 @@
           "FACEBOOK",
           "GOOGLE"
         ],
-        "usernameAttributes": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
         "signupAttributes": [
           "EMAIL"
         ],

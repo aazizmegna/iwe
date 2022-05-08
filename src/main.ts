@@ -9,9 +9,10 @@ import awsconfig from './aws-exports';
 Amplify.configure(awsconfig);
 
 
+
 const oauth = {
   // Domain name
-  domain : 'iwemobilea81946ca-a81946ca-dev.auth.us-east-1.amazoncognito.com',
+  domain : 'iwemobile-dev.auth.eu-central-1.amazoncognito.com',
 
   // Authorized scopes
   scope : ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],

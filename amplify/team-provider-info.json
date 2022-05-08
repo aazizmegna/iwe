@@ -1,19 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-iwemobile-dev-50229-authRole",
-      "UnauthRoleArn": "arn:aws:iam::858813658654:role/amplify-iwemobile-dev-50229-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::858813658654:role/amplify-iwemobile-dev-50229-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-iwemobile-dev-50229-deployment",
-      "UnauthRoleName": "amplify-iwemobile-dev-50229-unauthRole",
-      "StackName": "amplify-iwemobile-dev-50229",
-      "StackId": "arn:aws:cloudformation:us-east-1:858813658654:stack/amplify-iwemobile-dev-50229/44cd7680-c697-11ec-8319-0af40d247689",
-      "AmplifyAppId": "d3nxzzyfpnbkgo"
+      "AuthRoleName": "amplify-iwemobile-dev-220649-authRole",
+      "UnauthRoleArn": "arn:aws:iam::858813658654:role/amplify-iwemobile-dev-220649-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::858813658654:role/amplify-iwemobile-dev-220649-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-iwemobile-dev-220649-deployment",
+      "UnauthRoleName": "amplify-iwemobile-dev-220649-unauthRole",
+      "StackName": "amplify-iwemobile-dev-220649",
+      "StackId": "arn:aws:cloudformation:eu-central-1:858813658654:stack/amplify-iwemobile-dev-220649/04693250-cf02-11ec-9688-0aa96222073c",
+      "AmplifyAppId": "d2hjlgfzv9o2za"
     },
     "categories": {
       "auth": {
-        "iwemobilea81946ca": {}
+        "iwemobileb83bc155": {}
       }
     }
   }

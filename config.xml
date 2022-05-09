@@ -20,12 +20,20 @@
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="WKWebViewOnly" value="true" />
     <feature name="CDVWKWebViewEngine">`
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <param name="ios-package" value="CDVWKWebViewEngine" />
+                                                                                                    <param name="ios-package" value="CDVWKWebViewEngine" />
 </feature>
     <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <platform name="android">
         <preference name="android-minSdkVersion" value="21" />
+        <preference name="AndroidLaunchMode" value="singleTask" />
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:host="iwe-mobile.s3.eu-central-1.amazonaws.com" android:path="/tabs/home" android:scheme="iwe://app" />
+        </intent-filter>
+        <resource-file src="google-services.json" target="app/google-services.json" />
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
             <application android:usesCleartextTraffic="true" />
         </edit-config>

@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "~11.0.9",
     "@angular/router": "~11.0.9",
     "@awesome-cordova-plugins/core": "^5.37.3",
+    "@awesome-cordova-plugins/deeplinks": "^5.41.0",
     "@awesome-cordova-plugins/device-accounts": "^5.37.3",
     "@awesome-cordova-plugins/push": "^5.41.0",
     "@awesome-cordova-plugins/wonderpush": "^5.41.0",
@@ -46,6 +47,7 @@
     "@ngx-translate/http-loader": "6.0.0",
     "@stomp/ng2-stompjs": "^8.0.0",
     "@types/lodash": "^4.14.168",
+    "amazon-cognito-identity-js": "^5.2.8",
     "aws-amplify": "^4.3.20",
     "compare-func": "^2.0.0",
     "cordova": "^10.0.0",
@@ -56,6 +58,7 @@
     "core-js": "^3.8.2",
     "ionic-image-loader": "^7.0.0-beta.2",
     "ionic-img-cache": "^1.3.2",
+    "ionic-native": "^2.9.0",
     "jquery": "^3.4.1",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
@@ -71,8 +74,7 @@
     "stompjs": "^2.3.3",
     "tslib": "^2.1.0",
     "webstomp-client": "1.2.6",
-    "zone.js": "~0.11.3",
-    "amazon-cognito-identity-js": "^5.2.8"
+    "zone.js": "~0.11.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1100.7",
@@ -102,6 +104,7 @@
     "generator-jhipster-ionic": "6.0.0",
     "html-loader": "1.3.2",
     "ionic-mocks-jest": "1.3.3",
+    "ionic-plugin-deeplinks": "^1.0.24",
     "istanbul-instrumenter-loader": "3.0.1",
     "jasmine": "3.6.3",
     "jasmine-core": "~3.6.0",
@@ -153,11 +156,30 @@
       },
       "wonderpush-cordova-sdk-fcm": {
         "SENDER_ID": "449824726523"
+      },
+      "ionic-plugin-deeplinks": {
+        "URL_SCHEME": "iwe://app",
+        "DEEPLINK_HOST": "iwe-mobile.s3.eu-central-1.amazonaws.com",
+        "DEEPLINK_SCHEME": "https",
+        "ANDROID_PATH_PREFIX": "/",
+        "ANDROID_2_PATH_PREFIX": "/",
+        "ANDROID_3_PATH_PREFIX": "/",
+        "ANDROID_4_PATH_PREFIX": "/",
+        "ANDROID_5_PATH_PREFIX": "/",
+        "DEEPLINK_2_SCHEME": " ",
+        "DEEPLINK_2_HOST": " ",
+        "DEEPLINK_3_SCHEME": " ",
+        "DEEPLINK_3_HOST": " ",
+        "DEEPLINK_4_SCHEME": " ",
+        "DEEPLINK_4_HOST": " ",
+        "DEEPLINK_5_SCHEME": " ",
+        "DEEPLINK_5_HOST": " "
       }
     },
     "platforms": [
       "browser",
-      "an droid"
+      "an droid",
+      "android"
     ]
   },
   "jest": {

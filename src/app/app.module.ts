@@ -21,6 +21,7 @@ import {DeviceAccounts} from '@awesome-cordova-plugins/device-accounts/ngx';
 import { WonderPush } from '@awesome-cordova-plugins/wonderpush/ngx';
 import {SystemVariableProvider} from './providers/system-variable/system-variable';
 import {CognitoServiceProvider} from './providers/cognito-service/cognito-service';
+import {Deeplinks} from '@awesome-cordova-plugins/deeplinks/ngx';
 
 declare module '@angular/core' {
   interface ModuleWithProviders<T = any> {
@@ -60,6 +61,7 @@ export function createTranslateLoader(http: HttpClient) {
     WonderPush,
     CognitoServiceProvider,
     SystemVariableProvider,
+    Deeplinks,
     {
       provide: InjectableRxStompConfig,
       useValue: stompConfig,

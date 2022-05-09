@@ -46,7 +46,7 @@ export class LoginPage implements OnInit {
 
   async doLogin() {
     console.log('in login');
-    this.CognitoService.authenticate(this.account.email, this.account.password)
+    this.CognitoService.authenticate(this.account.email.trim(), this.account.password)
       .then(async (res) => {
         await this.navController.navigateRoot('/tabs/home');
         await this.loginService.login(this.account);

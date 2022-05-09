@@ -1,0 +1,5 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target" : { "namespace": "android_app", "package_name": "co.za.iwe",
+    "sha256_cert_fingerprints": ["2F:B8:0D:45:D0:05:54:6B:90:B4:60:C0:04:38:0E:07:B7:EB:45:72:5D:74:C3:DC:0E:D4:35:A1:55:70:F4:E7"] }
+}]

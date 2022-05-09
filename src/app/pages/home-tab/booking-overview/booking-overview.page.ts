@@ -48,13 +48,7 @@ export class BookingOverviewPage implements OnInit {
   }
 
   async onSaveSuccess(response) {
-    let action = 'updated';
-    if (response.status === 201) {
-      action = 'created';
-    }
-    this.isSaving = false;
-    const toast = await this.toastCtrl.create({message: `Booking ${action} successfully.`, duration: 2000, position: 'middle'});
-    toast.present();
+    await this.route.navigate(['tabs/home/booking-confirm']);
   }
 
   async onError(error) {
@@ -74,7 +68,6 @@ export class BookingOverviewPage implements OnInit {
   save() {
     this.isSaving = true;
     this.subscribeToSaveResponse(this.bookingService.create(this.bookingProvider));
-    this.route.navigate(['tabs/home/booking-confirm']);
   }
 
 }

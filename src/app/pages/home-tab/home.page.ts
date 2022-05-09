@@ -77,7 +77,18 @@ export class HomePage implements OnInit {
     let userId;
     if (consumer.body && !provider.body) {
       userId = consumer.body.id.toString();
-      this.$localstorage.store('user', consumer.body.user.firstName + ' ' + consumer.body.user.firstName);
+      if (consumer.body.user.firstName && consumer.body.user.lastName) {
+        this.$localstorage.store('user', consumer.body.user.firstName + ' ' + consumer.body.user.lastName);
+      }
+      if (!consumer.body.user.firstName && consumer.body.user.lastName) {
+        this.$localstorage.store('user', consumer.body.user.lastName);
+      }
+      if (consumer.body.user.firstName && !consumer.body.user.lastName) {
+        this.$localstorage.store('user', consumer.body.user.firstName);
+      }
+      if (!consumer.body.user.firstName && !consumer.body.user.lastName) {
+        this.$localstorage.store('user', '');
+      }
     } else if (!consumer.body && provider.body) {
       userId = provider.body.id.toString();
     } else if (!consumer.body && !provider.body) {

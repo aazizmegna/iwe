@@ -57,7 +57,7 @@ export class SignupPage implements OnInit {
   ngOnInit() {}
 
   register() {
-    this.CognitoService.signUp(this.account.email, this.account.password).then(
+    this.CognitoService.signUp(this.account.email.trim(), this.account.password).then(
      async (res) => {
         await this.promptVerificationCode();
       },

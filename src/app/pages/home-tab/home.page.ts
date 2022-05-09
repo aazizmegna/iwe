@@ -102,7 +102,11 @@ export class HomePage implements OnInit {
         consumerToStore = {
           user: userToStore,
         };
-        await this.serviceConsumerService.create(consumerToStore).toPromise();
+        const providerTmp = await this.serviceProviderService.findByUserEmail(user.attributes.email).toPromise();
+        const consumerTmp = await this.serviceConsumerService.findByUserEmail(user.attributes.email).toPromise();
+        if (user.attributes.email && !providerTmp.body && !consumerTmp.body) {
+          await this.serviceConsumerService.create(consumerToStore).toPromise();
+        }
         this.$localstorage.store('email', user.attributes.email);
       } else if (!user.attributes) {
         const emailUser = await this.CognitoService.getLoggedUser();
